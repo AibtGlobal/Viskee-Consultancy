@@ -1,0 +1,88 @@
+[
+  {
+    "name": "ACE AVIATION AEROSPACE ACADEMY",
+    "courses": [
+      {
+        "vetCode": "AVI50119",
+        "department": "",
+        "name": "Diploma of Aviation (Aviation Management)",
+        "duration": 52,
+        "durationDetail": "40 wks Tuition + 12 wks Break",
+        "offshoreTuition": 12500,
+        "onshoreTuition": 12000,
+        "location": [
+          "NSW",
+          "QLD"
+        ],
+        "unpaidPlacement": 0,
+        "completeServicePeriods": "Aviation"
+      },
+      {
+        "vetCode": "AVI50119",
+        "department": "",
+        "name": "Diploma of Aviation (Aviation Management)",
+        "duration": 52,
+        "durationDetail": "40 wks Tuition + 12 wks Break",
+        "offshoreTuition": 12500,
+        "onshoreTuition": 12000,
+        "location": [
+          "NSW",
+          "QLD"
+        ],
+        "unpaidPlacement": 0,
+        "completeServicePeriods": "Aviation"
+      },
+      {
+        "vetCode": "AVI50119",
+        "department": "",
+        "name": "Diploma of Aviation (Aviation Management)",
+        "duration": 52,
+        "durationDetail": "40 wks Tuition + 12 wks Break",
+        "offshoreTuition": 12500,
+        "onshoreTuition": 12000,
+        "location": [
+          "NSW",
+          "QLD"
+        ],
+        "unpaidPlacement": 0,
+        "completeServicePeriods": "Aviation"
+      },
+      {
+        "vetCode": "AVI50119",
+        "department": "",
+        "name": "Diploma of Aviation (Aviation Management)",
+        "duration": 52,
+        "durationDetail": "40 wks Tuition + 12 wks Break",
+        "offshoreTuition": 12500,
+        "onshoreTuition": 12000,
+        "location": [
+          "NSW",
+          "QLD"
+        ],
+        "unpaidPlacement": 0,
+        "completeServicePeriods": "Aviation"
+      }
+    ]
+  },
+  {
+    "name": "BESPOKE GRAMMAR SCHOOL OF ENGLISH",
+    "courses": [
+      {
+        "vetCode": "AVI50119",
+        "department": "English",
+        "name": "General English (Beginner to Upper Intermediate)",
+        "duration": 0,
+        "durationDetail": "Per Week",
+        "offshoreTuition": 200,
+        "onshoreTuition": 200,
+        "location": [
+          "NSW",
+          "QLD",
+          "TAS"
+        ],
+        "unpaidPlacement": 0,
+        "completeServicePeriods": ""
+      }
+    ]
+  }
+]

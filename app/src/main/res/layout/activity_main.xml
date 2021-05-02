@@ -86,7 +86,8 @@
             android:insetRight="0dp"
             android:insetBottom="0dp"
             android:text="Go"
-            app:backgroundTint="@color/gold" />
+            app:backgroundTint="@color/gold"
+            android:onClick="search"/>
 
     </RelativeLayout>
 

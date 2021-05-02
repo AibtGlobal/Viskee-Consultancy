@@ -10,9 +10,22 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.brochure.R;
+import com.example.brochure.adapter.SearchResultAdapter;
+import com.example.brochure.model.GroupEnum;
+import com.example.brochure.model.School;
+import com.example.brochure.model.SearchResult;
+import com.example.brochure.util.Utils;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    private List<School> schools;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +38,22 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        String json = Utils.getJsonFromAssets(getApplicationContext(), "AIBT.json");
+        Gson gson = new Gson();
+        Type listSchoolType = new TypeToken<List<School>>() {
+        }.getType();
+        schools = gson.fromJson(json, listSchoolType);
+
     }
+
+    public void search(View view) {
+        SearchResult searchResult = new SearchResult();
+        searchResult.getSearchResults().put(GroupEnum.AIBT, schools.get(0).getCourses());
+        Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+        intent.putExtra("SearchResult", searchResult);
+        startActivity(intent);
+    }
+
     public void goToAIBTSchoolPage(View view) {
         Intent intent = new Intent(MainActivity.this, SchoolActivity.class);
         startActivity(intent);

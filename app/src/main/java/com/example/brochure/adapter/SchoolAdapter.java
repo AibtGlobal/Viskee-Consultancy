@@ -16,7 +16,6 @@ public class SchoolAdapter extends BaseAdapter {
 
     private final Context context;
 
-    // 1
     public SchoolAdapter(Context context) {
         this.context = context;
     }
