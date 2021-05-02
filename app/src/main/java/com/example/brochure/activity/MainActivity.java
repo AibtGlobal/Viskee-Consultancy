@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SearchResultAdapter;
+import com.example.brochure.model.Group;
 import com.example.brochure.model.GroupEnum;
 import com.example.brochure.model.School;
 import com.example.brochure.model.SearchResult;
@@ -20,12 +21,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<School> schools;
+    private List<School> schools = new ArrayList<>();
+    private List<Group> groups = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
         Type listSchoolType = new TypeToken<List<School>>() {
         }.getType();
         schools = gson.fromJson(json, listSchoolType);
-
+        Group aibt = new Group();
+        aibt.setName("AIBT");
+        aibt.setSchools(schools);
+        groups.add(aibt);
     }
 
     public void search(View view) {
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToAIBTSchoolPage(View view) {
         Intent intent = new Intent(MainActivity.this, SchoolActivity.class);
+        intent.putExtra("Group", groups.get(0));
         startActivity(intent);
     }
 }

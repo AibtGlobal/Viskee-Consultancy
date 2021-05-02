@@ -29,14 +29,4 @@
         android:gravity="center_vertical"
         android:text="VET National Code: BSB50125" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/visit_page"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:layout_weight="2"-->
-<!--        android:gravity="end"-->
-<!--        android:text="Visit Page"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textStyle="bold" />-->
 </LinearLayout>

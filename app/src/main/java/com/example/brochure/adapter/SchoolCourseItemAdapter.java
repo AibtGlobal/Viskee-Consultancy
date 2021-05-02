@@ -6,28 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.brochure.R;
 import com.example.brochure.activity.CourseDetailActivity;
 import com.example.brochure.model.Course;
+import com.example.brochure.model.Department;
 
-import java.util.List;
-
-public class SearchResultAdapter extends BaseAdapter {
+public class SchoolCourseItemAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<Course> courses;
+    private final Department department;
 
-    public SearchResultAdapter(Context context, List<Course> courses) {
+    public SchoolCourseItemAdapter(Context context, Department department) {
         this.context = context;
-        this.courses = courses;
+        this.department = department;
     }
 
     @Override
     public int getCount() {
-        return courses.size();
+        return department.getCourses().size();
     }
 
     @Override
@@ -44,17 +42,12 @@ public class SearchResultAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(R.layout.layout_search_result, null);
+            convertView = layoutInflater.inflate(R.layout.layout_school_course_list_item, null);
         }
-
-        Course course = courses.get(position);
-        TextView courseNameTextView = convertView.findViewById(R.id.course_name);
-        TextView vetCodeTextView = convertView.findViewById(R.id.vet_code);
-        LinearLayout searchResultCard = convertView.findViewById(R.id.search_result_card);
-
+        Course course = department.getCourses().get(position);
+        TextView courseNameTextView = convertView.findViewById(R.id.school_course_name);
         courseNameTextView.setText(course.getName());
-        vetCodeTextView.setText(course.getVetCode());
-        searchResultCard.setOnClickListener(new View.OnClickListener() {
+        courseNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CourseDetailActivity.class);

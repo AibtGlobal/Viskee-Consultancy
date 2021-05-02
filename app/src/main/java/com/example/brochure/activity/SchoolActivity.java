@@ -9,6 +9,7 @@ import android.widget.GridView;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolAdapter;
+import com.example.brochure.model.Group;
 
 public class SchoolActivity extends AppCompatActivity {
 
@@ -24,8 +25,10 @@ public class SchoolActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_school);
 
+        Group group = (Group) getIntent().getSerializableExtra("Group");
+
         GridView gridView = findViewById(R.id.school_logo_grid_view);
-        SchoolAdapter booksAdapter = new SchoolAdapter(this);
+        SchoolAdapter booksAdapter = new SchoolAdapter(this, group);
         gridView.setAdapter(booksAdapter);
     }
 }
