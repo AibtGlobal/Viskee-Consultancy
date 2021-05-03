@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.brochure.R;
+import com.example.brochure.model.Course;
+
+import java.text.NumberFormat;
 
 public class CourseDetailActivity extends AppCompatActivity {
 
@@ -20,5 +24,24 @@ public class CourseDetailActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_course_detail);
+
+        Course courseDetail = (Course) getIntent().getSerializableExtra("CourseDetail");
+        TextView courseName = findViewById(R.id.course_detail_title);
+        TextView courseVetCode = findViewById(R.id.course_detail_vet_code);
+        TextView courseDuration = findViewById(R.id.course_duration);
+        TextView courseDurationDetail = findViewById(R.id.course_duration_detail);
+        TextView courseLocation = findViewById(R.id.course_location);
+        TextView offshorePricing = findViewById(R.id.course_pricing_offshore);
+        TextView onshorePricing = findViewById(R.id.course_pricing_onshore);
+        courseName.setText(courseDetail.getName());
+        courseVetCode.setText("VET National Code: " + courseDetail.getVetCode());
+        courseDuration.setText(courseDetail.getDuration()+" Weeks");
+        courseDurationDetail.setText(courseDetail.getDurationDetail());
+        courseLocation.setText(String.join(" | ", courseDetail.getLocation()));
+        NumberFormat myFormat = NumberFormat.getInstance();
+        myFormat.setGroupingUsed(true);
+        offshorePricing.setText("Tuition Fee - OffShore Int Student: $"+myFormat.format(courseDetail.getOffshoreTuition()));
+        onshorePricing.setText("Tuition Fee - OnShore Student Visa Holder: $"+myFormat.format(courseDetail.getOnshoreTuition()));
+
     }
 }
