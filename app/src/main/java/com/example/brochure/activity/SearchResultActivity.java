@@ -2,18 +2,25 @@ package com.example.brochure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SearchResultAdapter;
 import com.example.brochure.model.SearchResult;
 
 import static com.example.brochure.model.GroupEnum.AIBT;
+import static com.example.brochure.model.GroupEnum.REACH;
 
 public class SearchResultActivity extends AppCompatActivity {
+
+    private SearchResult searchResult;
+    private GridView searchResultGridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +34,27 @@ public class SearchResultActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_search_result);
 
-        SearchResult searchResult = (SearchResult) getIntent().getSerializableExtra("SearchResult");
+        searchResult = (SearchResult) getIntent().getSerializableExtra("SearchResult");
 
-        GridView gridView = findViewById(R.id.search_result_grid_view);
+        TextView searchResultTitle = findViewById(R.id.search_result_title);
+        searchResultTitle.setText("Search Results for: " + searchResult.getSearchText());
+        searchResultGridView = findViewById(R.id.search_result_grid_view);
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            searchResultGridView.setNumColumns(1);
+        }
+
         SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, searchResult.getSearchResults().get(AIBT));
-        gridView.setAdapter(searchResultAdapter);
+        searchResultGridView.setAdapter(searchResultAdapter);
+    }
+
+    public void aibtSwitchClick(View view) {
+        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, searchResult.getSearchResults().get(AIBT));
+        searchResultGridView.setAdapter(searchResultAdapter);
+    }
+
+    public void reachSwitchClick(View view) {
+        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, searchResult.getSearchResults().get(REACH));
+        searchResultGridView.setAdapter(searchResultAdapter);
     }
 }

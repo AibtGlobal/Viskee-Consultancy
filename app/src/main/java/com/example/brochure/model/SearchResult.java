@@ -6,7 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchResult implements Serializable {
+    private String searchText;
     private Map<GroupEnum, List<Course>> searchResults = new HashMap<>();
+
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
 
     public Map<GroupEnum, List<Course>> getSearchResults() {
         return searchResults;

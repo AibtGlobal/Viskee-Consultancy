@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SearchResultAdapter;
@@ -53,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void search(View view) {
+        EditText searchTextView = findViewById(R.id.search_text);
         SearchResult searchResult = new SearchResult();
+        searchResult.setSearchText(searchTextView.getText().toString());
         searchResult.getSearchResults().put(GroupEnum.AIBT, schools.get(0).getCourses());
+        searchResult.getSearchResults().put(GroupEnum.REACH, schools.get(1).getCourses());
         Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
         intent.putExtra("SearchResult", searchResult);
         startActivity(intent);
