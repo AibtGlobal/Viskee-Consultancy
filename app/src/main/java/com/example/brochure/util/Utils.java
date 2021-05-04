@@ -45,11 +45,14 @@ public class Utils {
         }
 
         int totalHeight = 0;
+        int totalHeight2 = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            TextView item = listView.findViewById(R.id.school_course_name);
+//            TextView item = listView.findViewById(R.id.school_course_name);
+//            item.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+//            totalHeight2 += item.getMeasuredHeight();
             totalHeight += listItem.getMeasuredHeight();
         }
 

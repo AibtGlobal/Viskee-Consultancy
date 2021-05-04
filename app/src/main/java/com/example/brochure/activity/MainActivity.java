@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SearchSuggestionAdapter;
@@ -23,6 +24,8 @@ import com.example.brochure.model.SearchResult;
 import com.example.brochure.util.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -95,10 +98,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void search(View view) {
         AutoCompleteTextView searchTextBar = findViewById(R.id.search_text);
+        String textToSearch = searchTextBar.getText().toString();
+        if (StringUtils.isBlank(textToSearch)) {
+            Toast.makeText(this, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         List<Course> suggestions = ((SearchSuggestionAdapter) searchTextBar.getAdapter()).getSuggestions();
-        EditText searchTextView = findViewById(R.id.search_text);
+//        EditText searchTextView = findViewById(R.id.search_text);
         SearchResult searchResult = new SearchResult();
-        searchResult.setSearchText(searchTextView.getText().toString());
+        searchResult.setSearchText(searchTextBar.getText().toString());
         if (courseSelected != null) {
             searchResult.getSearchResults().put(GroupEnum.AIBT, Collections.singletonList(courseSelected));
         } else {

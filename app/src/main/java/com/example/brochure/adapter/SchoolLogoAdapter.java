@@ -2,18 +2,15 @@ package com.example.brochure.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
-
 import com.example.brochure.R;
 import com.example.brochure.activity.SchoolCoursesActivity;
-import com.example.brochure.model.AIBTSchoolNameEnum;
 import com.example.brochure.model.Group;
 import com.example.brochure.model.School;
 import com.example.brochure.util.Utils;
