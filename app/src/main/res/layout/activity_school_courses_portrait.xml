@@ -32,11 +32,12 @@
         app:layout_constraintWidth_percent="0.15" />
 
     <ImageView
-        android:id="@+id/school_logo"
+        android:id="@+id/school_course_logo"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:gravity="center"
-        android:src="@drawable/logo_aibt_transparant"
+        android:src="@drawable/ace_aviation"
+        android:background="@drawable/border_with_background_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/school_logo"
+        app:layout_constraintTop_toBottomOf="@id/school_course_logo"
         android:layout_margin="20dp"
         android:gravity="center"
         android:verticalSpacing="24dp"

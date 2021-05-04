@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".activity.SearchResultActivity">
+    tools:context=".activity.SchoolLogoActivity">
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:alpha="0.41"
-        android:scaleType="centerCrop"
         android:src="@drawable/background_bw"
+        android:scaleType="centerCrop"
+        android:alpha="0.41"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,80 +31,47 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.15" />
 
-    <TextView
-        android:id="@+id/search_result_title"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/aibt_logo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Search Results for: Diploma of Business"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:src="@drawable/logo_aibt_transparant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.8"/>
 
-    <RadioGroup
-        android:checkedButton="@+id/aibt_switch"
-        android:id="@+id/switch_button"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:background="@drawable/border_with_background_gray"
-        android:orientation="horizontal"
+    <Button
+        android:id="@+id/download_brochure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gold"
+        android:text="Brochure April 2021"
+        app:layout_constraintTop_toBottomOf="@id/aibt_logo"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_result_title"
-        android:layout_marginTop="20dp">
-
-        <RadioButton
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
-            android:id="@+id/aibt_switch"
-            android:background="@drawable/toggle_widget_background"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="AIBT"
-            android:textColor="@color/white"
-            android:onClick="aibtSwitchClick"/>
-
-        <RadioButton
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:id="@+id/reach_switch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
-            android:button="@null"
-            android:gravity="center"
-            android:text="REACH"
-            android:textColor="@color/white"
-            android:onClick="reachSwitchClick"/>
-    </RadioGroup>
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.35"/>
 
     <GridView
-        android:id="@+id/search_result_grid_view"
+        android:id="@+id/school_logo_grid_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switch_button"
+        app:layout_constraintTop_toBottomOf="@id/download_brochure"
         android:layout_margin="20dp"
         android:gravity="center"
         android:verticalSpacing="24dp"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

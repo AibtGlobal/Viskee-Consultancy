@@ -53,7 +53,7 @@ public class SearchResultAdapter extends BaseAdapter {
         LinearLayout searchResultCard = convertView.findViewById(R.id.search_result_card);
 
         courseNameTextView.setText(course.getName());
-        vetCodeTextView.setText(course.getVetCode());
+        vetCodeTextView.setText("VET National Code: " + course.getVetCode());
         searchResultCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

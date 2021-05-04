@@ -10,15 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.TextView;
 
 import com.example.brochure.R;
-import com.example.brochure.adapter.SearchResultAdapter;
 import com.example.brochure.adapter.SearchSuggestionAdapter;
 import com.example.brochure.model.Course;
 import com.example.brochure.model.Group;
@@ -27,15 +22,12 @@ import com.example.brochure.model.School;
 import com.example.brochure.model.SearchResult;
 import com.example.brochure.util.Utils;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -119,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToAIBTSchoolPage(View view) {
-        Intent intent = new Intent(MainActivity.this, SchoolActivity.class);
+        Intent intent = new Intent(MainActivity.this, SchoolLogoActivity.class);
         intent.putExtra("Group", groups.get(0));
         startActivity(intent);
     }

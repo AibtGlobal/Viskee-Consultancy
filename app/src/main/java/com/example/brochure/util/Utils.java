@@ -1,13 +1,18 @@
 package com.example.brochure.util;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.brochure.R;
+import com.example.brochure.model.AIBTSchoolNameEnum;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,5 +57,31 @@ public class Utils {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
+    }
+
+    public static Drawable getSchoolLogoDrawable(Context context, String schoolName) {
+        AIBTSchoolNameEnum aibtSchoolNameEnum = AIBTSchoolNameEnum.fromValue(schoolName.toUpperCase());
+        Drawable drawable = null;
+        switch (aibtSchoolNameEnum) {
+            case ACE:
+                drawable = ContextCompat.getDrawable(context, R.drawable.ace_aviation);
+                break;
+            case BESPOKE:
+                drawable = ContextCompat.getDrawable(context, R.drawable.bespoke);
+                break;
+            case BRANSON:
+                drawable = ContextCompat.getDrawable(context, R.drawable.branson);
+                break;
+            case DIANA:
+                drawable = ContextCompat.getDrawable(context, R.drawable.diana);
+                break;
+            case EDISON:
+                drawable = ContextCompat.getDrawable(context, R.drawable.edison);
+                break;
+            case SHELDON:
+                drawable = ContextCompat.getDrawable(context, R.drawable.sheldon);
+                break;
+        }
+        return drawable;
     }
 }

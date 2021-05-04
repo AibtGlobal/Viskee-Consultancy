@@ -16,13 +16,14 @@ import com.example.brochure.activity.SchoolCoursesActivity;
 import com.example.brochure.model.AIBTSchoolNameEnum;
 import com.example.brochure.model.Group;
 import com.example.brochure.model.School;
+import com.example.brochure.util.Utils;
 
-public class SchoolAdapter extends BaseAdapter {
+public class SchoolLogoAdapter extends BaseAdapter {
 
     private final Context context;
     private final Group group;
 
-    public SchoolAdapter(Context context, Group group) {
+    public SchoolLogoAdapter(Context context, Group group) {
         this.context = context;
         this.group = group;
     }
@@ -51,30 +52,8 @@ public class SchoolAdapter extends BaseAdapter {
         }
 
         School school = group.getSchools().get(position);
-        AIBTSchoolNameEnum aibtSchoolNameEnum = AIBTSchoolNameEnum.fromValue(school.getName().toUpperCase());
         ImageView imageView = convertView.findViewById(R.id.school_logo);
-        Drawable drawable = null;
-        switch (aibtSchoolNameEnum) {
-            case ACE:
-                drawable = ContextCompat.getDrawable(context, R.drawable.ace_aviation);
-                break;
-            case BESPOKE:
-                drawable = ContextCompat.getDrawable(context, R.drawable.bespoke);
-                break;
-            case BRANSON:
-                drawable = ContextCompat.getDrawable(context, R.drawable.branson);
-                break;
-            case DIANA:
-                drawable = ContextCompat.getDrawable(context, R.drawable.diana);
-                break;
-            case EDISON:
-                drawable = ContextCompat.getDrawable(context, R.drawable.edison);
-                break;
-            case SHELDON:
-                drawable = ContextCompat.getDrawable(context, R.drawable.sheldon);
-                break;
-        }
-        imageView.setImageDrawable(drawable);
+        imageView.setImageDrawable(Utils.getSchoolLogoDrawable(context, school.getName()));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

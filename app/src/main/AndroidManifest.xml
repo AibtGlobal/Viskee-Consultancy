@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Brochure">
         <activity android:name=".activity.SchoolCoursesActivity"></activity>
-        <activity android:name=".activity.SchoolActivity" />
+        <activity android:name=".activity.SchoolLogoActivity" />
         <activity android:name=".activity.CourseDetailActivity" />
         <activity android:name=".activity.SearchResultActivity" />
         <activity android:name=".activity.MainActivity">

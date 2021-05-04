@@ -1,6 +1,8 @@
 package com.example.brochure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,7 +25,12 @@ public class CourseDetailActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_course_detail);
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_course_detail_portrait);
+        } else {
+            setContentView(R.layout.activity_course_detail_landscape);
+        }
 
         Course courseDetail = (Course) getIntent().getSerializableExtra("CourseDetail");
         TextView courseName = findViewById(R.id.course_detail_title);
