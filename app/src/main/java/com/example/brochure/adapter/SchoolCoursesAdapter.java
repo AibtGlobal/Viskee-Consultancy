@@ -16,6 +16,7 @@ import com.example.brochure.model.School;
 import com.example.brochure.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public class SchoolCoursesAdapter extends BaseAdapter {
         departmentNameTextView.setText(department.getName());
         SchoolCourseItemAdapter schoolCourseItemAdapter = new SchoolCourseItemAdapter(context, department);
         coursesListView.setAdapter(schoolCourseItemAdapter);
-        Utils.setListViewHeightBasedOnChildren(coursesListView);
+        Utils.setListViewHeightBasedOnChildren(department, coursesListView);
         return convertView;
     }
 
@@ -67,6 +68,6 @@ public class SchoolCoursesAdapter extends BaseAdapter {
         for (Map.Entry<String, List<Course>> entry : departmentMap.entrySet()) {
             departments.add(new Department(entry.getKey(), entry.getValue()));
         }
-
+        departments.sort(Comparator.comparing(Department::getName));
     }
 }

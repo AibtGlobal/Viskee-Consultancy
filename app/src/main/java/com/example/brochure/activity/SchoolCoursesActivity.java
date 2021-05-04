@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolCoursesAdapter;

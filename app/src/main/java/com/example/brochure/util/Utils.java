@@ -1,6 +1,7 @@
 package com.example.brochure.util;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.example.brochure.R;
+import com.example.brochure.adapter.SchoolCourseItemAdapter;
 import com.example.brochure.model.AIBTSchoolNameEnum;
+import com.example.brochure.model.Course;
+import com.example.brochure.model.Department;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,23 +41,28 @@ public class Utils {
         return jsonString;
     }
 
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
+    public static void setListViewHeightBasedOnChildren(Department department, ListView listView) {
+        SchoolCourseItemAdapter listAdapter = (SchoolCourseItemAdapter)listView.getAdapter();
         if (listAdapter == null) {
             // pre-condition
             return;
         }
-
         int totalHeight = 0;
-        int totalHeight2 = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
-        for (int i = 0; i < listAdapter.getCount(); i++) {
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int orientation = listView.getResources().getConfiguration().orientation;
+        for (int i = 0; i < department.getCourses().size(); i++) {
+
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-//            TextView item = listView.findViewById(R.id.school_course_name);
-//            item.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-//            totalHeight2 += item.getMeasuredHeight();
-            totalHeight += listItem.getMeasuredHeight();
+
+            Course course = department.getCourses().get(i);
+            String name = course.getName();
+
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                totalHeight += listItem.getMeasuredHeight() * (name.length() / 45 + 1);
+            } else {
+                totalHeight += listItem.getMeasuredHeight() * (name.length() / 100 + 1);
+            }
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
