@@ -13,6 +13,7 @@ import com.example.brochure.R;
 import com.example.brochure.model.Course;
 import com.example.brochure.model.Department;
 import com.example.brochure.model.School;
+import com.example.brochure.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +55,10 @@ public class SchoolCoursesAdapter extends BaseAdapter {
         Department department = departments.get(position);
         TextView departmentNameTextView = convertView.findViewById(R.id.department_name);
         ListView coursesListView = convertView.findViewById(R.id.course_list);
+        departmentNameTextView.setText(department.getName());
         SchoolCourseItemAdapter schoolCourseItemAdapter = new SchoolCourseItemAdapter(context, department);
         coursesListView.setAdapter(schoolCourseItemAdapter);
+        Utils.setListViewHeightBasedOnChildren(coursesListView);
         return convertView;
     }
 
