@@ -33,63 +33,6 @@ public class Course implements Serializable {
     private int unpaidPlacement;
     private String completeServicePeriods;
 
-//    public static class Builder {
-//        private final Course course;
-//
-//        private Builder() {
-//            this.course = new Course();
-//        }
-//
-//        public static Builder create() {
-//            return new Builder();
-//        }
-//
-//        public Builder vetCode(String vetCode) {
-//            course.setVetCode(vetCode);
-//            return this;
-//        }
-//
-//        public Builder name(String name) {
-//            course.setName(name);
-//            return this;
-//        }
-//
-//        public Builder duration(int duration) {
-//            course.setDuration(duration);
-//            return this;
-//        }
-//
-//        public Builder durationDetail(String durationDetail) {
-//            course.setDurationDetail(durationDetail);
-//            return this;
-//        }
-//
-//        public Builder offshoreTuition(long offshoreTuition) {
-//            course.setOffshoreTuition(offshoreTuition);
-//            return this;
-//        }
-//
-//        public Builder onshoreTuition(long onshoreTuition) {
-//            course.setOffshoreTuition(onshoreTuition);
-//            return this;
-//        }
-//
-//        public Builder location(List<String> location) {
-//            course.setLocation(location);
-//            return this;
-//        }
-//
-//        public Builder unpaidPlacement(int unpaidPlacement) {
-//            course.setUnpaidPlacement(unpaidPlacement);
-//            return this;
-//        }
-//
-//        public Builder completeServicePeriods(String completeServicePeriods) {
-//            course.setCompleteServicePeriods(completeServicePeriods);
-//            return this;
-//        }
-//    }
-
     public String getVetCode() {
         return vetCode;
     }
@@ -168,5 +111,21 @@ public class Course implements Serializable {
 
     public void setCompleteServicePeriods(String completeServicePeriods) {
         this.completeServicePeriods = completeServicePeriods;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "vetCode='" + vetCode + '\'' +
+                ", department='" + department + '\'' +
+                ", name='" + name + '\'' +
+                ", duration=" + duration +
+                ", durationDetail='" + durationDetail + '\'' +
+                ", offshoreTuition=" + offshoreTuition +
+                ", onshoreTuition=" + onshoreTuition +
+                ", location=" + location +
+                ", unpaidPlacement=" + unpaidPlacement +
+                ", completeServicePeriods='" + completeServicePeriods + '\'' +
+                '}';
     }
 }

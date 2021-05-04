@@ -24,4 +24,12 @@ public class SearchResult implements Serializable {
     public void setSearchResults(Map<GroupEnum, List<Course>> searchResults) {
         this.searchResults = searchResults;
     }
+
+    @Override
+    public String toString() {
+        return "SearchResult{" +
+                "searchText='" + searchText + '\'' +
+                ", searchResults=" + searchResults +
+                '}';
+    }
 }

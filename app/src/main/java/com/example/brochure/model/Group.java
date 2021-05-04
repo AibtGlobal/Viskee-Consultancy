@@ -23,4 +23,12 @@ public class Group implements Serializable {
     public void setSchools(List<School> schools) {
         this.schools = schools;
     }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "name='" + name + '\'' +
+                ", schools=" + schools +
+                '}';
+    }
 }

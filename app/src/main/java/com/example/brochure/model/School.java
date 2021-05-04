@@ -42,4 +42,12 @@ public class School implements Serializable {
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
+
+    @Override
+    public String toString() {
+        return "School{" +
+                "name='" + name + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
 }

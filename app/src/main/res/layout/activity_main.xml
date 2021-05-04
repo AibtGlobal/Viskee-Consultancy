@@ -62,7 +62,7 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.8">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/search_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
