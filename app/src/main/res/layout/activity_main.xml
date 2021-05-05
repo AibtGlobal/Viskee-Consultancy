@@ -91,11 +91,13 @@
 
     </RelativeLayout>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/aibt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/aibt_transparent"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1"
@@ -108,11 +110,13 @@
         app:layout_constraintWidth_percent="0.2"
         android:onClick="goToAIBTSchoolPage"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/reach"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/reach_transparent"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1"

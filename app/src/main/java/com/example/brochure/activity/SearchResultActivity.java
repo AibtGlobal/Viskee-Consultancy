@@ -16,6 +16,8 @@ import com.example.brochure.R;
 import com.example.brochure.adapter.SearchResultAdapter;
 import com.example.brochure.model.SearchResult;
 
+import java.util.Collections;
+
 import static com.example.brochure.model.GroupEnum.AIBT;
 import static com.example.brochure.model.GroupEnum.REACH;
 
@@ -65,7 +67,7 @@ public class SearchResultActivity extends AppCompatActivity {
     public void reachSwitchClick(View view) {
         aibtSwitchButton.setTypeface(null, Typeface.NORMAL);
         reachSwitchButton.setTypeface(null, Typeface.BOLD);
-        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, searchResult.getSearchResults().get(REACH));
+        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, Collections.emptyList());
         searchResultGridView.setAdapter(searchResultAdapter);
     }
 }
