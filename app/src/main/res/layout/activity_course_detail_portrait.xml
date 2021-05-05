@@ -45,7 +45,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/course_detail_vet_code"
@@ -59,7 +59,9 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/course_detail_title" />
+        app:layout_constraintTop_toBottomOf="@id/course_detail_title"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.9" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -179,6 +181,16 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/course_pricing_onshore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/course_pricing_offshore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -188,20 +200,7 @@
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/course_pricing_onshore"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
         </LinearLayout>
     </ScrollView>
 

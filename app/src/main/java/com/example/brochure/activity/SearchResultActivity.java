@@ -67,7 +67,7 @@ public class SearchResultActivity extends AppCompatActivity {
     public void reachSwitchClick(View view) {
         aibtSwitchButton.setTypeface(null, Typeface.NORMAL);
         reachSwitchButton.setTypeface(null, Typeface.BOLD);
-        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, Collections.emptyList());
+        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, searchResult.getSearchResults().get(REACH));
         searchResultGridView.setAdapter(searchResultAdapter);
     }
 }

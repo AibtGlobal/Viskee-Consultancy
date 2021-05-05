@@ -185,6 +185,16 @@
                 android:layout_marginTop="10dp"/>
 
             <TextView
+                android:id="@+id/course_pricing_onshore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
                 android:id="@+id/course_pricing_offshore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -193,16 +203,6 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/course_pricing_onshore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:textSize="15sp"/>
         </LinearLayout>
     </LinearLayout>

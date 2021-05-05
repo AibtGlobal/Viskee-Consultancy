@@ -59,7 +59,7 @@ public class Utils {
             String name = course.getName();
 
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                totalHeight += listItem.getMeasuredHeight() * (name.length() / 45 + 1);
+                totalHeight += listItem.getMeasuredHeight() * (name.length() / 40 + 1);
             } else {
                 totalHeight += listItem.getMeasuredHeight() * (name.length() / 100 + 1);
             }
@@ -92,6 +92,9 @@ public class Utils {
                 break;
             case SHELDON:
                 drawable = ContextCompat.getDrawable(context, R.drawable.sheldon);
+                break;
+            case REACH:
+                drawable = ContextCompat.getDrawable(context, R.drawable.reach);
                 break;
         }
         return drawable;

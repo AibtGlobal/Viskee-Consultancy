@@ -9,11 +9,12 @@ public enum AIBTSchoolNameEnum {
     BRANSON("BRANSON SCHOOL OF BUSINESS AND TECHNOLOGY"),
     DIANA("DIANA SCHOOL OF COMMUNITY SERVICES"),
     EDISON("EDISON SCHOOL OF TECH SCIENCES"),
-    SHELDON("SHELDON SCHOOL OF HOSPITALITY");
+    SHELDON("SHELDON SCHOOL OF HOSPITALITY"),
+    REACH("REACH COMMUNITY COLLEGE");
 
 
     private String name;
-    private static Map<String, AIBTSchoolNameEnum> map = new HashMap<>();
+    private static final Map<String, AIBTSchoolNameEnum> map = new HashMap<>();
     static {
         map.put(ACE.name, ACE);
         map.put(BESPOKE.name, BESPOKE);
@@ -21,6 +22,7 @@ public enum AIBTSchoolNameEnum {
         map.put(DIANA.name, DIANA);
         map.put(EDISON.name, EDISON);
         map.put(SHELDON.name, SHELDON);
+        map.put(REACH.name, REACH);
     }
 
     AIBTSchoolNameEnum(String name) {

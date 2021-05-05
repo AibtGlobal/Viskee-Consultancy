@@ -30,12 +30,16 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<School> schools = new ArrayList<>();
-    private List<Group> groups = new ArrayList<>();
+    private final Map<GroupEnum, Group> groups = new HashMap<>();
     private Course courseSelected;
 
     @Override
@@ -50,20 +54,37 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        String json = Utils.getJsonFromAssets(getApplicationContext(), "AIBT.json");
-        Gson gson = new Gson();
-        Type listSchoolType = new TypeToken<List<School>>() {
-        }.getType();
-        schools = gson.fromJson(json, listSchoolType);
+        String aibtJson = Utils.getJsonFromAssets(getApplicationContext(), "AIBT.json");
+        String reachJson = Utils.getJsonFromAssets(getApplicationContext(), "REACH.json");
+
+        List<School> aibtSchools = getSchoolFromJson(aibtJson);
+        List<School> reachSchools = getSchoolFromJson(reachJson);
+
         Group aibt = new Group();
         aibt.setName("AIBT");
-        aibt.setSchools(schools);
-        groups.add(aibt);
+        aibt.setSchools(aibtSchools);
+        groups.put(GroupEnum.AIBT, aibt);
+
+        Group reach = new Group();
+        reach.setName("REACH");
+        reach.setSchools(reachSchools);
+        groups.put(GroupEnum.REACH, reach);
+
+        List<Course> aibtCourses = new ArrayList<>();
+        for (School school : aibtSchools) {
+            aibtCourses.addAll(school.getCourses());
+        }
+        aibtCourses.forEach(course -> course.setGroup(GroupEnum.AIBT));
+
+        List<Course> reachCourses = new ArrayList<>();
+        for (School school : reachSchools) {
+            reachCourses.addAll(school.getCourses());
+        }
+        reachCourses.forEach(course -> course.setGroup(GroupEnum.REACH));
 
         List<Course> courses = new ArrayList<>();
-        for (School school : schools) {
-            courses.addAll(school.getCourses());
-        }
+        courses.addAll(aibtCourses);
+        courses.addAll(reachCourses);
 
         AutoCompleteTextView searchTextBar = findViewById(R.id.search_text);
 
@@ -108,9 +129,11 @@ public class MainActivity extends AppCompatActivity {
         SearchResult searchResult = new SearchResult();
         searchResult.setSearchText(searchTextBar.getText().toString());
         if (courseSelected != null) {
-            searchResult.getSearchResults().put(GroupEnum.AIBT, Collections.singletonList(courseSelected));
+            searchResult.getSearchResults().put(courseSelected.getGroup(), Collections.singletonList(courseSelected));
         } else {
-            searchResult.getSearchResults().put(GroupEnum.AIBT, suggestions);
+            Map<GroupEnum, List<Course>> map = suggestions.stream().collect(groupingBy(Course::getGroup));
+            searchResult.getSearchResults().put(GroupEnum.REACH, map.get(GroupEnum.REACH));
+            searchResult.getSearchResults().put(GroupEnum.AIBT, map.get(GroupEnum.AIBT));
         }
 //        searchResult.getSearchResults().put(GroupEnum.REACH, schools.get(1).getCourses());
         Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
@@ -120,7 +143,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToAIBTSchoolPage(View view) {
         Intent intent = new Intent(MainActivity.this, SchoolLogoActivity.class);
-        intent.putExtra("Group", groups.get(0));
+        intent.putExtra("Group", groups.get(GroupEnum.AIBT));
         startActivity(intent);
+    }
+
+    public void goToREACHCoursePage(View view) {
+        Group reachGroup = groups.get(GroupEnum.REACH);
+        if (reachGroup != null && reachGroup.getSchools() != null && reachGroup.getSchools().size() != 0) {
+            Intent intent = new Intent(MainActivity.this, SchoolCoursesActivity.class);
+            intent.putExtra("School", reachGroup.getSchools().get(0));
+            startActivity(intent);
+        }
+    }
+
+    private List<School> getSchoolFromJson(String json) {
+        Gson gson = new Gson();
+        Type listSchoolType = new TypeToken<List<School>>() {
+        }.getType();
+        return gson.fromJson(json, listSchoolType);
     }
 }

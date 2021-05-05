@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.brochure.R;
 import com.example.brochure.model.Course;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.NumberFormat;
 
 public class CourseDetailActivity extends AppCompatActivity {
@@ -41,14 +43,30 @@ public class CourseDetailActivity extends AppCompatActivity {
         TextView offshorePricing = findViewById(R.id.course_pricing_offshore);
         TextView onshorePricing = findViewById(R.id.course_pricing_onshore);
         courseName.setText(courseDetail.getName());
-        courseVetCode.setText("VET National Code: " + courseDetail.getVetCode());
-        courseDuration.setText(courseDetail.getDuration()+" Weeks");
+        if (!StringUtils.isBlank(courseDetail.getVetCode())) {
+            courseVetCode.setText("VET National Code: " + courseDetail.getVetCode());
+        } else {
+            courseVetCode.setText("");
+        }
+        if (courseDetail.getDuration() != 0) {
+            courseDuration.setText(courseDetail.getDuration() + " Weeks");
+        } else {
+            courseDuration.setText("");
+        }
         courseDurationDetail.setText(courseDetail.getDurationDetail());
         courseLocation.setText(String.join(" | ", courseDetail.getLocation()));
         NumberFormat myFormat = NumberFormat.getInstance();
         myFormat.setGroupingUsed(true);
-        offshorePricing.setText("Tuition Fee - OffShore Int Student: $"+myFormat.format(courseDetail.getOffshoreTuition()));
-        onshorePricing.setText("Tuition Fee - OnShore Student Visa Holder: $"+myFormat.format(courseDetail.getOnshoreTuition()));
+        if (courseDetail.getOffshoreTuition() != 0) {
+            offshorePricing.setText("Tuition Fee - OffShore Int Student: $"+myFormat.format(courseDetail.getOffshoreTuition()));
+        } else {
+            offshorePricing.setText("");
+        }
+        if (courseDetail.getOnshoreTuition() != 0) {
+            onshorePricing.setText("Tuition Fee - OnShore Student Visa Holder: $" + myFormat.format(courseDetail.getOnshoreTuition()));
+        } else {
+            onshorePricing.setText("");
+        }
 
     }
 }

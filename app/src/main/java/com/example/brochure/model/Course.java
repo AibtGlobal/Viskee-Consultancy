@@ -22,6 +22,7 @@ public class Course implements Serializable {
         this.completeServicePeriods = completeServicePeriods;
     }
 
+    private GroupEnum group;
     private String vetCode;
     private String department;
     private String name;
@@ -32,6 +33,14 @@ public class Course implements Serializable {
     private List<String> location = new ArrayList<>();
     private int unpaidPlacement;
     private String completeServicePeriods;
+
+    public GroupEnum getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupEnum group) {
+        this.group = group;
+    }
 
     public String getVetCode() {
         return vetCode;

@@ -27,6 +27,22 @@ public class SchoolCoursesAdapter extends BaseAdapter {
     private final Context context;
     private final List<Department> departments = new ArrayList<>();
 
+    private static final Comparator<Department> departmentNameComparator;
+    static {
+        departmentNameComparator = new Comparator<Department>() {
+            @Override
+            public int compare(Department o1, Department o2) {
+                if ("Packages".equalsIgnoreCase(o1.getName())) {
+                    return 1;
+                }
+                if ("Packages".equalsIgnoreCase(o2.getName())) {
+                    return -1;
+                }
+                return (o1.getName().compareTo(o2.getName()));
+            }
+        };
+    }
+
     public SchoolCoursesAdapter(Context context, School school) {
         this.context = context;
         buildDepartmentList(school);
@@ -68,6 +84,7 @@ public class SchoolCoursesAdapter extends BaseAdapter {
         for (Map.Entry<String, List<Course>> entry : departmentMap.entrySet()) {
             departments.add(new Department(entry.getKey(), entry.getValue()));
         }
-        departments.sort(Comparator.comparing(Department::getName));
+        departments.sort(departmentNameComparator);
     }
+
 }
