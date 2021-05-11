@@ -5,10 +5,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
@@ -24,25 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Utils {
-    public static String getJsonFromAssets(Context context, String fileName) {
-        String jsonString;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-
-            jsonString = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return jsonString;
-    }
-
     public static String getJsonFromStorage(Context context, String fileName) {
         String jsonString;
         try {
@@ -92,30 +70,58 @@ public class Utils {
         listView.requestLayout();
     }
 
-    public static Drawable getSchoolLogoDrawable(Context context, String schoolName) {
+    public static Drawable getSchoolLogoDrawable(Context context, String schoolName, int orientation) {
         AIBTSchoolNameEnum aibtSchoolNameEnum = AIBTSchoolNameEnum.fromValue(schoolName.toUpperCase());
         Drawable drawable = null;
         switch (aibtSchoolNameEnum) {
             case ACE:
-                drawable = ContextCompat.getDrawable(context, R.drawable.ace_aviation);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.ace_landscape);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.ace_landscape);
+                }
                 break;
             case BESPOKE:
-                drawable = ContextCompat.getDrawable(context, R.drawable.bespoke);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.bespoke_portrait);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.bespoke_landscape);
+                }
                 break;
             case BRANSON:
-                drawable = ContextCompat.getDrawable(context, R.drawable.branson);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.branson_portrait);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.branson_landscape);
+                }
                 break;
             case DIANA:
-                drawable = ContextCompat.getDrawable(context, R.drawable.diana);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.diana_portrait);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.diana_landscape);
+                }
                 break;
             case EDISON:
-                drawable = ContextCompat.getDrawable(context, R.drawable.edison);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.edison_portrait);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.edison_landscape);
+                }
                 break;
             case SHELDON:
-                drawable = ContextCompat.getDrawable(context, R.drawable.sheldon);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.sheldon_portrait);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.sheldon_landscape);
+                }
                 break;
             case REACH:
-                drawable = ContextCompat.getDrawable(context, R.drawable.reach);
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.reach_portrait);
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.reach_landscape);
+                }
                 break;
         }
         return drawable;

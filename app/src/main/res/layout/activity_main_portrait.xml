@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".activity.MainActivity">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:alpha="0.41"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_portrait"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/vc_logo_portrait"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <TextView
+        android:id="@+id/main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Explore over 90+ Courses and Promotions"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.92">
+
+        <AutoCompleteTextView
+            android:id="@+id/search_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="5dp"
+            android:layout_toStartOf="@id/search_button"
+            android:background="@drawable/border_with_background_gray"
+            android:gravity="center_vertical"
+            android:hint="Search for a course"
+            android:paddingLeft="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/border_with_no_backgroud"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:text="Go"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/gold" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/aibt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_with_background_gray"
+        android:scaleType="fitCenter"
+        android:src="@drawable/aibt_portrait"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <ImageButton
+        android:id="@+id/reach"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_with_background_gray"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/reach_portrait"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

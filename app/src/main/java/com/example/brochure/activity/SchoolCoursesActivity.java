@@ -27,12 +27,11 @@ public class SchoolCoursesActivity extends AppCompatActivity {
             setContentView(R.layout.activity_school_courses_landscape);
         }
 
-
         School school = (School) getIntent().getSerializableExtra("School");
         SchoolCoursesAdapter schoolCoursesAdapter = new SchoolCoursesAdapter(this, school);
 
         ImageView schoolLogo = findViewById(R.id.school_course_logo);
-        schoolLogo.setImageDrawable(Utils.getSchoolLogoDrawable(this, school.getName()));
+        schoolLogo.setImageDrawable(Utils.getSchoolLogoDrawable(this, school.getName(), Configuration.ORIENTATION_LANDSCAPE));
 
         GridView schoolCourseGridView = (GridView) findViewById(R.id.school_course_grid_view);
         schoolCourseGridView.setAdapter(schoolCoursesAdapter);

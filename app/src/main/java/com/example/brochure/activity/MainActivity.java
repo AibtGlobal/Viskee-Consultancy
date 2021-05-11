@@ -2,59 +2,27 @@ package com.example.brochure.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.MainViewAdapter;
-import com.example.brochure.adapter.SearchSuggestionAdapter;
-import com.example.brochure.model.Course;
-import com.example.brochure.model.Group;
-import com.example.brochure.model.GroupEnum;
-import com.example.brochure.model.School;
-import com.example.brochure.model.SearchResult;
 import com.example.brochure.util.DownloadConfigurationFileFromURL;
-import com.example.brochure.util.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -73,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_main_placeholder);
+        setContentView(R.layout.activity_main_placeholder_portrait);
 
         if (checkInternetConnection()) {
             ProgressBar progressBar = findViewById(R.id.progress_bar);
@@ -88,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } else {
+                int orientation = this.getResources().getConfiguration().orientation;
                 final LayoutInflater layoutInflater = LayoutInflater.from(this);
-                View layoutView = layoutInflater.inflate(R.layout.activity_main, null);
+                View layoutView;
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
+                } else {
+                    layoutView = layoutInflater.inflate(R.layout.activity_main_landscape, null);
+                }
                 setContentView(layoutView);
                 new MainViewAdapter(this, layoutView).prepareData();
             }

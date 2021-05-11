@@ -1,8 +1,8 @@
 package com.example.brochure.util;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -115,7 +115,7 @@ public class DownloadConfigurationFileFromURL extends AsyncTask<String, Integer,
                         .show();
             } else {
                 final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-                View layoutView = layoutInflater.inflate(R.layout.activity_main, null);
+                View layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
                 mContext.setContentView(layoutView);
                 new MainViewAdapter(mContext, layoutView).prepareData();
             }
@@ -132,8 +132,14 @@ public class DownloadConfigurationFileFromURL extends AsyncTask<String, Integer,
     protected void onPostExecute(String s) {
         progressBar.setVisibility(View.INVISIBLE);
 
+        int orientation = mContext.getResources().getConfiguration().orientation;
         final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View layoutView = layoutInflater.inflate(R.layout.activity_main, null);
+        View layoutView;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
+        } else {
+            layoutView = layoutInflater.inflate(R.layout.activity_main_landscape, null);
+        }
         mContext.setContentView(layoutView);
         new MainViewAdapter(mContext, layoutView).prepareData();
         super.onPostExecute(s);
