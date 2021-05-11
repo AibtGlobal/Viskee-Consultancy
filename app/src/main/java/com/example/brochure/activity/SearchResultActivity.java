@@ -16,8 +16,6 @@ import com.example.brochure.R;
 import com.example.brochure.adapter.SearchResultAdapter;
 import com.example.brochure.model.SearchResult;
 
-import java.util.Collections;
-
 import static com.example.brochure.model.GroupEnum.AIBT;
 import static com.example.brochure.model.GroupEnum.REACH;
 
@@ -38,14 +36,18 @@ public class SearchResultActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_search_result);
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_search_result_portrait);
+        } else {
+            setContentView(R.layout.activity_search_result_landscape);
+        }
 
         searchResult = (SearchResult) getIntent().getSerializableExtra("SearchResult");
 
         TextView searchResultTitle = findViewById(R.id.search_result_title);
         searchResultTitle.setText("Search Results for: " + searchResult.getSearchText());
         searchResultGridView = findViewById(R.id.search_result_grid_view);
-        int orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             searchResultGridView.setNumColumns(1);
         }

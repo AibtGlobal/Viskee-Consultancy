@@ -113,11 +113,6 @@ public class DownloadConfigurationFileFromURL extends AsyncTask<String, Integer,
                         .setMessage("Could you please connect to the Internet and relaunch the app ?")
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-            } else {
-                final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-                View layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
-                mContext.setContentView(layoutView);
-                new MainViewAdapter(mContext, layoutView).prepareData();
             }
         }
         return null;

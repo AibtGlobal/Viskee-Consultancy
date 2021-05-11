@@ -41,7 +41,12 @@ public class MainActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_main_placeholder_portrait);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_main_placeholder_portrait);
+        } else {
+            setContentView(R.layout.activity_main_placeholder_landscape);
+        }
 
         if (checkInternetConnection()) {
             ProgressBar progressBar = findViewById(R.id.progress_bar);
@@ -56,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } else {
-                int orientation = this.getResources().getConfiguration().orientation;
                 final LayoutInflater layoutInflater = LayoutInflater.from(this);
                 View layoutView;
                 if (orientation == Configuration.ORIENTATION_PORTRAIT) {

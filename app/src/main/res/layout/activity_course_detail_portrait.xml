@@ -110,8 +110,7 @@
                     android:gravity="center"
                     android:text="52 Weeks"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/course_duration_detail"
@@ -120,8 +119,7 @@
                     android:gravity="center"
                     android:text="(40 weeks Tuition + 12 weeks Break)"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,8 +152,7 @@
                     android:gravity="center"
                     android:text="NSW | QLD Campuses (AIBT)"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -187,8 +184,7 @@
                     android:gravity="center"
                     android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/course_pricing_offshore"
@@ -198,8 +194,7 @@
                     android:gravity="center"
                     android:text="Tuition Fee - OffShore Int Student: $12,500"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
