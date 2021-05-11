@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:id="@+id/root">
 
     <ImageView
         android:layout_width="0dp"
@@ -86,8 +87,7 @@
             android:insetRight="0dp"
             android:insetBottom="0dp"
             android:text="Go"
-            app:backgroundTint="@color/gold"
-            android:onClick="search"/>
+            app:backgroundTint="@color/gold"/>
 
     </RelativeLayout>
 
@@ -107,8 +107,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
-        android:onClick="goToAIBTSchoolPage"/>
+        app:layout_constraintWidth_percent="0.2"/>
 
     <ImageButton
         android:id="@+id/reach"
@@ -126,7 +125,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.3"
-        android:onClick="goToREACHCoursePage"/>
+        app:layout_constraintWidth_percent="0.3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

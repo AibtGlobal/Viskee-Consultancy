@@ -1,46 +1,67 @@
 package com.example.brochure.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.brochure.R;
+import com.example.brochure.adapter.MainViewAdapter;
 import com.example.brochure.adapter.SearchSuggestionAdapter;
 import com.example.brochure.model.Course;
 import com.example.brochure.model.Group;
 import com.example.brochure.model.GroupEnum;
 import com.example.brochure.model.School;
 import com.example.brochure.model.SearchResult;
+import com.example.brochure.util.DownloadConfigurationFileFromURL;
 import com.example.brochure.util.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Map<GroupEnum, Group> groups = new HashMap<>();
-    private Course courseSelected;
+    private static final String AIBT_CONFIGURATION = "https://raw.githubusercontent.com/ZelongChen/paomia/gh-pages/AIBT.json";
+    private static final String REACH_CONFIGURATION = "https://raw.githubusercontent.com/ZelongChen/paomia/gh-pages/REACH.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,114 +73,50 @@ public class MainActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_placeholder);
 
-        String aibtJson = Utils.getJsonFromAssets(getApplicationContext(), "AIBT.json");
-        String reachJson = Utils.getJsonFromAssets(getApplicationContext(), "REACH.json");
-
-        List<School> aibtSchools = getSchoolFromJson(aibtJson);
-        List<School> reachSchools = getSchoolFromJson(reachJson);
-
-        Group aibt = new Group();
-        aibt.setName("AIBT");
-        aibt.setSchools(aibtSchools);
-        groups.put(GroupEnum.AIBT, aibt);
-
-        Group reach = new Group();
-        reach.setName("REACH");
-        reach.setSchools(reachSchools);
-        groups.put(GroupEnum.REACH, reach);
-
-        List<Course> aibtCourses = new ArrayList<>();
-        for (School school : aibtSchools) {
-            aibtCourses.addAll(school.getCourses());
-        }
-        aibtCourses.forEach(course -> course.setGroup(GroupEnum.AIBT));
-
-        List<Course> reachCourses = new ArrayList<>();
-        for (School school : reachSchools) {
-            reachCourses.addAll(school.getCourses());
-        }
-        reachCourses.forEach(course -> course.setGroup(GroupEnum.REACH));
-
-        List<Course> courses = new ArrayList<>();
-        courses.addAll(aibtCourses);
-        courses.addAll(reachCourses);
-
-        AutoCompleteTextView searchTextBar = findViewById(R.id.search_text);
-
-        SearchSuggestionAdapter searchSuggestionAdapter = new SearchSuggestionAdapter(this, courses);
-        searchTextBar.setAdapter(searchSuggestionAdapter);
-        searchTextBar.setThreshold(0);
-
-        searchTextBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                courseSelected = (Course)parent.getItemAtPosition(position);
-
-            }
-        });
-        searchTextBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                courseSelected = null;
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
-    public void search(View view) {
-        AutoCompleteTextView searchTextBar = findViewById(R.id.search_text);
-        String textToSearch = searchTextBar.getText().toString();
-        if (StringUtils.isBlank(textToSearch)) {
-            Toast.makeText(this, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        List<Course> suggestions = ((SearchSuggestionAdapter) searchTextBar.getAdapter()).getSuggestions();
-//        EditText searchTextView = findViewById(R.id.search_text);
-        SearchResult searchResult = new SearchResult();
-        searchResult.setSearchText(searchTextBar.getText().toString());
-        if (courseSelected != null) {
-            searchResult.getSearchResults().put(courseSelected.getGroup(), Collections.singletonList(courseSelected));
+        if (checkInternetConnection()) {
+            ProgressBar progressBar = findViewById(R.id.progress_bar);
+            new DownloadConfigurationFileFromURL(this, progressBar).execute(AIBT_CONFIGURATION, REACH_CONFIGURATION);
         } else {
-            Map<GroupEnum, List<Course>> map = suggestions.stream().collect(groupingBy(Course::getGroup));
-            searchResult.getSearchResults().put(GroupEnum.REACH, map.get(GroupEnum.REACH));
-            searchResult.getSearchResults().put(GroupEnum.AIBT, map.get(GroupEnum.AIBT));
-        }
-//        searchResult.getSearchResults().put(GroupEnum.REACH, schools.get(1).getCourses());
-        Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
-        intent.putExtra("SearchResult", searchResult);
-        startActivity(intent);
-    }
-
-    public void goToAIBTSchoolPage(View view) {
-        Intent intent = new Intent(MainActivity.this, SchoolLogoActivity.class);
-        intent.putExtra("Group", groups.get(GroupEnum.AIBT));
-        startActivity(intent);
-    }
-
-    public void goToREACHCoursePage(View view) {
-        Group reachGroup = groups.get(GroupEnum.REACH);
-        if (reachGroup != null && reachGroup.getSchools() != null && reachGroup.getSchools().size() != 0) {
-            Intent intent = new Intent(MainActivity.this, SchoolCoursesActivity.class);
-            intent.putExtra("School", reachGroup.getSchools().get(0));
-            startActivity(intent);
+            File AIBT = new File(getFilesDir() + "/AIBT.json");
+            File REACH = new File(getFilesDir() + "/REACH.json");
+            if (!AIBT.exists() || !REACH.exists()) {
+                new AlertDialog.Builder(this)
+                        .setTitle("No configuration found")
+                        .setMessage("Could you please connect to the Internet and relaunch the app ?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else {
+                final LayoutInflater layoutInflater = LayoutInflater.from(this);
+                View layoutView = layoutInflater.inflate(R.layout.activity_main, null);
+                setContentView(layoutView);
+                new MainViewAdapter(this, layoutView).prepareData();
+            }
         }
     }
 
-    private List<School> getSchoolFromJson(String json) {
-        Gson gson = new Gson();
-        Type listSchoolType = new TypeToken<List<School>>() {
-        }.getType();
-        return gson.fromJson(json, listSchoolType);
+    @SuppressLint("WrongConstant")
+    private boolean checkInternetConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Network activeNetwork = connectivityManager.getActiveNetwork();
+            if (activeNetwork == null) {
+                return false;
+            }
+            NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
+            if (networkCapabilities == null) {
+                return false;
+            }
+            if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                return true;
+            }
+        } else {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 }

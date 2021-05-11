@@ -18,6 +18,8 @@ import com.example.brochure.model.AIBTSchoolNameEnum;
 import com.example.brochure.model.Course;
 import com.example.brochure.model.Department;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,6 +28,25 @@ public class Utils {
         String jsonString;
         try {
             InputStream is = context.getAssets().open(fileName);
+
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return jsonString;
+    }
+
+    public static String getJsonFromStorage(Context context, String fileName) {
+        String jsonString;
+        try {
+            InputStream is = new FileInputStream(new File(context.getFilesDir() + "/" + fileName));
 
             int size = is.available();
             byte[] buffer = new byte[size];

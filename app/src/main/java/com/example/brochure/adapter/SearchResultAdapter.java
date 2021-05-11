@@ -13,16 +13,19 @@ import com.example.brochure.R;
 import com.example.brochure.activity.CourseDetailActivity;
 import com.example.brochure.model.Course;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultAdapter extends BaseAdapter {
 
     private final Context context;
-    private final List<Course> courses;
+    private List<Course> courses = new ArrayList<>();
 
     public SearchResultAdapter(Context context, List<Course> courses) {
         this.context = context;
-        this.courses = courses;
+        if (courses != null) {
+            this.courses = courses;
+        }
     }
 
     @Override
