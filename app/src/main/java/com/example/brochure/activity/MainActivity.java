@@ -20,7 +20,7 @@ import android.widget.ProgressBar;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.MainViewAdapter;
-import com.example.brochure.util.DownloadConfigurationFileFromURL;
+import com.example.brochure.util.ConfigFileDownloader;
 
 import java.io.File;
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (checkInternetConnection()) {
             ProgressBar progressBar = findViewById(R.id.progress_bar);
-            new DownloadConfigurationFileFromURL(this, progressBar).execute(AIBT_CONFIGURATION, REACH_CONFIGURATION);
+            new ConfigFileDownloader(this, progressBar).execute(AIBT_CONFIGURATION, REACH_CONFIGURATION);
         } else {
             File AIBT = new File(getFilesDir() + "/AIBT.json");
             File REACH = new File(getFilesDir() + "/REACH.json");

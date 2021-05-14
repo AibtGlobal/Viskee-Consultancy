@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridView;
@@ -11,6 +12,7 @@ import android.widget.GridView;
 import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolLogoAdapter;
 import com.example.brochure.model.Group;
+import com.example.brochure.util.PDFFileDownloader;
 
 public class SchoolLogoActivity extends AppCompatActivity {
 
@@ -37,5 +39,9 @@ public class SchoolLogoActivity extends AppCompatActivity {
         GridView gridView = findViewById(R.id.school_logo_grid_view);
         SchoolLogoAdapter booksAdapter = new SchoolLogoAdapter(this, group);
         gridView.setAdapter(booksAdapter);
+    }
+
+    public void downloadPDF(View view) {
+        new PDFFileDownloader(this).execute("https://github.com/ZelongChen/paomia/raw/gh-pages/AIBT.pdf", "promotion.pdf");
     }
 }

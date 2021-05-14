@@ -34,7 +34,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-public class DownloadConfigurationFileFromURL extends AsyncTask<String, Integer, String> {
+public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
 
     private TrustManager[] getWrappedTrustManagers(TrustManager[] trustManagers) {
         final X509TrustManager originalTrustManager = (X509TrustManager) trustManagers[0];
@@ -89,7 +89,7 @@ public class DownloadConfigurationFileFromURL extends AsyncTask<String, Integer,
     private final Activity mContext;
     private final ProgressBar progressBar;
 
-    public DownloadConfigurationFileFromURL(Activity context, ProgressBar progressBar) {
+    public ConfigFileDownloader(Activity context, ProgressBar progressBar) {
         this.mContext = context;
         this.progressBar = progressBar;
     }
