@@ -3,6 +3,8 @@ package com.example.brochure.util;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.brochure.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class PDFFileDownloader extends AsyncTask<String, Void, Void> {
         String fileUrl = strings[0];
         String fileName = strings[1];
         this.fileName = fileName;
-        File folder = new File(context.getFilesDir(), "promotion-pdf");
+        File folder = new File(context.getFilesDir(), context.getString(R.string.PROMOTION_DIRECTORY));
         folder.mkdir();
 
         File pdfFile = new File(folder, fileName);
@@ -61,7 +63,7 @@ public class PDFFileDownloader extends AsyncTask<String, Void, Void> {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
                     HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
-                    return hv.verify("github.com", session);
+                    return hv.verify(context.getString(R.string.HOST_NAME), session);
                 }
             });
             connection.connect();

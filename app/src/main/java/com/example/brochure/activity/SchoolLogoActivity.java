@@ -28,7 +28,6 @@ public class SchoolLogoActivity extends AppCompatActivity {
 
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -40,7 +39,7 @@ public class SchoolLogoActivity extends AppCompatActivity {
             setContentView(R.layout.activity_school_logo_landscape);
         }
 
-        group = (Group) getIntent().getSerializableExtra("Group");
+        group = (Group) getIntent().getSerializableExtra(getString(R.string.GROUP));
 
         GridView gridView = findViewById(R.id.school_logo_grid_view);
         SchoolLogoAdapter booksAdapter = new SchoolLogoAdapter(this, group);
@@ -49,9 +48,9 @@ public class SchoolLogoActivity extends AppCompatActivity {
 
     public void downloadPDF(View view) {
         if (Utils.checkInternetConnection(this)) {
-            new PDFFileDownloader(this).execute(group.getPromotion().getLink(), group.getPromotion().getName() + ".pdf");
+            new PDFFileDownloader(this).execute(group.getPromotion().getLink(), group.getPromotion().getName());
         } else {
-            File pdfFile = new File(getFilesDir() + "/promotion-pdf/" + group.getPromotion().getName() + ".pdf");
+            File pdfFile = new File(getFilesDir() + "/" + getString(R.string.PROMOTION_DIRECTORY) + "/" + group.getPromotion().getName());
             if (!pdfFile.exists()) {
                 new AlertDialog.Builder(this)
                         .setTitle("No promotion file found")
@@ -59,7 +58,7 @@ public class SchoolLogoActivity extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } else {
-                Utils.openPdfFile(this, group.getPromotion().getName() + ".pdf");
+                Utils.openPdfFile(this, group.getPromotion().getName());
             }
         }
     }

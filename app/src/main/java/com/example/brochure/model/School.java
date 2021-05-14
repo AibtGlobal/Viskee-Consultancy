@@ -1,16 +1,11 @@
 package com.example.brochure.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class School implements Serializable {
     private String name;
     private List<Course> courses;
-
-    public School() {
-
-    }
 
     public School(String name, List<Course> courses) {
         this.name = name;

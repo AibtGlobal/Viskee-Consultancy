@@ -42,11 +42,11 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... sUrl) {
-        boolean aibtResult = downloadConfigurationFile(sUrl[0], "AIBT.json");
-        boolean reachResult = downloadConfigurationFile(sUrl[1], "REACH.json");
+        boolean aibtResult = downloadConfigurationFile(sUrl[0], context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+        boolean reachResult = downloadConfigurationFile(sUrl[1], context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
         if (!aibtResult || !reachResult) {
-            File AIBT = new File(context.getFilesDir() + "/AIBT.json");
-            File REACH = new File(context.getFilesDir() + "/REACH.json");
+            File AIBT = new File(context.getFilesDir() + "/" + context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+            File REACH = new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
             if (!AIBT.exists() || !REACH.exists()) {
                 new AlertDialog.Builder(context)
                         .setTitle("No configuration found")
@@ -93,7 +93,7 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
                     HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
-                    return hv.verify("github.com", session);
+                    return hv.verify(context.getString(R.string.HOST_NAME), session);
                 }
             });
             connection.connect();

@@ -43,7 +43,7 @@ public class SearchResultActivity extends AppCompatActivity {
             setContentView(R.layout.activity_search_result_landscape);
         }
 
-        searchResult = (SearchResult) getIntent().getSerializableExtra("SearchResult");
+        searchResult = (SearchResult) getIntent().getSerializableExtra(getString(R.string.SEARCH_RESULT));
 
         TextView searchResultTitle = findViewById(R.id.search_result_title);
         searchResultTitle.setText("Search Results for: " + searchResult.getSearchText());

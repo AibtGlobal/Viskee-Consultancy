@@ -61,7 +61,7 @@ public class SearchResultAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CourseDetailActivity.class);
-                intent.putExtra("CourseDetail", course);
+                intent.putExtra(context.getString(R.string.COURSE_DETAIL), course);
                 context.startActivity(intent);
             }
         });

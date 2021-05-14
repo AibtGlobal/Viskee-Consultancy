@@ -37,19 +37,21 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class MainViewAdapter {
 
-    private Activity mContext;
-    private View layoutView;
+    private final Activity context;
+    private final View layoutView;
     private final Map<GroupEnum, Group> groups = new HashMap<>();
     private Course courseSelected;
 
-    public MainViewAdapter(Activity mContext, View layoutView) {
-        this.mContext = mContext;
+    public MainViewAdapter(Activity context, View layoutView) {
+        this.context = context;
         this.layoutView = layoutView;
     }
 
     public void prepareData() {
-        String aibtJson = Utils.getJsonFromStorage(mContext.getApplicationContext(), "AIBT.json");
-        String reachJson = Utils.getJsonFromStorage(mContext.getApplicationContext(), "REACH.json");
+        String aibtJson = Utils.getJsonFromStorage(context.getApplicationContext(),
+                context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+        String reachJson = Utils.getJsonFromStorage(context.getApplicationContext(),
+                context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
 
         Group aibt = getSchoolFromJson(aibtJson);
         Group reach = getSchoolFromJson(reachJson);
@@ -78,7 +80,7 @@ public class MainViewAdapter {
 
         AutoCompleteTextView searchTextBar = layoutView.findViewById(R.id.search_text);
 
-        SearchSuggestionAdapter searchSuggestionAdapter = new SearchSuggestionAdapter(mContext, courses);
+        SearchSuggestionAdapter searchSuggestionAdapter = new SearchSuggestionAdapter(context, courses);
         searchTextBar.setAdapter(searchSuggestionAdapter);
         searchTextBar.setThreshold(0);
 
@@ -134,7 +136,7 @@ public class MainViewAdapter {
         AutoCompleteTextView searchTextBar = layoutView.findViewById(R.id.search_text);
         String textToSearch = searchTextBar.getText().toString();
         if (StringUtils.isBlank(textToSearch)) {
-            Toast.makeText(mContext, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
             return;
         }
         List<Course> suggestions = ((SearchSuggestionAdapter) searchTextBar.getAdapter()).getSuggestions();
@@ -149,23 +151,23 @@ public class MainViewAdapter {
             searchResult.getSearchResults().put(GroupEnum.AIBT, map.get(GroupEnum.AIBT));
         }
 //        searchResult.getSearchResults().put(GroupEnum.REACH, schools.get(1).getCourses());
-        Intent intent = new Intent(mContext, SearchResultActivity.class);
+        Intent intent = new Intent(context, SearchResultActivity.class);
         intent.putExtra("SearchResult", searchResult);
-        mContext.startActivity(intent);
+        context.startActivity(intent);
     }
 
     public void goToAIBTSchoolPage(View view) {
-        Intent intent = new Intent(mContext, SchoolLogoActivity.class);
-        intent.putExtra("Group", groups.get(GroupEnum.AIBT));
-        mContext.startActivity(intent);
+        Intent intent = new Intent(context, SchoolLogoActivity.class);
+        intent.putExtra(context.getString(R.string.GROUP), groups.get(GroupEnum.AIBT));
+        context.startActivity(intent);
     }
 
     public void goToREACHCoursePage(View view) {
         Group reachGroup = groups.get(GroupEnum.REACH);
         if (reachGroup != null && reachGroup.getSchools() != null && reachGroup.getSchools().size() != 0) {
-            Intent intent = new Intent(mContext, SchoolCoursesActivity.class);
-            intent.putExtra("School", reachGroup.getSchools().get(0));
-            mContext.startActivity(intent);
+            Intent intent = new Intent(context, SchoolCoursesActivity.class);
+            intent.putExtra(context.getString(R.string.SCHOOL), reachGroup.getSchools().get(0));
+            context.startActivity(intent);
         }
     }
 

@@ -12,7 +12,6 @@ import com.example.brochure.R;
 import com.example.brochure.activity.CourseDetailActivity;
 import com.example.brochure.model.Course;
 import com.example.brochure.model.Department;
-import com.example.brochure.util.Utils;
 
 public class SchoolCourseItemAdapter extends BaseAdapter {
 
@@ -52,7 +51,7 @@ public class SchoolCourseItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CourseDetailActivity.class);
-                intent.putExtra("CourseDetail", course);
+                intent.putExtra(context.getString(R.string.COURSE_DETAIL), course);
                 context.startActivity(intent);
             }
         });

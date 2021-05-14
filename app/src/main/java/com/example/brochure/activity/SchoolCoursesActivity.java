@@ -1,12 +1,11 @@
 package com.example.brochure.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolCoursesAdapter;
@@ -27,7 +26,7 @@ public class SchoolCoursesActivity extends AppCompatActivity {
             setContentView(R.layout.activity_school_courses_landscape);
         }
 
-        School school = (School) getIntent().getSerializableExtra("School");
+        School school = (School) getIntent().getSerializableExtra(getString(R.string.SCHOOL));
         SchoolCoursesAdapter schoolCoursesAdapter = new SchoolCoursesAdapter(this, school);
 
         ImageView schoolLogo = findViewById(R.id.school_course_logo);

@@ -2,7 +2,6 @@ package com.example.brochure.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,7 @@ public class SchoolLogoAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SchoolCoursesActivity.class);
-                intent.putExtra("School", school);
+                intent.putExtra(context.getString(R.string.SCHOOL), school);
                 context.startActivity(intent);
             }
         });

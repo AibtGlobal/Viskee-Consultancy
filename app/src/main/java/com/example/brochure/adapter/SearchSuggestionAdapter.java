@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.brochure.R;
 import com.example.brochure.model.Course;
@@ -15,11 +14,11 @@ import com.example.brochure.model.Course;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchSuggestionAdapter extends ArrayAdapter {
+public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
 
-    private Context context;
-    private List<Course> data = new ArrayList<>();
-    private List<Course> temp;
+    private final Context context;
+    private List<Course> data;
+    private final List<Course> temp;
     protected List<Course> suggestions;
 
     public SearchSuggestionAdapter(Context context, List<Course> courses) {
@@ -55,7 +54,6 @@ public class SearchSuggestionAdapter extends ArrayAdapter {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
             Course course = (Course) resultValue;
-//            Toast.makeText(context,course.getName(),Toast.LENGTH_LONG).show();
             return course.getName();
         }
 
