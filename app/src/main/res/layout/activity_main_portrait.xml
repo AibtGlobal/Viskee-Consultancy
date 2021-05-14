@@ -75,19 +75,18 @@
             android:hint="Search for a course"
             android:paddingLeft="10dp" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/border_with_no_backgroud"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
             android:text="Go"
             android:textColor="@color/black"
-            app:backgroundTint="@color/gold"
+            android:backgroundTint="@color/gold"
             android:onClick="search"/>
 
     </RelativeLayout>
@@ -96,7 +95,7 @@
         android:id="@+id/aibt"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/border_with_background_gray"
+        android:background="@drawable/button_selector"
         android:scaleType="fitCenter"
         android:src="@drawable/aibt_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -115,7 +114,7 @@
         android:id="@+id/reach"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/border_with_background_gray"
+        android:background="@drawable/button_selector"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/reach_portrait"
