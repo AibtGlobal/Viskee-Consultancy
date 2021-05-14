@@ -1,12 +1,18 @@
 package com.example.brochure.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ProgressBar;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brochure.R;
+import com.example.brochure.util.ConfigFileDownloader;
+import com.example.brochure.util.Utils;
+
+import java.io.File;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,8 +23,25 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Handler handler = new Handler();
-        handler.postDelayed(this::goToMainActivity, SPLASH_TIME);
+
+        if (Utils.checkInternetConnection(this)) {
+            ProgressBar progressBar = findViewById(R.id.progress_bar);
+            new ConfigFileDownloader(this, progressBar).execute(getString(R.string.AIBT_CONFIGURATION_FILE_LINK),
+                    getString(R.string.REACH_CONFIGURATION_FILE_LINK));
+        } else {
+            File AIBT = new File(getFilesDir() + "/" + getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+            File REACH = new File(getFilesDir() + "/" + getString(R.string.REACH_CONFIGURATION_FILE_NAME));
+            if (!AIBT.exists() || !REACH.exists()) {
+                new AlertDialog.Builder(this)
+                        .setTitle("No configuration found")
+                        .setMessage("Could you please connect to the Internet and relaunch the app ?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else {
+                Handler handler = new Handler();
+                handler.postDelayed(this::goToMainActivity, SPLASH_TIME);
+            }
+        }
     }
 
     private void goToMainActivity() {

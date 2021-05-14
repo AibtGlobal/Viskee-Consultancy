@@ -1,16 +1,15 @@
 package com.example.brochure.util;
 
 import android.app.Activity;
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.brochure.R;
-import com.example.brochure.adapter.MainViewAdapter;
+import com.example.brochure.activity.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,16 +66,19 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String s) {
         progressBar.setVisibility(View.INVISIBLE);
 
-        int orientation = context.getResources().getConfiguration().orientation;
-        final LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View layoutView;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
-        } else {
-            layoutView = layoutInflater.inflate(R.layout.activity_main_landscape, null);
-        }
-        context.setContentView(layoutView);
-        new MainViewAdapter(context, layoutView).prepareData();
+//        int orientation = context.getResources().getConfiguration().orientation;
+//        final LayoutInflater layoutInflater = LayoutInflater.from(context);
+//        View layoutView;
+//        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
+//        } else {
+//            layoutView = layoutInflater.inflate(R.layout.activity_main_landscape, null);
+//        }
+//        context.setContentView(layoutView);
+//        new MainViewAdapter(context, layoutView).prepareData();
+
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
         super.onPostExecute(s);
 
     }
