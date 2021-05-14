@@ -4,8 +4,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AlertDialog;
@@ -24,11 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //Remove notification bar
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             setContentView(R.layout.activity_main_placeholder_portrait);
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             new ConfigFileDownloader(this, progressBar).execute(getString(R.string.AIBT_CONFIGURATION_FILE_LINK), getString(R.string.REACH_CONFIGURATION_FILE_LINK));
         } else {
             File AIBT = new File(getFilesDir() + "/" + getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
-            File REACH = new File(getFilesDir() + "" + getString(R.string.REACH_CONFIGURATION_FILE_NAME));
+            File REACH = new File(getFilesDir() + "/" + getString(R.string.REACH_CONFIGURATION_FILE_NAME));
             if (!AIBT.exists() || !REACH.exists()) {
                 new AlertDialog.Builder(this)
                         .setTitle("No configuration found")

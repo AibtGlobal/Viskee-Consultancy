@@ -1,16 +1,14 @@
 package com.example.brochure.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SearchResultAdapter;
@@ -29,12 +27,6 @@ public class SearchResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //Remove notification bar
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         int orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {

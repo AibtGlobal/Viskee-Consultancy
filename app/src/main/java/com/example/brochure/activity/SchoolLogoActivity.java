@@ -1,14 +1,12 @@
 package com.example.brochure.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.GridView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolLogoAdapter;
@@ -25,11 +23,6 @@ public class SchoolLogoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //Remove notification bar
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_school_logo_portrait);
         int orientation = this.getResources().getConfiguration().orientation;
