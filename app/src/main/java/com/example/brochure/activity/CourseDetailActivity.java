@@ -34,7 +34,7 @@ public class CourseDetailActivity extends AppCompatActivity {
             setContentView(R.layout.activity_course_detail_landscape);
         }
 
-        Course courseDetail = (Course) getIntent().getSerializableExtra("CourseDetail");
+        Course courseDetail = (Course) getIntent().getSerializableExtra(getString(R.string.COURSE_DETAIL));
         TextView courseName = findViewById(R.id.course_detail_title);
         TextView courseVetCode = findViewById(R.id.course_detail_vet_code);
         TextView courseDuration = findViewById(R.id.course_duration);

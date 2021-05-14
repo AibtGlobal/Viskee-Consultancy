@@ -7,7 +7,6 @@ import java.util.List;
 public class School implements Serializable {
     private String name;
     private List<Course> courses;
-//    private List<Department> departments = new ArrayList<>();
 
     public School() {
 
@@ -25,15 +24,6 @@ public class School implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public List<Department> getDepartments() {
-//        return departments;
-//    }
-
-//    public void setDepartments(List<Department> departments) {
-//        this.departments = departments;
-//    }
-
 
     public List<Course> getCourses() {
         return courses;

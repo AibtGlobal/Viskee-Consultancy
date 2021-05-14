@@ -1,5 +1,6 @@
 package com.example.brochure.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
@@ -13,8 +14,13 @@ import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolLogoAdapter;
 import com.example.brochure.model.Group;
 import com.example.brochure.util.PDFFileDownloader;
+import com.example.brochure.util.Utils;
+
+import java.io.File;
 
 public class SchoolLogoActivity extends AppCompatActivity {
+
+    private Group group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class SchoolLogoActivity extends AppCompatActivity {
             setContentView(R.layout.activity_school_logo_landscape);
         }
 
-        Group group = (Group) getIntent().getSerializableExtra("Group");
+        group = (Group) getIntent().getSerializableExtra("Group");
 
         GridView gridView = findViewById(R.id.school_logo_grid_view);
         SchoolLogoAdapter booksAdapter = new SchoolLogoAdapter(this, group);
@@ -42,6 +48,19 @@ public class SchoolLogoActivity extends AppCompatActivity {
     }
 
     public void downloadPDF(View view) {
-        new PDFFileDownloader(this).execute("https://github.com/ZelongChen/paomia/raw/gh-pages/AIBT.pdf", "promotion.pdf");
+        if (Utils.checkInternetConnection(this)) {
+            new PDFFileDownloader(this).execute(group.getPromotion().getLink(), group.getPromotion().getName() + ".pdf");
+        } else {
+            File pdfFile = new File(getFilesDir() + "/promotion-pdf/" + group.getPromotion().getName() + ".pdf");
+            if (!pdfFile.exists()) {
+                new AlertDialog.Builder(this)
+                        .setTitle("No promotion file found")
+                        .setMessage("Could you please connect to the Internet and re-download the promotion file ?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else {
+                Utils.openPdfFile(this, group.getPromotion().getName() + ".pdf");
+            }
+        }
     }
 }

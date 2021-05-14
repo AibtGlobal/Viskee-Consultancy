@@ -51,18 +51,14 @@ public class MainViewAdapter {
         String aibtJson = Utils.getJsonFromStorage(mContext.getApplicationContext(), "AIBT.json");
         String reachJson = Utils.getJsonFromStorage(mContext.getApplicationContext(), "REACH.json");
 
-        List<School> aibtSchools = getSchoolFromJson(aibtJson);
-        List<School> reachSchools = getSchoolFromJson(reachJson);
+        Group aibt = getSchoolFromJson(aibtJson);
+        Group reach = getSchoolFromJson(reachJson);
 
-        Group aibt = new Group();
-        aibt.setName("AIBT");
-        aibt.setSchools(aibtSchools);
         groups.put(GroupEnum.AIBT, aibt);
-
-        Group reach = new Group();
-        reach.setName("REACH");
-        reach.setSchools(reachSchools);
         groups.put(GroupEnum.REACH, reach);
+
+        List<School> aibtSchools = aibt.getSchools();
+        List<School> reachSchools = reach.getSchools();
 
         List<Course> aibtCourses = new ArrayList<>();
         for (School school : aibtSchools) {
@@ -173,10 +169,10 @@ public class MainViewAdapter {
         }
     }
 
-    private List<School> getSchoolFromJson(String json) {
+    private Group getSchoolFromJson(String json) {
         Gson gson = new Gson();
-        Type listSchoolType = new TypeToken<List<School>>() {
+        Type groupType = new TypeToken<Group>() {
         }.getType();
-        return gson.fromJson(json, listSchoolType);
+        return gson.fromJson(json, groupType);
     }
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Viskee Consultancy</string>
+    <string name="COURSE_DETAIL">Course_Detail</string>
+    <string name="AIBT_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/ZelongChen/paomia/gh-pages/AIBT.json</string>
+    <string name="AIBT_CONFIGURATION_FILE_NAME">AIBT.json</string>
+    <string name="REACH_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/ZelongChen/paomia/gh-pages/REACH.json</string>
+    <string name="REACH_CONFIGURATION_FILE_NAME">REACH.json</string>
 </resources>

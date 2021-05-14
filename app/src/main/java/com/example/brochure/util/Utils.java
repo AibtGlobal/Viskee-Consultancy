@@ -1,14 +1,26 @@
 package com.example.brochure.util;
 
+import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
+import com.example.brochure.BuildConfig;
 import com.example.brochure.R;
 import com.example.brochure.adapter.SchoolCourseItemAdapter;
 import com.example.brochure.model.AIBTSchoolNameEnum;
@@ -41,7 +53,7 @@ public class Utils {
     }
 
     public static void setListViewHeightBasedOnChildren(Department department, ListView listView) {
-        SchoolCourseItemAdapter listAdapter = (SchoolCourseItemAdapter)listView.getAdapter();
+        SchoolCourseItemAdapter listAdapter = (SchoolCourseItemAdapter) listView.getAdapter();
         if (listAdapter == null) {
             // pre-condition
             return;
@@ -125,5 +137,46 @@ public class Utils {
                 break;
         }
         return drawable;
+    }
+
+    @SuppressLint("WrongConstant")
+    public static boolean checkInternetConnection(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Network activeNetwork = connectivityManager.getActiveNetwork();
+            if (activeNetwork == null) {
+                return false;
+            }
+            NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
+            if (networkCapabilities == null) {
+                return false;
+            }
+            if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                return true;
+            }
+        } else {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo.isConnected();
+        }
+        return false;
+    }
+
+    public static void openPdfFile(Context context, String fileName) {
+        File pdfFile = new File(context.getFilesDir() + "/promotion-pdf/" + fileName);  // -> filename = maven.pdf
+//        Uri path = Uri.fromFile(pdfFile);
+        Uri path = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", pdfFile);
+        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+        pdfIntent.setDataAndType(path, "application/pdf");
+        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        try{
+            context.startActivity(pdfIntent);
+        }catch(ActivityNotFoundException e){
+            e.printStackTrace();
+            Toast.makeText(context, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+        }
     }
 }
