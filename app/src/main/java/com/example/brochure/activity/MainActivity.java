@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         if (reachGroup != null && reachGroup.getSchools() != null && reachGroup.getSchools().size() != 0) {
             Intent intent = new Intent(MainActivity.this, SchoolCoursesActivity.class);
             intent.putExtra(getString(R.string.SCHOOL), reachGroup.getSchools().get(0));
+            intent.putExtra(getString(R.string.PROMOTION), reachGroup.getPromotion());
             startActivity(intent);
         }
     }

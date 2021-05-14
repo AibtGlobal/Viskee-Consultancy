@@ -5,6 +5,7 @@
     <string name="SCHOOL">School</string>
     <string name="GROUP">Group</string>
     <string name="SEARCH_RESULT">Search_Result</string>
+    <string name="PROMOTION">Promotion</string>
     <!-- Configuration File -->
     <string name="AIBT_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/ZelongChen/paomia/gh-pages/AIBT.json</string>
     <string name="AIBT_CONFIGURATION_FILE_NAME">AIBT.json</string>

@@ -47,7 +47,7 @@
         app:layout_constraintWidth_percent="0.4"/>
 
     <Button
-        android:id="@+id/download_brochure"
+        android:id="@+id/download_promotion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gold"
@@ -57,7 +57,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"/>
+        app:layout_constraintWidth_percent="0.35"
+        android:onClick="downloadPromotion"
+        android:visibility="gone"/>
 
     <GridView
         android:id="@+id/school_logo_grid_view"
@@ -66,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/download_brochure"
+        app:layout_constraintTop_toBottomOf="@id/download_promotion"
         android:layout_margin="20dp"
         android:gravity="center"
         android:verticalSpacing="24dp"

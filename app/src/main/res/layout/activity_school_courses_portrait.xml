@@ -48,6 +48,21 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.7"/>
 
+    <Button
+        android:id="@+id/download_promotion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gold"
+        android:text="Brochure April 2021"
+        app:layout_constraintTop_toBottomOf="@id/school_course_logo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
+
     <GridView
         android:id="@+id/school_course_grid_view"
         android:layout_width="0dp"
@@ -55,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/school_course_logo"
+        app:layout_constraintTop_toBottomOf="@id/download_promotion"
         android:layout_margin="20dp"
         android:gravity="center"
         android:verticalSpacing="24dp"
