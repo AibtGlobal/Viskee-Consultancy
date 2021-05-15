@@ -75,19 +75,19 @@
             android:hint="Search for a course"
             android:paddingLeft="10dp" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/border_with_no_backgroud"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
             android:text="Go"
             android:textColor="@color/black"
-            app:backgroundTint="@color/gold" />
+            android:backgroundTint="@color/gold"
+            android:onClick="search"/>
 
     </RelativeLayout>
 
@@ -108,7 +108,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2" />
+        app:layout_constraintWidth_percent="0.2"
+        android:onClick="goToAIBTSchoolPage"/>
 
     <ImageButton
         android:id="@+id/reach"
@@ -127,6 +128,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2" />
+        app:layout_constraintWidth_percent="0.2"
+        android:onClick="goToREACHCoursePage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

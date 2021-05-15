@@ -45,7 +45,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.11" />
 
     <TextView
         android:id="@+id/course_detail_vet_code"
@@ -66,10 +66,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
         android:fillViewport="true"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/course_detail_vet_code">
@@ -100,7 +98,8 @@
                     android:text="Total Duration"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:id="@+id/course_duration"
@@ -142,7 +141,8 @@
                     android:text="Location"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:id="@+id/course_location"
@@ -175,7 +175,8 @@
                     android:text="Pricing"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:id="@+id/course_pricing_onshore"
@@ -190,7 +191,6 @@
                     android:id="@+id/course_pricing_offshore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:text="Tuition Fee - OffShore Int Student: $12,500"
                     android:textColor="@color/white"

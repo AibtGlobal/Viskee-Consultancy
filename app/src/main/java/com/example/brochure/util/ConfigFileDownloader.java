@@ -65,20 +65,9 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String s) {
         progressBar.setVisibility(View.INVISIBLE);
-
-//        int orientation = context.getResources().getConfiguration().orientation;
-//        final LayoutInflater layoutInflater = LayoutInflater.from(context);
-//        View layoutView;
-//        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            layoutView = layoutInflater.inflate(R.layout.activity_main_portrait, null);
-//        } else {
-//            layoutView = layoutInflater.inflate(R.layout.activity_main_landscape, null);
-//        }
-//        context.setContentView(layoutView);
-//        new MainViewAdapter(context, layoutView).prepareData();
-
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
+        context.finish();
         super.onPostExecute(s);
 
     }
