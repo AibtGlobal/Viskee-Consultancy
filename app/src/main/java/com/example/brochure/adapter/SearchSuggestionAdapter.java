@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import com.example.brochure.R;
 import com.example.brochure.model.Course;
+import com.example.brochure.util.SearchUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
 
@@ -61,8 +64,15 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
         protected FilterResults performFiltering(CharSequence constraint) {
             if (constraint != null) {
                 suggestions.clear();
+                String searchText = constraint.toString().toLowerCase();
                 for (Course course : temp) {
-                    if (course.toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    List<String> splitList = new ArrayList<>(Arrays.asList(searchText.split(" ")));
+                    Optional<Integer> yearOptional = SearchUtils.extractYear(splitList);
+                    Optional<Integer> weekOptional = SearchUtils.extractWeek(splitList);
+                    boolean isDurationMatch = SearchUtils.isDurationMatch(course.getDuration(), yearOptional, weekOptional);
+                    boolean isLocationMatch = SearchUtils.isLocationMatch(course.getLocation(), splitList);
+                    boolean isTextMatch = SearchUtils.isTextMatch(course.toString().toLowerCase(), splitList);
+                    if (isDurationMatch && isTextMatch && isLocationMatch) {
                         suggestions.add(course);
                     }
                 }
@@ -80,7 +90,7 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
             List<Course> values = (List<Course>) results.values;
             if (results != null && results.count > 0) {
                 clear();
-                for (Course course : values) {
+                for (Course course : values.toArray(new Course[]{})) {
                     add(course);
                     notifyDataSetChanged();
                 }
