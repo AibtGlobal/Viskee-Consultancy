@@ -12,8 +12,10 @@ import android.widget.TextView;
 import com.example.brochure.R;
 import com.example.brochure.activity.CourseDetailActivity;
 import com.example.brochure.model.Course;
+import com.example.brochure.model.Department;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SearchResultAdapter extends BaseAdapter {
@@ -21,10 +23,21 @@ public class SearchResultAdapter extends BaseAdapter {
     private final Context context;
     private List<Course> courses = new ArrayList<>();
 
+    private static final Comparator<Course> departmentNameComparator;
+    static {
+        departmentNameComparator = new Comparator<Course>() {
+            @Override
+            public int compare(Course c1, Course c2) {
+                return c1.getName().length() - c2.getName().length();
+            }
+        };
+    }
+
     public SearchResultAdapter(Context context, List<Course> courses) {
         this.context = context;
         if (courses != null) {
             this.courses = courses;
+            this.courses.sort(departmentNameComparator);
         }
     }
 
