@@ -10,9 +10,9 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:src="@drawable/background_landscape"
-        android:scaleType="centerCrop"
         android:alpha="0.41"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_landscape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,36 +44,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.4"/>
+        app:layout_constraintWidth_percent="0.4" />
 
     <Button
         android:id="@+id/download_promotion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gold"
+        android:onClick="downloadPromotion"
         android:text="Brochure April 2021"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/aibt_logo"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.35"
-        android:onClick="downloadPromotion"
-        android:visibility="gone"/>
+        app:layout_constraintWidth_percent="0.35" />
 
     <GridView
         android:id="@+id/school_logo_grid_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/download_promotion"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:verticalSpacing="24dp"
-        android:horizontalSpacing="10dp"
-        android:numColumns="auto_fit"/>
+        app:layout_constraintTop_toBottomOf="@id/download_promotion" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

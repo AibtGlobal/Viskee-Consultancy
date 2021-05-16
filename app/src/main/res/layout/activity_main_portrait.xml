@@ -41,7 +41,7 @@
         android:paddingRight="10dp"
         android:text="Explore over 90+ Courses and Promotions"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

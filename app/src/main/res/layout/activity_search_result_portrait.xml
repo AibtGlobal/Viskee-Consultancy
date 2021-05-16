@@ -40,7 +40,7 @@
         android:paddingRight="10dp"
         android:text="Search Results for: Diploma of Business"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
