@@ -7,9 +7,9 @@
     <string name="SEARCH_RESULT">Search_Result</string>
     <string name="PROMOTION">Promotion</string>
     <!-- Configuration File -->
-    <string name="AIBT_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy/master/configuration/AIBT.json</string>
+    <string name="AIBT_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/configuration/AIBT.json</string>
     <string name="AIBT_CONFIGURATION_FILE_NAME">AIBT.json</string>
-    <string name="REACH_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy/master/configuration/REACH.json</string>
+    <string name="REACH_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/configuration/REACH.json</string>
     <string name="REACH_CONFIGURATION_FILE_NAME">REACH.json</string>
     <string name="HOST_NAME">github.com</string>
     <!-- Promotion File -->
