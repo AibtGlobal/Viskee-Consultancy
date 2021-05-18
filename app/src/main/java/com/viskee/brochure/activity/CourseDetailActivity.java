@@ -2,6 +2,7 @@ package com.viskee.brochure.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,5 +61,9 @@ public class CourseDetailActivity extends AppCompatActivity {
             onshorePricing.setText("");
         }
 
+    }
+
+    public void backToPrevious(View view) {
+        finish();
     }
 }

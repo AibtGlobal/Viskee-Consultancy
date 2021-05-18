@@ -67,4 +67,8 @@ public class SchoolLogoActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void backToPrevious(View view) {
+        finish();
+    }
 }

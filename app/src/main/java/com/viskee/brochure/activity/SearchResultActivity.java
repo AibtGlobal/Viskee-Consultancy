@@ -64,4 +64,8 @@ public class SearchResultActivity extends AppCompatActivity {
         SearchResultAdapter searchResultAdapter = new SearchResultAdapter(this, searchResult.getSearchResults().get(REACH));
         searchResultGridView.setAdapter(searchResultAdapter);
     }
+
+    public void backToPrevious(View view) {
+        finish();
+    }
 }

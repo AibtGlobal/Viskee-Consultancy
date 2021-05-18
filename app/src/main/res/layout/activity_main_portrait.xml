@@ -5,13 +5,11 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".activity.MainActivity">
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:alpha="0.41"
         android:scaleType="centerCrop"
         android:src="@drawable/background_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,10 +22,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/vc_logo_portrait"
+        android:src="@drawable/vc_logo_landscape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.15" />
@@ -40,7 +38,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="Explore over 90+ Courses and Promotions"
-        android:textColor="@color/white"
+        android:textColor="@color/gold"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

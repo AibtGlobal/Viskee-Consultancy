@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".activity.CourseDetailActivity">
 
     <ImageView
@@ -13,6 +12,7 @@
         android:alpha="0.41"
         android:scaleType="centerCrop"
         android:src="@drawable/background_portrait"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +23,28 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/vc_logo_portrait"
+        android:src="@drawable/vc_logo_landscape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.15" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.15"
+        android:padding="5dp"
+        android:onClick="backToPrevious"/>
 
     <TextView
         android:id="@+id/course_detail_title"
@@ -37,7 +52,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Diploma of Business 1"
-        android:textColor="@color/white"
+        android:textColor="@color/gold"
         android:textSize="26sp"
         android:textStyle="bold"
         android:layout_marginStart="10dp"
@@ -56,7 +71,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="VET National Code: BSB50215"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -100,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Total Duration"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"/>
@@ -112,7 +127,7 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:text="52 Weeks"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp"/>
 
                 <TextView
@@ -121,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="(40 weeks Tuition + 12 weeks Break)"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -144,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Location"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"/>
@@ -156,7 +171,7 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:text="NSW | QLD Campuses (AIBT)"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -179,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Pricing"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"/>
@@ -190,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -199,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Tuition Fee - OffShore Int Student: $12,500"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>

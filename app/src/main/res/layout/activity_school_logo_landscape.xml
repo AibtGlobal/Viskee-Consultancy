@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".activity.SchoolLogoActivity">
 
     <ImageView
@@ -13,6 +12,7 @@
         android:alpha="0.41"
         android:scaleType="centerCrop"
         android:src="@drawable/background_landscape"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/vc_logo_portrait"
+        android:src="@drawable/vc_logo_landscape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.1"
@@ -32,11 +32,27 @@
         app:layout_constraintWidth_percent="0.15" />
 
     <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.15"
+        android:padding="15dp"
+        android:onClick="backToPrevious"/>
+
+    <ImageView
         android:id="@+id/aibt_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:src="@drawable/aibt_landscape"
+        android:background="@drawable/border_with_background_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -74,4 +74,8 @@ public class SchoolCoursesActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void backToPrevious(View view) {
+        finish();
+    }
 }
