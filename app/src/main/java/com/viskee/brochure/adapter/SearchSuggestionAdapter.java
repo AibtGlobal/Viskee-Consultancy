@@ -40,7 +40,7 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(R.layout.layout_dropdown_search_suggestion_item, null);
+            convertView = layoutInflater.inflate(R.layout.layout_search_suggestion_item, null);
         }
         Course course = data.get(position);
         TextView textView = convertView.findViewById(R.id.search_suggestion_item);
