@@ -48,52 +48,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <RelativeLayout
+    <AutoCompleteTextView
+        android:id="@+id/search_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/border_with_background_gray"
+        android:gravity="center_vertical"
+        android:hint="Search for a course"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.92">
-
-        <AutoCompleteTextView
-            android:id="@+id/search_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_marginRight="5dp"
-            android:layout_toStartOf="@id/search_button"
-            android:background="@drawable/border_with_background_gray"
-            android:gravity="center_vertical"
-            android:hint="Search for a course"
-            android:paddingLeft="10dp" />
-
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:text="Go"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/gold"
-            android:onClick="search"/>
-
-    </RelativeLayout>
+        app:layout_constraintWidth_percent="0.92" />
 
     <ImageButton
         android:id="@+id/aibt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/button_selector"
+        android:onClick="goToAIBTSchoolPage"
         android:scaleType="fitCenter"
         android:src="@drawable/aibt_portrait"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,14 +86,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
-        android:onClick="goToAIBTSchoolPage"/>
+        app:layout_constraintWidth_percent="0.2" />
 
     <ImageButton
         android:id="@+id/reach"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/button_selector"
+        android:onClick="goToREACHCoursePage"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/reach_portrait"
@@ -125,7 +106,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
-        android:onClick="goToREACHCoursePage"/>
+        app:layout_constraintWidth_percent="0.2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
