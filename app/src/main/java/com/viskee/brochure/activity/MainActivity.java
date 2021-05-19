@@ -20,6 +20,7 @@ import com.viskee.brochure.adapter.SearchSuggestionAdapter;
 import com.viskee.brochure.model.Course;
 import com.viskee.brochure.model.Group;
 import com.viskee.brochure.model.GroupEnum;
+import com.viskee.brochure.model.Promotions;
 import com.viskee.brochure.model.School;
 import com.viskee.brochure.model.SearchResult;
 import com.viskee.brochure.util.Utils;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         if (reachGroup != null && reachGroup.getSchools() != null && reachGroup.getSchools().size() != 0) {
             Intent intent = new Intent(MainActivity.this, SchoolCoursesActivity.class);
             intent.putExtra(getString(R.string.SCHOOL), reachGroup.getSchools().get(0));
-            intent.putExtra(getString(R.string.PROMOTION), reachGroup.getPromotion());
+            intent.putExtra(getString(R.string.PROMOTIONS), new Promotions(reachGroup.getPromotions()));
             startActivity(intent);
         }
     }

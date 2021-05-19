@@ -64,14 +64,13 @@
         app:layout_constraintHeight_percent="0.15"/>
 
     <Button
-        android:id="@+id/download_promotion"
+        android:id="@+id/show_promotions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gold"
-        android:onClick="downloadPromotion"
-        android:text="Brochure April 2021"
+        android:onClick="showPromotions"
+        android:text="Latest Promotions"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/aibt_logo"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -94,7 +93,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/download_promotion" />
+        app:layout_constraintTop_toBottomOf="@id/show_promotions" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

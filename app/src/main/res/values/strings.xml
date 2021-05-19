@@ -4,8 +4,9 @@
     <string name="COURSE_DETAIL">Course_Detail</string>
     <string name="SCHOOL">School</string>
     <string name="GROUP">Group</string>
+    <string name="GROUP_NAME">Group_Name</string>
     <string name="SEARCH_RESULT">Search_Result</string>
-    <string name="PROMOTION">Promotion</string>
+    <string name="PROMOTIONS">Promotions</string>
     <!-- Configuration File -->
     <string name="AIBT_CONFIGURATION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/configuration/AIBT.json</string>
     <string name="AIBT_CONFIGURATION_FILE_NAME">AIBT.json</string>

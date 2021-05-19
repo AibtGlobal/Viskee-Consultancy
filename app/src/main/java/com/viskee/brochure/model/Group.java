@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Group implements Serializable {
     private String name;
-    private Promotion promotion;
+    private List<Promotion> promotions;
     private List<School> schools = new ArrayList<>();
 
     public String getName() {
@@ -17,12 +17,12 @@ public class Group implements Serializable {
         this.name = name;
     }
 
-    public Promotion getPromotion() {
-        return promotion;
+    public List<Promotion> getPromotions() {
+        return promotions;
     }
 
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
+    public void setPromotions(List<Promotion> promotions) {
+        this.promotions = promotions;
     }
 
     public List<School> getSchools() {

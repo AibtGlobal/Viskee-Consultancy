@@ -1,9 +1,9 @@
 package com.viskee.brochure.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -13,12 +13,9 @@ import com.viskee.brochure.R;
 import com.viskee.brochure.adapter.SchoolLogoAdapter;
 import com.viskee.brochure.model.Group;
 import com.viskee.brochure.model.Promotion;
-import com.viskee.brochure.util.PDFFileDownloader;
-import com.viskee.brochure.util.Utils;
+import com.viskee.brochure.model.Promotions;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
+import java.util.List;
 
 public class SchoolLogoActivity extends AppCompatActivity {
 
@@ -38,34 +35,24 @@ public class SchoolLogoActivity extends AppCompatActivity {
 
         group = (Group) getIntent().getSerializableExtra(getString(R.string.GROUP));
 
-        Promotion promotion = group.getPromotion();
-        Button downloadPromotion = findViewById(R.id.download_promotion);
-        if (promotion != null && StringUtils.isNotBlank(promotion.getName()) && StringUtils.isNotBlank(promotion.getLink())) {
-            downloadPromotion.setVisibility(View.VISIBLE);
-            downloadPromotion.setText(promotion.getName());
-        }
-
         GridView gridView = findViewById(R.id.school_logo_grid_view);
         SchoolLogoAdapter booksAdapter = new SchoolLogoAdapter(this, group);
         gridView.setAdapter(booksAdapter);
     }
 
-    public void downloadPromotion(View view) {
-        if (Utils.checkInternetConnection(this)) {
-            new PDFFileDownloader(this).execute(group.getPromotion().getLink(), group.getPromotion().getName());
-        } else {
-            File pdfFile =
-                    new File(getFilesDir() + "/" + getString(R.string.PROMOTION_DIRECTORY) + "/" + group.getPromotion().getName());
-            if (!pdfFile.exists()) {
-                new AlertDialog.Builder(this)
-                        .setTitle("No promotion file found")
-                        .setMessage("Could you please connect to the Internet and re-download the promotion file ?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-            } else {
-                Utils.openPdfFile(this, group.getPromotion().getName());
-            }
+    public void showPromotions(View view) {
+        List<Promotion> promotions = group.getPromotions();
+        if (promotions == null || promotions.isEmpty()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("No promotion found")
+                    .setMessage("Currently there is no promotion for " + group.getName())
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
+        Intent intent = new Intent(SchoolLogoActivity.this, PromotionDownloadActivity.class);
+        intent.putExtra(getString(R.string.GROUP_NAME), group.getName());
+        intent.putExtra(getString(R.string.PROMOTIONS), new Promotions(promotions));
+        startActivity(intent);
     }
 
     public void backToPrevious(View view) {
