@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         searchSuggestionAdapter.notifyDataSetChanged();
+        searchTextBar.refreshAutoCompleteResults();
     }
 
     private void setupSearchBar() {
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 courseSelected = (Course) parent.getItemAtPosition(position);
-
+                search();
             }
         });
         searchTextBar.addTextChangedListener(new TextWatcher() {
@@ -111,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
             return;
         }
-        searchSuggestionAdapter.notifyDataSetChanged();
         List<Course> suggestions = searchSuggestionAdapter.getSuggestions();
         SearchResult searchResult = new SearchResult();
         searchResult.setSearchText(searchTextBar.getText().toString());
