@@ -51,7 +51,6 @@
         android:layout_height="80dp"
         android:gravity="center"
         android:src="@drawable/branson_landscape"
-        android:background="@drawable/border_with_background_gray"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
