@@ -111,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
             return;
         }
-        List<Course> suggestions = ((SearchSuggestionAdapter) searchTextBar.getAdapter()).getSuggestions();
+        searchSuggestionAdapter.notifyDataSetChanged();
+        List<Course> suggestions = searchSuggestionAdapter.getSuggestions();
         SearchResult searchResult = new SearchResult();
         searchResult.setSearchText(searchTextBar.getText().toString());
         if (courseSelected != null) {

@@ -1,5 +1,8 @@
 package com.viskee.brochure.util;
 
+import android.service.autofill.FieldClassification;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Arrays;
@@ -8,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SearchUtils {
@@ -98,7 +103,7 @@ public class SearchUtils {
         boolean isLocationSearchTextProvided = false;
         boolean isLocationSearchMatch = false;
 
-        String searchText = String.join(" ", splitList);
+        String searchText = StringUtils.join(splitList, " ");
         List<String> locationsLowerCase = locations.stream().map(String::toLowerCase).collect(Collectors.toList());
         for (String locationName : LOCATION_NAME_LIST) {
             if (searchText.contains(locationName)) {
@@ -124,7 +129,9 @@ public class SearchUtils {
 
     public static boolean isTextMatch(String courseString, List<String> splitList) {
         if (splitList.isEmpty()) return true;
-        String searchText = "(.*?)" + String.join("(.*?)", splitList) + "(.*?)";
-        return courseString.matches(searchText);
+        String searchText = "(.*?)" + StringUtils.join(splitList, "(.*?)") + "(.*?)";
+        Pattern pattern = Pattern.compile(searchText);
+        Matcher matcher = pattern.matcher(courseString);
+        return matcher.find();
     }
 }
