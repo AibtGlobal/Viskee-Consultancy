@@ -1,6 +1,8 @@
 package com.viskee.brochure.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -67,6 +69,11 @@ public class CourseDetailActivity extends AppCompatActivity {
             onshorePricing.setText("");
         }
 
+    }
+
+    public void viewTerms(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://aibtglobal.edu.au/courses/terms-for-courses/"));
+        startActivity(browserIntent);
     }
 
     public void backToPrevious(View view) {

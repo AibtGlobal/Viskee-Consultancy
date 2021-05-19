@@ -232,6 +232,22 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:text="Course Terms and Conditions"
+                android:textSize="14sp"
+                android:backgroundTint="@color/gold"
+                android:onClick="viewTerms"/>
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
