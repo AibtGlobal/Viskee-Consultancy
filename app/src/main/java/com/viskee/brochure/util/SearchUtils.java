@@ -124,7 +124,7 @@ public class SearchUtils {
 
     public static boolean isTextMatch(String courseString, List<String> splitList) {
         if (splitList.isEmpty()) return true;
-        String searchText = ".*" + String.join("(.*?)", splitList) + ".*";
+        String searchText = "(.*?)" + String.join("(.*?)", splitList) + "(.*?)";
         return courseString.matches(searchText);
     }
 }

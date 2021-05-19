@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final Map<GroupEnum, Group> groups = new HashMap<>();
     private Course courseSelected;
+    private SearchSuggestionAdapter searchSuggestionAdapter;
+    private AutoCompleteTextView searchTextBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +56,21 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main_landscape);
         }
         prepareGroups();
-        SearchSuggestionAdapter searchSuggestionAdapter = new SearchSuggestionAdapter(MainActivity.this, prepareCourses());
-        AutoCompleteTextView searchTextBar = findViewById(R.id.search_text);
+        setupSearchBar();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchSuggestionAdapter.notifyDataSetChanged();
+    }
+
+    private void setupSearchBar() {
+        searchSuggestionAdapter = new SearchSuggestionAdapter(MainActivity.this, prepareCourses());
+        searchTextBar = findViewById(R.id.search_text);
         searchTextBar.setAdapter(searchSuggestionAdapter);
         searchTextBar.setThreshold(0);
+        searchTextBar.clearListSelection();
 
         searchTextBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -93,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void search() {
-        AutoCompleteTextView searchTextBar = findViewById(R.id.search_text);
         String textToSearch = searchTextBar.getText().toString();
         if (StringUtils.isBlank(textToSearch)) {
             Toast.makeText(MainActivity.this, "Please type text to do the search.", Toast.LENGTH_SHORT).show();
