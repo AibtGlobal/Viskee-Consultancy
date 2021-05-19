@@ -9,21 +9,10 @@ public class Course implements Serializable {
     public Course () {
 
     }
-    public Course(String vetCode, String department, String name, int duration, String durationDetail, int offshoreTuition, int onshoreTuition, List<String> location, int unpaidPlacement, String completeServicePeriods) {
-        this.vetCode = vetCode;
-        this.department = department;
-        this.name = name;
-        this.duration = duration;
-        this.durationDetail = durationDetail;
-        this.offshoreTuition = offshoreTuition;
-        this.onshoreTuition = onshoreTuition;
-        this.location = location;
-        this.unpaidPlacement = unpaidPlacement;
-        this.completeServicePeriods = completeServicePeriods;
-    }
 
     private GroupEnum group;
     private String vetCode;
+    private String cricosCode;
     private String department;
     private String name;
     private int duration;
@@ -48,6 +37,14 @@ public class Course implements Serializable {
 
     public void setVetCode(String vetCode) {
         this.vetCode = vetCode;
+    }
+
+    public String getCricosCode() {
+        return cricosCode;
+    }
+
+    public void setCricosCode(String cricosCode) {
+        this.cricosCode = cricosCode;
     }
 
     public String getDepartment() {
