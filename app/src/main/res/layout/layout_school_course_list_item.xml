@@ -13,5 +13,6 @@
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:layout_marginTop="5dp"
+        android:paddingStart="5dp"
         android:background="@drawable/text_clickable_selector"/>
 </LinearLayout>

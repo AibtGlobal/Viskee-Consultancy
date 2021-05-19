@@ -60,7 +60,7 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.4"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.15"/>
+        app:layout_constraintHeight_percent="0.2"/>
 
     <Button
         android:id="@+id/show_promotions"
