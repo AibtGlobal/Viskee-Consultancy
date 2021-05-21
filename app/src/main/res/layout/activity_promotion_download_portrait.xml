@@ -28,7 +28,7 @@
         app:layout_constraintHeight_percent="0.05"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.15" />
+        app:layout_constraintWidth_percent="0.2" />
 
     <ImageView
         android:layout_width="0dp"
