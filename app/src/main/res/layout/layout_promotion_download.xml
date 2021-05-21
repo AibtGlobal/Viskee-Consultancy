@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:orientation="horizontal">
+
     <Button
         android:id="@+id/download_promotion"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:backgroundTint="@color/gold"
+        android:fontFamily="@font/roboto"
         android:text="Brochure April 2021"
         app:icon="@drawable/pdf"
         app:iconSize="30dp" />

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/button_selector"
-    android:orientation="vertical"
-    android:clickable="true">
+    android:clickable="true"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/course_name"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto"
         android:text="Diploma of Business 1"
         android:textColor="@color/gold"
         android:textSize="20sp"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:text="VET National Code: BSB50125" />
 

@@ -8,8 +8,8 @@
         android:id="@+id/school_logo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:padding="10dp"
-        android:scaleType="fitCenter"
         android:background="@drawable/button_selector"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:padding="10dp"
+        android:scaleType="fitCenter" />
 </LinearLayout>
