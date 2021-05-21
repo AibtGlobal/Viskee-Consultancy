@@ -1,5 +1,6 @@
 package com.viskee.brochure.util;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -15,14 +16,27 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
-public class PDFFileDownloader extends AsyncTask<String, Void, Void> {
+public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
     private static final int MEGABYTE = 1024 * 1024;
 
     private final Context context;
     private String fileName;
+    private ProgressDialog progressDialog;
 
     public PDFFileDownloader(Context context) {
         this.context = context;
+        progressDialog = new ProgressDialog(context);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressDialog.setTitle("Download Promotion");
+        progressDialog.setMessage("Downloading, please wait!");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setMax(100);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
     }
 
     @Override
@@ -46,8 +60,9 @@ public class PDFFileDownloader extends AsyncTask<String, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        Utils.openPdfFile(context, fileName);
         super.onPostExecute(aVoid);
+        Utils.openPdfFile(context, fileName);
+        progressDialog.dismiss();
     }
 
     public void downloadFile(String fileUrl, File directory) {
@@ -67,13 +82,16 @@ public class PDFFileDownloader extends AsyncTask<String, Void, Void> {
                 }
             });
             connection.connect();
-
+            int fileLength = connection.getContentLength();
             inputStream = connection.getInputStream();
             outputStream = new FileOutputStream(directory);
 
             byte[] buffer = new byte[MEGABYTE];
             int bufferLength = 0;
+            int total = 0;
             while ((bufferLength = inputStream.read(buffer)) > 0) {
+                total += bufferLength;
+                publishProgress((int) (total*100/fileLength));
                 outputStream.write(buffer, 0, bufferLength);
             }
             outputStream.close();
@@ -94,5 +112,11 @@ public class PDFFileDownloader extends AsyncTask<String, Void, Void> {
                 connection.disconnect();
             }
         }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        progressDialog.setProgress(values[0]);
     }
 }
