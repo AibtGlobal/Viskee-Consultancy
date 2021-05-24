@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -50,6 +51,25 @@ public class SearchUtils {
                 splitList.remove(yearNumberIndex);
                 return Optional.of(Integer.valueOf(year));
             }
+        } else {
+            ListIterator<String> listIterator = splitList.listIterator();
+            while (listIterator.hasNext()) {
+                String split = listIterator.next();
+                if (split.contains(YEAR)) {
+                    String[] strings = split.split(YEAR);
+                    if (NumberUtils.isCreatable(strings[0])) {
+                        listIterator.remove();
+                        return Optional.of(Integer.valueOf(strings[0]));
+                    }
+                }
+                if (split.contains(YEARS)) {
+                    String[] strings = split.split(YEARS);
+                    if (NumberUtils.isCreatable(strings[0])) {
+                        listIterator.remove();
+                        return Optional.of(Integer.valueOf(strings[0]));
+                    }
+                }
+            }
         }
         return Optional.empty();
     }
@@ -70,6 +90,32 @@ public class SearchUtils {
                 splitList.remove(weekTextIndex);
                 splitList.remove(weekNumberIndex);
                 return Optional.of(Integer.valueOf(week));
+            }
+        } else {
+            ListIterator<String> listIterator = splitList.listIterator();
+            while (listIterator.hasNext()) {
+                String split = listIterator.next();
+                if (split.contains(WKS)) {
+                    String[] strings = split.split(WKS);
+                    if (NumberUtils.isCreatable(strings[0])) {
+                        listIterator.remove();
+                        return Optional.of(Integer.valueOf(strings[0]));
+                    }
+                }
+                if (split.contains(WEEK)) {
+                    String[] strings = split.split(WEEK);
+                    if (NumberUtils.isCreatable(strings[0])) {
+                        listIterator.remove();
+                        return Optional.of(Integer.valueOf(strings[0]));
+                    }
+                }
+                if (split.contains(WEEKS)) {
+                    String[] strings = split.split(WEEKS);
+                    if (NumberUtils.isCreatable(strings[0])) {
+                        listIterator.remove();
+                        return Optional.of(Integer.valueOf(strings[0]));
+                    }
+                }
             }
         }
         return Optional.empty();
