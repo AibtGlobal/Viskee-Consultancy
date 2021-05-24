@@ -19,12 +19,12 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.util.List;
 
-public class PromotionDownloadAdapter extends BaseAdapter {
+public class BrochureDownloadAdapter extends BaseAdapter {
 
     private List<Promotion> promotions;
     private Context context;
 
-    public PromotionDownloadAdapter(Context context, List<Promotion> promotions) {
+    public BrochureDownloadAdapter(Context context, List<Promotion> promotions) {
         this.promotions = promotions;
         this.context = context;
     }
@@ -48,7 +48,7 @@ public class PromotionDownloadAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(R.layout.layout_promotion_download, null);
+            convertView = layoutInflater.inflate(R.layout.layout_brochure_download, null);
         }
 
         final Promotion promotion = promotions.get(position);
@@ -70,11 +70,11 @@ public class PromotionDownloadAdapter extends BaseAdapter {
             new PDFFileDownloader(context).execute(promotion.getLink(), promotion.getName());
         } else {
             File pdfFile =
-                    new File(context.getFilesDir() + "/" + context.getString(R.string.PROMOTION_DIRECTORY) + "/" + promotion.getName());
+                    new File(context.getFilesDir() + "/" + context.getString(R.string.BROCHURE_DIRECTORY) + "/" + promotion.getName());
             if (!pdfFile.exists()) {
                 new AlertDialog.Builder(context)
-                        .setTitle("No promotion file found")
-                        .setMessage("Could you please connect to the Internet and re-download the promotion file ?")
+                        .setTitle("No brochure file found")
+                        .setMessage("Could you please connect to the Internet and re-download the brochure file ?")
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } else {

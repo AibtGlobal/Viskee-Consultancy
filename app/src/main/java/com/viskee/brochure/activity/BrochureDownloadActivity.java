@@ -9,10 +9,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.viskee.brochure.R;
-import com.viskee.brochure.adapter.PromotionDownloadAdapter;
+import com.viskee.brochure.adapter.BrochureDownloadAdapter;
 import com.viskee.brochure.model.Promotions;
 
-public class PromotionDownloadActivity extends AppCompatActivity {
+public class BrochureDownloadActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,20 +20,20 @@ public class PromotionDownloadActivity extends AppCompatActivity {
 
         int orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            setContentView(R.layout.activity_promotion_download_portrait);
+            setContentView(R.layout.activity_brochure_download_portrait);
         } else {
-            setContentView(R.layout.activity_promotion_download_landscape);
+            setContentView(R.layout.activity_brochure_download_landscape);
         }
 
         String groupName = (String) getIntent().getSerializableExtra(getString(R.string.GROUP_NAME));
         Promotions promotions = (Promotions) getIntent().getSerializableExtra(getString(R.string.PROMOTIONS));
 
         TextView promotionTitle = findViewById(R.id.promotion_title);
-        promotionTitle.setText("Latest Promotions For " + groupName);
+        promotionTitle.setText("Latest Brochures For " + groupName);
 
-        PromotionDownloadAdapter promotionDownloadAdapter = new PromotionDownloadAdapter(this, promotions.getPromotions());
+        BrochureDownloadAdapter brochureDownloadAdapter = new BrochureDownloadAdapter(this, promotions.getPromotions());
         GridView promotionGridView = findViewById(R.id.promotion_grid_view);
-        promotionGridView.setAdapter(promotionDownloadAdapter);
+        promotionGridView.setAdapter(brochureDownloadAdapter);
     }
 
     public void backToPrevious(View view) {

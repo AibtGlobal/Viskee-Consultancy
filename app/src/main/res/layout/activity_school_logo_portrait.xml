@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gold"
         android:onClick="showPromotions"
-        android:text="Latest Promotions"
+        android:text="Latest Brochures"
         android:fontFamily="@font/roboto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

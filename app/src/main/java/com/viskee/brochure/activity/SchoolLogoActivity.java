@@ -49,7 +49,7 @@ public class SchoolLogoActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
-        Intent intent = new Intent(SchoolLogoActivity.this, PromotionDownloadActivity.class);
+        Intent intent = new Intent(SchoolLogoActivity.this, BrochureDownloadActivity.class);
         intent.putExtra(getString(R.string.GROUP_NAME), group.getName());
         intent.putExtra(getString(R.string.PROMOTIONS), new Promotions(promotions));
         startActivity(intent);

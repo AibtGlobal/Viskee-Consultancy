@@ -60,7 +60,7 @@ public class SchoolCoursesActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         } else {
-            Intent intent = new Intent(SchoolCoursesActivity.this, PromotionDownloadActivity.class);
+            Intent intent = new Intent(SchoolCoursesActivity.this, BrochureDownloadActivity.class);
             intent.putExtra(getString(R.string.GROUP_NAME), school.getName());
             intent.putExtra(getString(R.string.PROMOTIONS), promotions);
             startActivity(intent);

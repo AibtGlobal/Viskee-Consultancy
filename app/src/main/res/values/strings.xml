@@ -14,6 +14,6 @@
     <string name="REACH_CONFIGURATION_FILE_NAME">REACH.json</string>
     <string name="HOST_NAME">github.com</string>
     <!-- Promotion File -->
-    <string name="PROMOTION_DIRECTORY">promotion</string>
+    <string name="BROCHURE_DIRECTORY">brochure</string>
     <!-- Others -->
 </resources>

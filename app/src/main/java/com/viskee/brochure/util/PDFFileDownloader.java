@@ -31,7 +31,7 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.setTitle("Download Promotion");
+        progressDialog.setTitle("Download Brochure");
         progressDialog.setMessage("Downloading, please wait!");
         progressDialog.setIndeterminate(false);
         progressDialog.setMax(100);
@@ -44,7 +44,7 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
         String fileUrl = strings[0];
         String fileName = strings[1];
         this.fileName = fileName;
-        File folder = new File(context.getFilesDir(), context.getString(R.string.PROMOTION_DIRECTORY));
+        File folder = new File(context.getFilesDir(), context.getString(R.string.BROCHURE_DIRECTORY));
         folder.mkdir();
 
         File pdfFile = new File(folder, fileName);

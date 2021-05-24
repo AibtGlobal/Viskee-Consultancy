@@ -164,7 +164,7 @@ public class Utils {
     }
 
     public static void openPdfFile(Context context, String fileName) {
-        File pdfFile = new File(context.getFilesDir() + "/" + context.getString(R.string.PROMOTION_DIRECTORY) + "/" + fileName);  // -> filename = maven.pdf
+        File pdfFile = new File(context.getFilesDir() + "/" + context.getString(R.string.BROCHURE_DIRECTORY) + "/" + fileName);  // -> filename = maven.pdf
         Uri path = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", pdfFile);
         Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
         pdfIntent.setDataAndType(path, "application/pdf");
