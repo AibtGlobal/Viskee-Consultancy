@@ -1,7 +1,5 @@
 package com.viskee.brochure.util;
 
-import android.service.autofill.FieldClassification;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -85,14 +83,17 @@ public class SearchUtils {
         }
         if (weekOptional.isPresent()) {
             int week = weekOptional.get();
-            return duration == week;
+            return duration <= week;
         }
         if (yearOptional.isPresent()) {
             int year = yearOptional.get();
-            if (year == 1 && duration >= 48 && duration <= 52) {
+            if (year == 1 && duration <= 52) {
                 return true;
             }
-            if (year == 2 && duration >= 92 && duration <= 104) {
+            if (year == 2 && duration > 52 && duration <= 104) {
+                return true;
+            }
+            if (year > 2 && duration > 104) {
                 return true;
             }
         }
