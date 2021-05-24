@@ -2,11 +2,16 @@ package com.viskee.brochure.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -14,8 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.viskee.brochure.R;
+import com.viskee.brochure.adapter.OnKeyboardVisibilityListener;
 import com.viskee.brochure.adapter.SearchSuggestionAdapter;
 import com.viskee.brochure.model.Course;
 import com.viskee.brochure.model.Group;
@@ -24,8 +33,6 @@ import com.viskee.brochure.model.Promotions;
 import com.viskee.brochure.model.School;
 import com.viskee.brochure.model.SearchResult;
 import com.viskee.brochure.util.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,7 +46,7 @@ import java.util.Objects;
 
 import static java.util.stream.Collectors.groupingBy;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnKeyboardVisibilityListener {
 
     private final Map<GroupEnum, Group> groups = new HashMap<>();
     private Course courseSelected;
@@ -106,7 +113,46 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        setKeyboardVisibilityListener(this);
     }
+
+    @Override
+    public void onVisibilityChanged(boolean visible) {
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchTextBar.getLayoutParams();
+        if (visible) {
+            params.verticalBias = 0.4f;
+        } else {
+            params.verticalBias = 0.55f;
+        }
+        searchTextBar.setLayoutParams(params);
+    }
+
+    private void setKeyboardVisibilityListener(final OnKeyboardVisibilityListener onKeyboardVisibilityListener) {
+        final View parentView = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        parentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            private boolean alreadyOpen;
+            private final Rect rect = new Rect();
+
+            @Override
+            public void onGlobalLayout() {
+                int defaultKeyboardHeightDP = 100;
+                int estimatedKeyboardDP = defaultKeyboardHeightDP + 48;
+                int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, estimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
+                parentView.getWindowVisibleDisplayFrame(rect);
+                int heightDiff = parentView.getRootView().getHeight() - (rect.bottom - rect.top);
+                boolean isShown = heightDiff >= estimatedKeyboardHeight;
+
+                if (isShown == alreadyOpen) {
+                    Log.i("Keyboard state", "Ignoring global layout change...");
+                    return;
+                }
+                alreadyOpen = isShown;
+                onKeyboardVisibilityListener.onVisibilityChanged(isShown);
+            }
+        });
+    }
+
 
     public void search() {
         String textToSearch = searchTextBar.getText().toString();
