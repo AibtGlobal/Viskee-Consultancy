@@ -45,7 +45,7 @@ public class CourseDetailActivity extends AppCompatActivity {
             courseVetCode.setText("");
         }
         if (!StringUtils.isBlank(courseDetail.getCricosCode())) {
-            courseVetCode.setText("CRICOS Course Code: " + courseDetail.getCricosCode());
+            courseCricosCode.setText("CRICOS Course Code: " + courseDetail.getCricosCode());
         } else {
             courseVetCode.setText("");
         }

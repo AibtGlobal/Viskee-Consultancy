@@ -71,7 +71,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto"
         android:text="VET National Code: BSB50215"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -85,7 +85,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:text="CRICOS Course Code: BSB50215"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -132,7 +132,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="Total Duration"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="52 Weeks"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
 
                 <TextView
@@ -156,7 +156,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="(40 weeks Tuition + 12 weeks Break)"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -181,7 +181,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="Location"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -193,18 +193,18 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="NSW | QLD Campuses (AIBT)"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
 
                 <Button
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="55dp"
                     android:backgroundTint="@color/gold"
                     android:fontFamily="@font/roboto"
                     android:onClick="viewTerms"
-                    android:text="Course Terms and Conditions"
+                    android:text="Terms and Conditions"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -229,7 +229,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="Pricing"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -240,7 +240,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="Tuition Fee - OnShore Student Visa Holder: $12,000"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
 
                 <TextView
@@ -251,7 +251,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="Tuition Fee - OffShore Int Student: $12,500"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
