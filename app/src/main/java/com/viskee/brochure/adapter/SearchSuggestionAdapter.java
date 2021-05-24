@@ -57,7 +57,10 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
             Course course = (Course) resultValue;
-            return course.getName();
+            if (course != null) {
+                return course.getName();
+            }
+            return "";
         }
 
         @Override
@@ -65,6 +68,7 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
             if (constraint != null) {
                 suggestions.clear();
                 String searchText = constraint.toString().toLowerCase();
+                searchText = searchText.replaceAll("\\+ ","");
                 for (Course course : temp) {
                     List<String> splitList = new ArrayList<>(Arrays.asList(searchText.split(" ")));
                     Optional<Integer> yearOptional = SearchUtils.extractYear(splitList);
