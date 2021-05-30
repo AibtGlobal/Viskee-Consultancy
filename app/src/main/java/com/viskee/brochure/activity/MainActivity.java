@@ -113,18 +113,18 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
                 return false;
             }
         });
-        setKeyboardVisibilityListener(this);
+//        setKeyboardVisibilityListener(this);
     }
 
     @Override
     public void onVisibilityChanged(boolean visible) {
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchTextBar.getLayoutParams();
-        if (visible) {
-            params.verticalBias = 0.4f;
-        } else {
-            params.verticalBias = 0.55f;
-        }
-        searchTextBar.setLayoutParams(params);
+//        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchTextBar.getLayoutParams();
+//        if (visible) {
+//            params.verticalBias = 0.4f;
+//        } else {
+//            params.verticalBias = 0.55f;
+//        }
+//        searchTextBar.setLayoutParams(params);
     }
 
     private void setKeyboardVisibilityListener(final OnKeyboardVisibilityListener onKeyboardVisibilityListener) {
