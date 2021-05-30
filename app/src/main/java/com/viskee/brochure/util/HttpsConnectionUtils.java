@@ -40,6 +40,7 @@ public class HttpsConnectionUtils {
 
             return sslContext.getSocketFactory();
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpsURLConnection.getDefaultSSLSocketFactory();
         }
     }
@@ -52,18 +53,12 @@ public class HttpsConnectionUtils {
                         return originalTrustManager.getAcceptedIssuers();
                     }
 
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                        try {
-                            originalTrustManager.checkClientTrusted(certs, authType);
-                        } catch (CertificateException ignored) {
-                        }
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        originalTrustManager.checkClientTrusted(certs, authType);
                     }
 
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                        try {
-                            originalTrustManager.checkServerTrusted(certs, authType);
-                        } catch (CertificateException ignored) {
-                        }
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        originalTrustManager.checkServerTrusted(certs, authType);
                     }
                 }
         };
