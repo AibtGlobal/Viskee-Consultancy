@@ -3,6 +3,7 @@ package com.viskee.brochure.util;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -23,7 +24,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
-public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
+public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
 
     private final Activity context;
     private final ProgressBar progressBar;
@@ -40,21 +41,12 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(String... sUrl) {
-        boolean aibtResult = downloadConfigurationFile(sUrl[0], context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
-        boolean reachResult = downloadConfigurationFile(sUrl[1], context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
-        if (!aibtResult || !reachResult) {
-            File AIBT = new File(context.getFilesDir() + "/" + context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
-            File REACH = new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
-            if (!AIBT.exists() || !REACH.exists()) {
-                new AlertDialog.Builder(context)
-                        .setTitle("No configuration found")
-                        .setMessage("Could you please connect to the Internet and relaunch the app ?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-            }
-        }
-        return null;
+    protected Boolean doInBackground(String... sUrl) {
+        boolean aibtResult = downloadConfigurationFile(sUrl[0],
+                context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+        boolean reachResult = downloadConfigurationFile(sUrl[1],
+                context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
+        return aibtResult && reachResult;
     }
 
     @Override
@@ -63,13 +55,42 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        progressBar.setVisibility(View.INVISIBLE);
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
-        context.finish();
-        super.onPostExecute(s);
-
+    protected void onPostExecute(Boolean isConfigurationDownloadSuccessfully) {
+        super.onPostExecute(isConfigurationDownloadSuccessfully);
+        if (isConfigurationDownloadSuccessfully) {
+            File AIBT =
+                    new File(context.getFilesDir() + "/" + context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+            File REACH =
+                    new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
+            if (!AIBT.exists() || !REACH.exists()) {
+                context.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new AlertDialog.Builder(context)
+                                .setTitle("No configuration found")
+                                .setMessage("Could you please connect to the Internet and relaunch the app ?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                    }
+                });
+            } else {
+                progressBar.setVisibility(View.INVISIBLE);
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+                context.finish();
+            }
+        } else {
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    new AlertDialog.Builder(context)
+                            .setTitle("No configuration found")
+                            .setMessage("Could you please connect to the Internet and relaunch the app ?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            });
+        }
     }
 
     private boolean downloadConfigurationFile(String sUrl, String fileName) {
@@ -122,6 +143,7 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
             }
             output.flush();
         } catch (Exception e) {
+            Log.e(ConfigFileDownloader.class.getSimpleName(), e.getMessage());
             return false;
         } finally {
             try {
@@ -129,7 +151,8 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, String> {
                     output.close();
                 if (input != null)
                     input.close();
-            } catch (IOException ignored) {
+            } catch (IOException exception) {
+                Log.e(ConfigFileDownloader.class.getSimpleName(), exception.getMessage());
             }
 
             if (connection != null)

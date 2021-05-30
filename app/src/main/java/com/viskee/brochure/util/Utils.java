@@ -12,6 +12,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -45,7 +46,7 @@ public class Utils {
 
             jsonString = new String(buffer, "UTF-8");
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(Utils.class.getSimpleName(), e.getMessage());
             return null;
         }
 

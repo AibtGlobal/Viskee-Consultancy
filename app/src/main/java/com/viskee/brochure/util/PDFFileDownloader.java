@@ -3,6 +3,7 @@ package com.viskee.brochure.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.viskee.brochure.R;
 
@@ -52,7 +53,7 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
         try {
             pdfFile.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(PDFFileDownloader.class.getSimpleName(), e.getMessage());
         }
         downloadFile(fileUrl, pdfFile);
         return null;
@@ -96,7 +97,7 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
             }
             outputStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(PDFFileDownloader.class.getSimpleName(), e.getMessage());
         } finally {
             try {
                 if (inputStream != null) {
@@ -106,7 +107,7 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
                     outputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(PDFFileDownloader.class.getSimpleName(), e.getMessage());
             }
             if (connection != null) {
                 connection.disconnect();
