@@ -25,7 +25,8 @@ public class HttpsConnectionUtils {
         try {
             // Load CAs from an InputStream
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            // From github raw page: https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/configuration/AIBT.json
+            // From github raw page:
+            // https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/configuration/AIBT.json
             // To note that this cert is different from the one of default github page
             InputStream caInput = context.getResources().openRawResource(R.raw.certificate);
             Certificate ca;
@@ -66,20 +67,12 @@ public class HttpsConnectionUtils {
                         return originalTrustManager.getAcceptedIssuers();
                     }
 
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                        try {
-                            originalTrustManager.checkClientTrusted(certs, authType);
-                        } catch (CertificateException e) {
-                            Log.e(HttpsConnectionUtils.class.getSimpleName(), e.getMessage());
-                        }
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        originalTrustManager.checkClientTrusted(certs, authType);
                     }
 
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                        try {
-                            originalTrustManager.checkServerTrusted(certs, authType);
-                        } catch (CertificateException e) {
-                            Log.e(HttpsConnectionUtils.class.getSimpleName(), e.getMessage());
-                        }
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        originalTrustManager.checkServerTrusted(certs, authType);
                     }
                 }
         };
