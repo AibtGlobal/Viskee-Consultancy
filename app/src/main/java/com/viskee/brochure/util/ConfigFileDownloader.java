@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -96,19 +97,14 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
     private boolean downloadConfigurationFile(String sUrl, String fileName) {
         InputStream input = null;
         OutputStream output = null;
-        HttpsURLConnection connection = null;
+        HttpURLConnection connection = null;
         try {
             URL url = new URL(sUrl);
-            connection = (HttpsURLConnection) url.openConnection();
-            connection.setSSLSocketFactory(HttpsConnectionUtils.getSSLSocketFactory(context));
-            connection.setHostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
-                    return hv.verify(context.getString(R.string.HOST_NAME), session);
-                }
-            });
-            connection.connect();
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("X-Requested-With", "Curl");
+            String userpass = context.getString(R.string.USER_NAME) + ":" + context.getString(R.string.PASSWORD);
+            String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+            connection.setRequestProperty("Authorization", basicAuth);
 
             // expect HTTP 200 OK, so we don't mistakenly save error report
             // instead of the file

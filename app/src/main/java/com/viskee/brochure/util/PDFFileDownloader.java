@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -69,20 +71,17 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
     public void downloadFile(String fileUrl, File directory) {
         InputStream inputStream = null;
         FileOutputStream outputStream = null;
-        HttpsURLConnection connection = null;
+        HttpURLConnection connection = null;
         try {
 
             URL url = new URL(fileUrl);
-            connection = (HttpsURLConnection) url.openConnection();
-            connection.setSSLSocketFactory(HttpsConnectionUtils.getSSLSocketFactory(context));
-            connection.setHostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
-                    return hv.verify(context.getString(R.string.HOST_NAME), session);
-                }
-            });
-            connection.connect();
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("X-Requested-With", "Curl");
+            String userpass = context.getString(R.string.USER_NAME) + ":" + context.getString(R.string.PASSWORD);
+            String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+            connection.setRequestProperty("Authorization", basicAuth);
+
+
             int fileLength = connection.getContentLength();
             inputStream = connection.getInputStream();
             outputStream = new FileOutputStream(directory);
