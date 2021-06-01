@@ -13,17 +13,12 @@ import com.viskee.brochure.R;
 import com.viskee.brochure.activity.MainActivity;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Base64;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
 
@@ -64,16 +59,7 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
             File REACH =
                     new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
             if (!AIBT.exists() || !REACH.exists()) {
-                context.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        new AlertDialog.Builder(context)
-                                .setTitle("No configuration found")
-                                .setMessage("Could you please connect to the Internet and relaunch the app ?")
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
-                    }
-                });
+                displayAlert(context);
             } else {
                 progressBar.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(context, MainActivity.class);
@@ -81,82 +67,43 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
                 context.finish();
             }
         } else {
-            context.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    new AlertDialog.Builder(context)
-                            .setTitle("No configuration found")
-                            .setMessage("Could you please connect to the Internet and relaunch the app ?")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-            });
+            displayAlert(context);
         }
     }
 
     private boolean downloadConfigurationFile(String sUrl, String fileName) {
-        InputStream input = null;
-        OutputStream output = null;
-        HttpURLConnection connection = null;
+        InputStream inputStream = null;
         try {
             URL url = new URL(sUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("X-Requested-With", "Curl");
-            String userpass = context.getString(R.string.USER_NAME) + ":" + context.getString(R.string.PASSWORD);
-            String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
-            connection.setRequestProperty("Authorization", basicAuth);
-
-            // expect HTTP 200 OK, so we don't mistakenly save error report
-            // instead of the file
-            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                return false;
-            }
-
-            // this will be useful to display download percentage
-            // might be -1: server did not report the length
-            int fileLength = connection.getContentLength();
-
-            // download the file
-            input = connection.getInputStream();
-
-            output = new FileOutputStream(context.getFilesDir() + "/" + fileName);
-
-            byte data[] = new byte[4096];
-            long total = 0;
-            int count;
-            while ((count = input.read(data)) != -1) {
-                // allow canceling with back button
-                if (isCancelled()) {
-                    input.close();
-                    return false;
-                }
-                total += count;
-                // publishing the progress....
-                if (fileLength > 0) // only if total length is known
-                    progressBar.setProgress((int) (total * 100 / fileLength), true);
-                publishProgress((int) (total * 100 / fileLength));
-                output.write(data, 0, count);
-            }
-            output.flush();
+            inputStream = url.openStream();
+            Files.copy(inputStream, Paths.get(context.getFilesDir() + "/" + fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             Log.e(ConfigFileDownloader.class.getSimpleName(), e.getMessage());
             return false;
         } finally {
             try {
-                if (output != null)
-                    output.close();
-                if (input != null)
-                    input.close();
+                if (inputStream != null) {
+                    inputStream.close();
+                }
             } catch (IOException exception) {
                 Log.e(ConfigFileDownloader.class.getSimpleName(), exception.getMessage());
             }
-
-            if (connection != null)
-                connection.disconnect();
         }
         return true;
     }
 
+    private void displayAlert(Activity context) {
+        context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(context)
+                        .setTitle("No configuration found")
+                        .setMessage("Could you please connect to the Internet and relaunch the app ?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+    }
 
 }
 

@@ -3,6 +3,7 @@ package com.viskee.brochure.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -71,7 +72,9 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
     protected void onResume() {
         super.onResume();
         searchSuggestionAdapter.notifyDataSetChanged();
-        searchTextBar.refreshAutoCompleteResults();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            searchTextBar.refreshAutoCompleteResults();
+        }
     }
 
     private void setupSearchBar() {
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
 
             @Override
             public void afterTextChanged(Editable s) {
+                searchSuggestionAdapter.notifyDataSetChanged();
             }
         });
         searchTextBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -143,7 +147,8 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
             public void onGlobalLayout() {
                 int defaultKeyboardHeightDP = 100;
                 int estimatedKeyboardDP = defaultKeyboardHeightDP + 48;
-                int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, estimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
+                int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        estimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
                 parentView.getWindowVisibleDisplayFrame(rect);
                 int heightDiff = parentView.getRootView().getHeight() - (rect.bottom - rect.top);
                 boolean isShown = heightDiff >= estimatedKeyboardHeight;
@@ -198,8 +203,10 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
 
     private void prepareGroups() {
 
-        String aibtJson = Utils.getJsonFromStorage(getApplicationContext(), getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
-        String reachJson = Utils.getJsonFromStorage(getApplicationContext(), getString(R.string.REACH_CONFIGURATION_FILE_NAME));
+        String aibtJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+        String reachJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.REACH_CONFIGURATION_FILE_NAME));
 
         Group aibt = getSchoolFromJson(aibtJson);
         Group reach = getSchoolFromJson(reachJson);

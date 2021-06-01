@@ -8,19 +8,14 @@ import android.util.Log;
 import com.viskee.brochure.R;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Base64;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
-    private static final int MEGABYTE = 1024 * 1024;
 
     private final Context context;
     private String fileName;
@@ -70,31 +65,11 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
 
     public void downloadFile(String fileUrl, File directory) {
         InputStream inputStream = null;
-        FileOutputStream outputStream = null;
-        HttpURLConnection connection = null;
         try {
-
             URL url = new URL(fileUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("X-Requested-With", "Curl");
-            String userpass = context.getString(R.string.USER_NAME) + ":" + context.getString(R.string.PASSWORD);
-            String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
-            connection.setRequestProperty("Authorization", basicAuth);
+            inputStream = url.openStream();
+            Files.copy(inputStream, Paths.get(directory.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
 
-
-            int fileLength = connection.getContentLength();
-            inputStream = connection.getInputStream();
-            outputStream = new FileOutputStream(directory);
-
-            byte[] buffer = new byte[MEGABYTE];
-            int bufferLength = 0;
-            int total = 0;
-            while ((bufferLength = inputStream.read(buffer)) > 0) {
-                total += bufferLength;
-                publishProgress((int) (total*100/fileLength));
-                outputStream.write(buffer, 0, bufferLength);
-            }
-            outputStream.close();
         } catch (IOException e) {
             Log.e(PDFFileDownloader.class.getSimpleName(), e.getMessage());
         } finally {
@@ -102,14 +77,8 @@ public class PDFFileDownloader extends AsyncTask<String, Integer, Void> {
                 if (inputStream != null) {
                     inputStream.close();
                 }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
             } catch (IOException e) {
                 Log.e(PDFFileDownloader.class.getSimpleName(), e.getMessage());
-            }
-            if (connection != null) {
-                connection.disconnect();
             }
         }
     }
