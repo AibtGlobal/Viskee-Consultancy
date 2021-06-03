@@ -10,8 +10,8 @@ android {
         applicationId "com.viskee.brochure"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 19
-        versionName "4.15"
+        versionCode 20
+        versionName "4.16"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
