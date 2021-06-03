@@ -14,5 +14,8 @@
     <string name="REACH_CONFIGURATION_FILE_NAME">REACH.json</string>
     <!-- Promotion File -->
     <string name="BROCHURE_DIRECTORY">brochure</string>
-    <!-- Others -->
+    <!-- Accessibility -->
+    <string name="BACK">Back to Previous Page</string>
+    <string name="AIBT_BUTTON">Display AIBT Group Schools Logos</string>
+    <string name="REACH_BUTTON">Display REACH Group Courses</string>
 </resources>

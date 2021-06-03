@@ -49,6 +49,7 @@ public class SchoolLogoAdapter extends BaseAdapter {
 
         School school = group.getSchools().get(position);
         ImageView imageView = convertView.findViewById(R.id.school_logo);
+        imageView.setContentDescription(school.getName());
         imageView.setImageDrawable(Utils.getSchoolLogoDrawable(context, school.getName(), context.getResources().getConfiguration().orientation));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
