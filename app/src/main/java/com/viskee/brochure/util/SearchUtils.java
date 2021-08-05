@@ -1,5 +1,7 @@
 package com.viskee.brochure.util;
 
+import com.viskee.brochure.model.Course;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -83,7 +85,7 @@ public class SearchUtils {
         if (weekTextIndex < 1) {
             weekTextIndex = splitList.indexOf(WKS);
         }
-        if (weekTextIndex > 1) {
+        if (weekTextIndex >= 1) {
             weekNumberIndex = weekTextIndex - 1;
             String week = splitList.get(weekNumberIndex);
             if (NumberUtils.isCreatable(week)) {
@@ -121,26 +123,50 @@ public class SearchUtils {
         return Optional.empty();
     }
 
-    public static boolean isDurationMatch(int duration, Optional<Integer> yearOptional,
+    public static boolean isDurationMatch(Course course, Optional<Integer> yearOptional,
                                           Optional<Integer> weekOptional) {
         if (!yearOptional.isPresent() && !weekOptional.isPresent()) {
             // No duration search exists.
             return true;
         }
-        if (weekOptional.isPresent()) {
-            int week = weekOptional.get();
-            return duration <= week;
-        }
-        if (yearOptional.isPresent()) {
-            int year = yearOptional.get();
-            if (year == 1 && duration <= 52) {
-                return true;
+        int duration = course.getDuration();
+        if (duration != 0) {
+            if (weekOptional.isPresent()) {
+                int week = weekOptional.get();
+                return duration <= week;
             }
-            if (year == 2 && duration > 52 && duration <= 104) {
-                return true;
+            if (yearOptional.isPresent()) {
+                int year = yearOptional.get();
+                if (year == 1 && duration <= 52) {
+                    return true;
+                }
+                if (year == 2 && duration > 52 && duration <= 104) {
+                    return true;
+                }
+                if (year > 2 && duration > 104) {
+                    return true;
+                }
             }
-            if (year > 2 && duration > 104) {
-                return true;
+        } else {
+            int durationMin = course.getDurationMin();
+            int durationMax = course.getDurationMax();
+            if (durationMin == 0 || durationMax == 0) {
+                return false;
+            }
+            if (weekOptional.isPresent()) {
+                return durationMin <= weekOptional.get() && durationMax >=weekOptional.get() ;
+            }
+            if (yearOptional.isPresent()) {
+                int year = yearOptional.get();
+                if (year == 1 && (durationMin <= 52 && durationMax >=52)) {
+                    return true;
+                }
+                if (year == 2 && (durationMax > 52 && durationMax <= 104)) {
+                    return true;
+                }
+                if (year > 2 && durationMax > 104) {
+                    return true;
+                }
             }
         }
         return false;

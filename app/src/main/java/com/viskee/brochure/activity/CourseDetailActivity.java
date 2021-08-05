@@ -49,17 +49,13 @@ public class CourseDetailActivity extends AppCompatActivity {
         } else {
             courseVetCode.setText("");
         }
-        if (courseDetail.getDuration() != 0) {
-            courseDuration.setText(courseDetail.getDuration() + " Weeks");
-        } else {
-            courseDuration.setText("");
-        }
+        courseDuration.setText(courseDetail.getDurationString() + " Weeks");
         courseDurationDetail.setText(courseDetail.getDurationDetail());
         courseLocation.setText(StringUtils.join(courseDetail.getLocation(), " | "));
         NumberFormat myFormat = NumberFormat.getInstance();
         myFormat.setGroupingUsed(true);
         if (courseDetail.getOffshoreTuition() != 0) {
-            offshorePricing.setText("Tuition Fee - OffShore Int Student: $"+myFormat.format(courseDetail.getOffshoreTuition()));
+            offshorePricing.setText("Tuition Fee - OffShore Int Student: $" + myFormat.format(courseDetail.getOffshoreTuition()));
         } else {
             offshorePricing.setText("");
         }
@@ -72,7 +68,8 @@ public class CourseDetailActivity extends AppCompatActivity {
     }
 
     public void viewTerms(View view) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://aibtglobal.edu.au/courses/terms-for-courses/"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://aibtglobal.edu" +
+                ".au/courses/terms-for-courses/"));
         startActivity(browserIntent);
     }
 

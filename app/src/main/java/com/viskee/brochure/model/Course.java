@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Course implements Serializable {
 
-    public Course () {
+    public Course() {
 
     }
 
@@ -16,6 +16,8 @@ public class Course implements Serializable {
     private String department;
     private String name;
     private int duration;
+    private int durationMin;
+    private int durationMax;
     private String durationDetail;
     private int offshoreTuition;
     private int onshoreTuition;
@@ -71,6 +73,22 @@ public class Course implements Serializable {
         this.duration = duration;
     }
 
+    public int getDurationMin() {
+        return durationMin;
+    }
+
+    public void setDurationMin(int durationMin) {
+        this.durationMin = durationMin;
+    }
+
+    public int getDurationMax() {
+        return durationMax;
+    }
+
+    public void setDurationMax(int durationMax) {
+        this.durationMax = durationMax;
+    }
+
     public String getDurationDetail() {
         return durationDetail;
     }
@@ -117,6 +135,16 @@ public class Course implements Serializable {
 
     public void setCompleteServicePeriods(String completeServicePeriods) {
         this.completeServicePeriods = completeServicePeriods;
+    }
+
+    public String getDurationString() {
+        if (duration != 0) {
+            return String.valueOf(duration);
+        } else if (durationMin != 0 && durationMax != 0) {
+            return durationMin + " - " + durationMax;
+        } else {
+            return "";
+        }
     }
 
     @Override
