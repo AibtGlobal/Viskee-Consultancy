@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Group implements Serializable {
     private String name;
-    private List<Promotion> promotions;
+    private List<Promotion> promotions = new ArrayList<>();
     private List<School> schools = new ArrayList<>();
 
     public String getName() {

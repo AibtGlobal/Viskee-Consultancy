@@ -51,16 +51,14 @@ public class CourseDetailActivity extends AppCompatActivity {
         }
         courseDuration.setText(courseDetail.getDurationString() + " Weeks");
         courseDurationDetail.setText(courseDetail.getDurationDetail());
-        courseLocation.setText(StringUtils.join(courseDetail.getLocation(), " | "));
-        NumberFormat myFormat = NumberFormat.getInstance();
-        myFormat.setGroupingUsed(true);
-        if (courseDetail.getOffshoreTuition() != 0) {
-            offshorePricing.setText("Tuition Fee - OffShore Int Student: $" + myFormat.format(courseDetail.getOffshoreTuition()));
+        courseLocation.setText(StringUtils.join(courseDetail.getLocationList(), " | "));
+        if (StringUtils.isNotEmpty(courseDetail.getOffshoreTuition())) {
+            offshorePricing.setText("Tuition Fee - OffShore Int Student: $" + courseDetail.getOffshoreTuition());
         } else {
             offshorePricing.setText("");
         }
-        if (courseDetail.getOnshoreTuition() != 0) {
-            onshorePricing.setText("Tuition Fee - OnShore Student Visa Holder: $" + myFormat.format(courseDetail.getOnshoreTuition()));
+        if (StringUtils.isNotEmpty(courseDetail.getOnshoreTuition())) {
+            onshorePricing.setText("Tuition Fee - OnShore Student Visa Holder: $" + courseDetail.getOnshoreTuition());
         } else {
             onshorePricing.setText("");
         }

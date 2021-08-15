@@ -74,7 +74,7 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
                     Optional<Integer> yearOptional = SearchUtils.extractYear(splitList);
                     Optional<Integer> weekOptional = SearchUtils.extractWeek(splitList);
                     boolean isDurationMatch = SearchUtils.isDurationMatch(course, yearOptional, weekOptional);
-                    boolean isLocationMatch = SearchUtils.isLocationMatch(course.getLocation(), splitList);
+                    boolean isLocationMatch = SearchUtils.isLocationMatch(course.getLocationList(), splitList);
                     boolean isTextMatch = SearchUtils.isTextMatch(course.toString().toLowerCase(), splitList);
                     if (isDurationMatch && isTextMatch && isLocationMatch) {
                         suggestions.add(course);

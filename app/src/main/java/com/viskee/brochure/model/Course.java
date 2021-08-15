@@ -1,7 +1,10 @@
 package com.viskee.brochure.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Course implements Serializable {
@@ -19,9 +22,10 @@ public class Course implements Serializable {
     private int durationMin;
     private int durationMax;
     private String durationDetail;
-    private int offshoreTuition;
-    private int onshoreTuition;
-    private List<String> location = new ArrayList<>();
+    private String offshoreTuition;
+    private String onshoreTuition;
+    private String location;
+    private List<String> locationList = new ArrayList<>();
     private int unpaidPlacement;
     private String completeServicePeriods;
 
@@ -97,28 +101,39 @@ public class Course implements Serializable {
         this.durationDetail = durationDetail;
     }
 
-    public int getOffshoreTuition() {
+    public String getOffshoreTuition() {
         return offshoreTuition;
     }
 
-    public void setOffshoreTuition(int offshoreTuition) {
+    public void setOffshoreTuition(String offshoreTuition) {
         this.offshoreTuition = offshoreTuition;
     }
 
-    public int getOnshoreTuition() {
+    public String getOnshoreTuition() {
         return onshoreTuition;
     }
 
-    public void setOnshoreTuition(int onshoreTuition) {
+    public void setOnshoreTuition(String onshoreTuition) {
         this.onshoreTuition = onshoreTuition;
     }
 
-    public List<String> getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(List<String> location) {
+    public void setLocation(String location) {
         this.location = location;
+    }
+
+    public List<String> getLocationList() {
+        if (locationList.isEmpty() && StringUtils.isNotEmpty(location)) {
+            locationList = Arrays.asList(location.split("/"));
+        }
+        return locationList;
+    }
+
+    public void setLocationList(List<String> locationList) {
+        this.locationList = locationList;
     }
 
     public int getUnpaidPlacement() {
@@ -157,7 +172,7 @@ public class Course implements Serializable {
                 ", durationDetail='" + durationDetail + '\'' +
                 ", offshoreTuition=" + offshoreTuition +
                 ", onshoreTuition=" + onshoreTuition +
-                ", location=" + location +
+                ", location=" + locationList +
                 ", unpaidPlacement=" + unpaidPlacement +
                 ", completeServicePeriods='" + completeServicePeriods + '\'' +
                 '}';

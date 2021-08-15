@@ -39,6 +39,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -203,16 +204,45 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
 
     private void prepareGroups() {
 
-        String aibtJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
+        String aceJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
+        String bespokeJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
+        String bransonJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
+        String dianaJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
+        String edisonJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
+        String sheldonJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
         String reachJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.REACH_CONFIGURATION_FILE_NAME));
+                getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
 
-        Group aibt = getSchoolFromJson(aibtJson);
-        Group reach = getSchoolFromJson(reachJson);
+        School ace = getSchoolFromJson(aceJson);
+        ace.setName("ACE AVIATION AEROSPACE ACADEMY");
+        School bespoke = getSchoolFromJson(bespokeJson);
+        bespoke.setName("BESPOKE GRAMMAR SCHOOL OF ENGLISH");
+        School branson = getSchoolFromJson(bransonJson);
+        branson.setName("BRANSON SCHOOL OF BUSINESS AND TECHNOLOGY");
+        School diana = getSchoolFromJson(dianaJson);
+        diana.setName("DIANA SCHOOL OF COMMUNITY SERVICES");
+        School edison = getSchoolFromJson(edisonJson);
+        edison.setName("EDISON SCHOOL OF TECH SCIENCES");
+        School sheldon = getSchoolFromJson(sheldonJson);
+        sheldon.setName("SHELDON SCHOOL OF HOSPITALITY");
+        School reach = getSchoolFromJson(reachJson);
+        reach.setName("REACH COMMUNITY COLLEGE");
 
-        groups.put(GroupEnum.AIBT, aibt);
-        groups.put(GroupEnum.REACH, reach);
+        Group aibtGroup = new Group();
+        aibtGroup.setName("AIBT");
+        aibtGroup.setSchools(Arrays.asList(ace, bespoke, branson, diana, edison, sheldon));
+        groups.put(GroupEnum.AIBT, aibtGroup);
+
+        Group reachGroup = new Group();
+        reachGroup.setName("REACH");
+        reachGroup.setSchools(Collections.singletonList(reach));
+        groups.put(GroupEnum.REACH, reachGroup);
     }
 
     private List<Course> prepareCourses() {
@@ -246,10 +276,10 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         return courses;
     }
 
-    private Group getSchoolFromJson(String json) {
+    private School getSchoolFromJson(String json) {
         Gson gson = new Gson();
-        Type groupType = new TypeToken<Group>() {
+        Type schoolType = new TypeToken<School>() {
         }.getType();
-        return gson.fromJson(json, groupType);
+        return gson.fromJson(json, schoolType);
     }
 }

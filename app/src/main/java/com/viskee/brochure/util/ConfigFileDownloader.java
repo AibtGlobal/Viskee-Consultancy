@@ -38,11 +38,21 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... sUrl) {
-        boolean aibtResult = downloadConfigurationFile(sUrl[0],
-                context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
-        boolean reachResult = downloadConfigurationFile(sUrl[1],
-                context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
-        return aibtResult && reachResult;
+        boolean ace = downloadConfigurationFile(sUrl[0],
+                context.getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
+        boolean bespoke = downloadConfigurationFile(sUrl[1],
+                context.getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
+        boolean branson = downloadConfigurationFile(sUrl[2],
+                context.getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
+        boolean diana = downloadConfigurationFile(sUrl[3],
+                context.getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
+        boolean edison = downloadConfigurationFile(sUrl[4],
+                context.getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
+        boolean sheldon = downloadConfigurationFile(sUrl[5],
+                context.getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
+        boolean reach = downloadConfigurationFile(sUrl[6],
+                context.getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+        return ace && bespoke && branson && diana && edison && sheldon && reach;
     }
 
     @Override
@@ -54,11 +64,15 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
     protected void onPostExecute(Boolean isConfigurationDownloadSuccessfully) {
         super.onPostExecute(isConfigurationDownloadSuccessfully);
         if (isConfigurationDownloadSuccessfully) {
-            File AIBT =
-                    new File(context.getFilesDir() + "/" + context.getString(R.string.AIBT_CONFIGURATION_FILE_NAME));
-            File REACH =
-                    new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_CONFIGURATION_FILE_NAME));
-            if (!AIBT.exists() || !REACH.exists()) {
+            File ACE = new File(context.getFilesDir() + "/" + context.getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
+            File BESPOKE = new File(context.getFilesDir() + "/" + context.getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
+            File BRANSON = new File(context.getFilesDir() + "/" + context.getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
+            File DIANA = new File(context.getFilesDir() + "/" + context.getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
+            File EDISON = new File(context.getFilesDir() + "/" + context.getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
+            File SHELDON = new File(context.getFilesDir() + "/" + context.getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
+            File REACH = new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+            if (!ACE.exists() || !BESPOKE.exists() || !BRANSON.exists() || !DIANA.exists() || !EDISON.exists()
+                    || !SHELDON.exists() || !REACH.exists()) {
                 displayAlert(context);
             } else {
                 progressBar.setVisibility(View.INVISIBLE);
