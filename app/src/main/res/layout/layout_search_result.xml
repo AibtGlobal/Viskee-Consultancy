@@ -29,7 +29,7 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
-        android:text="VET National Code: BSB50125" />
+        android:text="VET National Code:" />
 
     <TextView
         android:id="@+id/cricos_code"
@@ -40,6 +40,6 @@
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
-        android:text="CRICOS Course Code: BSB50215" />
+        android:text="CRICOS Course Code:" />
 
 </LinearLayout>

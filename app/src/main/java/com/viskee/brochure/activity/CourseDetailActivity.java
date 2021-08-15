@@ -39,19 +39,31 @@ public class CourseDetailActivity extends AppCompatActivity {
         TextView offshorePricing = findViewById(R.id.course_pricing_offshore);
         TextView onshorePricing = findViewById(R.id.course_pricing_onshore);
         courseName.setText(courseDetail.getName());
-        if (!StringUtils.isBlank(courseDetail.getVetCode())) {
+        if (StringUtils.isNotEmpty(courseDetail.getVetCode())) {
             courseVetCode.setText("VET National Code: " + courseDetail.getVetCode());
         } else {
             courseVetCode.setText("");
         }
-        if (!StringUtils.isBlank(courseDetail.getCricosCode())) {
+        if (StringUtils.isNotEmpty(courseDetail.getCricosCode())) {
             courseCricosCode.setText("CRICOS Course Code: " + courseDetail.getCricosCode());
         } else {
             courseVetCode.setText("");
         }
-        courseDuration.setText(courseDetail.getDurationString() + " Weeks");
-        courseDurationDetail.setText(courseDetail.getDurationDetail());
-        courseLocation.setText(StringUtils.join(courseDetail.getLocationList(), " | "));
+        if (StringUtils.isNotEmpty(courseDetail.getDurationString())) {
+            courseDuration.setText(courseDetail.getDurationString() + " Weeks");
+        } else {
+            courseVetCode.setText("");
+        }
+        if (StringUtils.isNotEmpty(courseDetail.getDurationDetail())) {
+            courseDurationDetail.setText(courseDetail.getDurationDetail());
+        } else {
+            courseDurationDetail.setText("");
+        }
+        if (!courseDetail.getLocationList().isEmpty()) {
+            courseLocation.setText(StringUtils.join(courseDetail.getLocationList(), " | "));
+        } else {
+            courseLocation.setText("");
+        }
         if (StringUtils.isNotEmpty(courseDetail.getOffshoreTuition())) {
             offshorePricing.setText("Tuition Fee - OffShore Int Student: $" + courseDetail.getOffshoreTuition());
         } else {
@@ -62,7 +74,6 @@ public class CourseDetailActivity extends AppCompatActivity {
         } else {
             onshorePricing.setText("");
         }
-
     }
 
     public void viewTerms(View view) {

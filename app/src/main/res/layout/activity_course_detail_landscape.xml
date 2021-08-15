@@ -202,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="55dp"
+                    android:layout_marginTop="80dp"
                     android:backgroundTint="@color/gold"
                     android:fontFamily="@font/roboto"
                     android:onClick="viewTerms"

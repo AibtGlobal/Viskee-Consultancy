@@ -14,6 +14,8 @@ import com.viskee.brochure.activity.CourseDetailActivity;
 import com.viskee.brochure.model.Course;
 import com.viskee.brochure.model.Department;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -70,8 +72,16 @@ public class SearchResultAdapter extends BaseAdapter {
         LinearLayout searchResultCard = convertView.findViewById(R.id.search_result_card);
 
         courseNameTextView.setText(course.getName());
-        vetCodeTextView.setText("VET National Code: " + course.getVetCode());
-        cricosCodeTextView.setText("CRICOS Course Code: " + course.getCricosCode());
+        if (StringUtils.isNotEmpty(course.getVetCode())) {
+            vetCodeTextView.setText("VET National Code: " + course.getVetCode());
+        } else {
+            vetCodeTextView.setText("VET National Code: ");
+        }
+        if (StringUtils.isNotEmpty(course.getCricosCode())) {
+            cricosCodeTextView.setText("CRICOS Course Code: " + course.getCricosCode());
+        } else {
+            cricosCodeTextView.setText("CRICOS Course Code: ");
+        }
         searchResultCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
