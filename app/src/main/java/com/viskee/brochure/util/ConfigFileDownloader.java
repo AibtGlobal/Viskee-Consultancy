@@ -52,6 +52,10 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
                 context.getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
         boolean reach = downloadConfigurationFile(sUrl[6],
                 context.getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+        boolean aibtPromotion = downloadConfigurationFile(sUrl[7],
+                context.getString(R.string.AIBT_PROMOTION_FILE_NAME));
+        boolean reachPromotion = downloadConfigurationFile(sUrl[8],
+                context.getString(R.string.REACH_PROMOTION_FILE_NAME));
         return ace && bespoke && branson && diana && edison && sheldon && reach;
     }
 

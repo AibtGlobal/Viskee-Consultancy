@@ -27,7 +27,11 @@
 
     <!-- Promotion Configuration File -->
     <!-- AIBT -->
+    <string name="AIBT_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Promotion/JSON/aibt-promotions.json</string>
+    <string name="AIBT_PROMOTION_FILE_NAME">aibt-promotions.json</string>
     <!-- REACH -->
+    <string name="REACH_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Promotion/JSON/reach-promotions.json</string>
+    <string name="REACH_PROMOTION_FILE_NAME">reach-promotions.json</string>
 
     <!-- Promotion File -->
     <string name="BROCHURE_DIRECTORY">brochure</string>

@@ -30,6 +30,7 @@ import com.viskee.brochure.adapter.SearchSuggestionAdapter;
 import com.viskee.brochure.model.Course;
 import com.viskee.brochure.model.Group;
 import com.viskee.brochure.model.GroupEnum;
+import com.viskee.brochure.model.Promotion;
 import com.viskee.brochure.model.Promotions;
 import com.viskee.brochure.model.School;
 import com.viskee.brochure.model.SearchResult;
@@ -219,6 +220,11 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         String reachJson = Utils.getJsonFromStorage(getApplicationContext(),
                 getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
 
+        String aibtPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.AIBT_PROMOTION_FILE_NAME));
+        String reachPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                getString(R.string.REACH_PROMOTION_FILE_NAME));
+
         School ace = getSchoolFromJson(aceJson);
         ace.setName("ACE AVIATION AEROSPACE ACADEMY");
         School bespoke = getSchoolFromJson(bespokeJson);
@@ -237,11 +243,19 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         Group aibtGroup = new Group();
         aibtGroup.setName("AIBT");
         aibtGroup.setSchools(Arrays.asList(ace, bespoke, branson, diana, edison, sheldon));
+        if (StringUtils.isNotEmpty(aibtPromotionJson)) {
+            Promotions aibtPromotion = getPromotionsFromJson(aibtPromotionJson);
+            aibtGroup.setPromotions(aibtPromotion.getPromotions());
+        }
         groups.put(GroupEnum.AIBT, aibtGroup);
 
         Group reachGroup = new Group();
         reachGroup.setName("REACH");
         reachGroup.setSchools(Collections.singletonList(reach));
+        if (StringUtils.isNotEmpty(reachPromotionJson)) {
+            Promotions reachPromotion = getPromotionsFromJson(reachPromotionJson);
+            reachGroup.setPromotions(reachPromotion.getPromotions());
+        }
         groups.put(GroupEnum.REACH, reachGroup);
     }
 
@@ -281,5 +295,12 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         Type schoolType = new TypeToken<School>() {
         }.getType();
         return gson.fromJson(json, schoolType);
+    }
+
+    private Promotions getPromotionsFromJson(String json) {
+        Gson gson = new Gson();
+        Type promotionsType = new TypeToken<Promotions>() {
+        }.getType();
+        return gson.fromJson(json, promotionsType);
     }
 }

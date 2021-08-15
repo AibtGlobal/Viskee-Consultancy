@@ -32,7 +32,9 @@ public class SplashActivity extends AppCompatActivity {
                     getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_LINK),
                     getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_LINK),
                     getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_LINK),
-                    getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_LINK));
+                    getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_LINK),
+                    getString(R.string.AIBT_PROMOTION_FILE_LINK),
+                    getString(R.string.REACH_PROMOTION_FILE_LINK));
         } else {
             File ACE = new File(getFilesDir() + "/" + getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
             File BESPOKE = new File(getFilesDir() + "/" + getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
