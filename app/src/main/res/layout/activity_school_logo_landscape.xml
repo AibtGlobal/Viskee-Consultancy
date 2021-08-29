@@ -73,6 +73,7 @@
         android:fontFamily="@font/roboto"
         android:onClick="showPromotions"
         android:text="Latest Brochures"
+        android:textColor="@color/black"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

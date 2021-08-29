@@ -261,6 +261,7 @@
                     android:fontFamily="@font/roboto"
                     android:onClick="viewTerms"
                     android:text="Terms and Conditions"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
