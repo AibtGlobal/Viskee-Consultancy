@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 courseSelected = (Course) parent.getItemAtPosition(position);
-                search();
+                selectItemForSearch();
             }
         });
         searchTextBar.addTextChangedListener(new TextWatcher() {
@@ -165,6 +165,12 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         });
     }
 
+    public void selectItemForSearch() {
+        if (courseSelected != null) {
+            searchTextBar.setText(courseSelected.getName());
+            searchSuggestionAdapter.notifyDataSetChanged();
+        }
+    }
 
     public void search() {
         String textToSearch = searchTextBar.getText().toString();
@@ -175,13 +181,11 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         List<Course> suggestions = searchSuggestionAdapter.getSuggestions();
         SearchResult searchResult = new SearchResult();
         searchResult.setSearchText(searchTextBar.getText().toString());
-        if (courseSelected != null) {
-            searchResult.getSearchResults().put(courseSelected.getGroup(), Collections.singletonList(courseSelected));
-        } else {
-            Map<GroupEnum, List<Course>> map = suggestions.stream().collect(groupingBy(Course::getGroup));
-            searchResult.getSearchResults().put(GroupEnum.REACH, map.get(GroupEnum.REACH));
-            searchResult.getSearchResults().put(GroupEnum.AIBT, map.get(GroupEnum.AIBT));
-        }
+
+        Map<GroupEnum, List<Course>> map = suggestions.stream().collect(groupingBy(Course::getGroup));
+        searchResult.getSearchResults().put(GroupEnum.REACH, map.get(GroupEnum.REACH));
+        searchResult.getSearchResults().put(GroupEnum.AIBT, map.get(GroupEnum.AIBT));
+
         Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
         intent.putExtra(getString(R.string.SEARCH_RESULT), searchResult);
         startActivity(intent);

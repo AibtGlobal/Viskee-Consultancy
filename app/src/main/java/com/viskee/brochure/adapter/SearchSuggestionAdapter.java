@@ -14,8 +14,13 @@ import com.viskee.brochure.util.SearchUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
 
@@ -52,7 +57,8 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
     public Filter getFilter() {
         return myFilter;
     }
-    Filter myFilter = new Filter() {
+
+    final Filter myFilter = new Filter() {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
@@ -80,9 +86,14 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Course> {
                         suggestions.add(course);
                     }
                 }
+                suggestions.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+                List<Course> suggestionsWithoutDuplicate = new ArrayList<>(suggestions);
+                Set<String> duplicates = new HashSet<>();
+                suggestionsWithoutDuplicate.removeIf(e -> !duplicates.add(e.getName()));
+
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = suggestions;
-                filterResults.count = suggestions.size();
+                filterResults.values = suggestionsWithoutDuplicate;
+                filterResults.count = suggestionsWithoutDuplicate.size();
                 return filterResults;
             } else {
                 return new FilterResults();
