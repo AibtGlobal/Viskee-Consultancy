@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:backgroundTint="@color/gold"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/dmsans"
         android:textColor="@color/black"
         android:text="Brochure April 2021"
         app:icon="@drawable/pdf"

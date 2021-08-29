@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/gold"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/dmsans"
         android:onClick="showPromotions"
         android:text="Latest Brochures"
         android:textColor="@color/black"

@@ -14,7 +14,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="5dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/dmsans"
         android:text="Diploma of Business 1"
         android:textColor="@color/gold"
         android:textSize="20sp"
@@ -27,7 +27,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/dmsans"
         android:gravity="center_vertical"
         android:text="VET National Code:" />
 
@@ -38,7 +38,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/dmsans"
         android:gravity="center_vertical"
         android:text="CRICOS Course Code:" />
 
