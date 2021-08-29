@@ -88,53 +88,25 @@ public class Utils {
         Drawable drawable = null;
         switch (aibtSchoolNameEnum) {
             case ACE:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.ace_landscape);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.ace_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.ace_landscape);
                 break;
             case BESPOKE:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.bespoke_portrait);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.bespoke_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.bespoke);
                 break;
             case BRANSON:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.branson_portrait);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.branson_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.branson);
                 break;
             case DIANA:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.diana_portrait);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.diana_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.diana);
                 break;
             case EDISON:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.edison_portrait);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.edison_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.edison);
                 break;
             case SHELDON:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.sheldon_portrait);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.sheldon_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.sheldon);
                 break;
             case REACH:
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.reach_portrait);
-                } else {
-                    drawable = ContextCompat.getDrawable(context, R.drawable.reach_landscape);
-                }
+                drawable = ContextCompat.getDrawable(context, R.drawable.reach);
                 break;
         }
         return drawable;
@@ -142,7 +114,8 @@ public class Utils {
 
     @SuppressLint("WrongConstant")
     public static boolean checkInternetConnection(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Network activeNetwork = connectivityManager.getActiveNetwork();
             if (activeNetwork == null) {
@@ -165,16 +138,17 @@ public class Utils {
     }
 
     public static void openPdfFile(Context context, String fileName) {
-        File pdfFile = new File(context.getFilesDir() + "/" + context.getString(R.string.BROCHURE_DIRECTORY) + "/" + fileName);  // -> filename = maven.pdf
+        File pdfFile =
+                new File(context.getFilesDir() + "/" + context.getString(R.string.BROCHURE_DIRECTORY) + "/" + fileName);  // -> filename = maven.pdf
         Uri path = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", pdfFile);
         Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
         pdfIntent.setDataAndType(path, "application/pdf");
         pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-        try{
+        try {
             context.startActivity(pdfIntent);
-        }catch(ActivityNotFoundException e){
+        } catch (ActivityNotFoundException e) {
             e.printStackTrace();
             Toast.makeText(context, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
         }
