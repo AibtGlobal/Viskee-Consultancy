@@ -63,6 +63,7 @@
         android:inputType="text"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:drawableStart="@drawable/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
