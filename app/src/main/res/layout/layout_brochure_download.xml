@@ -14,5 +14,6 @@
         android:textColor="@color/black"
         android:text="Brochure April 2021"
         app:icon="@drawable/pdf"
+        app:iconTint="@color/black"
         app:iconSize="30dp" />
 </LinearLayout>
