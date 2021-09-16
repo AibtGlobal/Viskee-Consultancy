@@ -46,6 +46,9 @@ public class SchoolCourseItemAdapter extends BaseAdapter {
         }
         Course course = department.getCourses().get(position);
         TextView courseNameTextView = convertView.findViewById(R.id.school_course_name);
+        if (course.isOnPromotion()) {
+            courseNameTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.promotion, 0, 0, 0);
+        }
         courseNameTextView.setText(course.getName());
         courseNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override

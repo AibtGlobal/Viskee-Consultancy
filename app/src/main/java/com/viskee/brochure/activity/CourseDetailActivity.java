@@ -2,6 +2,7 @@ package com.viskee.brochure.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -34,8 +35,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         TextView courseDuration = findViewById(R.id.course_duration);
         TextView courseDurationDetail = findViewById(R.id.course_duration_detail);
         TextView courseLocation = findViewById(R.id.course_location);
-        TextView offshorePricing = findViewById(R.id.course_pricing_offshore);
-        TextView onshorePricing = findViewById(R.id.course_pricing_onshore);
+        TextView courseTuition = findViewById(R.id.course_tuition);
         courseName.setText(courseDetail.getName());
         if (StringUtils.isNotEmpty(courseDetail.getVetCode())) {
             courseVetCode.setText("VET National Code: " + courseDetail.getVetCode());
@@ -63,9 +63,44 @@ public class CourseDetailActivity extends AppCompatActivity {
             courseLocation.setText("");
         }
         if (StringUtils.isNotEmpty(courseDetail.getTuition())) {
-            onshorePricing.setText("Tuition Fee: $" + courseDetail.getTuition());
+            courseTuition.setText("Tuition Fee: $" + courseDetail.getTuition());
         } else {
-            onshorePricing.setText("");
+            courseTuition.setText("");
+        }
+        if (courseDetail.isOnPromotion()) {
+            if (courseDetail.getPromotionDuration() != 0) {
+                TextView courseDurationPromotion = findViewById(R.id.course_duration_promotion);
+                courseDurationPromotion.setVisibility(View.VISIBLE);
+                courseDurationPromotion.setText(courseDetail.getPromotionDuration() + " Weeks");
+                courseDurationPromotion.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.promotion, 0, 0, 0);;
+                courseDuration.setTextSize(12);
+                courseDuration.setPaintFlags(courseDuration.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            if (StringUtils.isNotEmpty(courseDetail.getPromotionDurationDetail())) {
+                TextView courseDurationDetailPromotion = findViewById(R.id.course_duration_detail_promotion);
+                courseDurationDetailPromotion.setVisibility(View.VISIBLE);
+                courseDurationDetailPromotion.setText(courseDetail.getPromotionDurationDetail());
+                courseDurationDetailPromotion.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.promotion, 0, 0, 0);;
+                courseDurationDetail.setTextSize(12);
+                courseDurationDetail.setPaintFlags(courseDuration.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            if (StringUtils.isNotEmpty(courseDetail.getPromotionLocation())) {
+                TextView courseLocationPromotion = findViewById(R.id.course_location_promotion);
+                courseLocationPromotion.setVisibility(View.VISIBLE);
+                courseLocationPromotion.setText(StringUtils.join(courseDetail.getPromotionLocationList(), " | "));
+                courseLocationPromotion.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.promotion, 0, 0, 0);;
+                courseLocation.setTextSize(12);
+                courseLocation.setPaintFlags(courseDuration.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+
+            if (StringUtils.isNotEmpty(courseDetail.getPromotionTuition())) {
+                TextView courseTuitionPromotion = findViewById(R.id.course_tuition_promotion);
+                courseTuitionPromotion.setVisibility(View.VISIBLE);
+                courseTuitionPromotion.setText("Tuition Fee: $" + courseDetail.getPromotionTuition());
+                courseTuitionPromotion.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.promotion, 0, 0, 0);;
+                courseTuition.setTextSize(12);
+                courseTuition.setPaintFlags(courseDuration.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
         }
     }
 

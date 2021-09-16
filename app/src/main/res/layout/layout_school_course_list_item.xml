@@ -15,5 +15,5 @@
         android:fontFamily="@font/dmsans"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"/>
 </LinearLayout>

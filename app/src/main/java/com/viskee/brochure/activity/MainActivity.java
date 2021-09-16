@@ -215,45 +215,45 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
     private void prepareGroups() {
         // Retrieve AIBT basic configuration files
         String aceJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.ACE_FILE_NAME));
+                subFolder + "_" + getString(R.string.ACE_FILE_NAME));
         String bespokeJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.BESPOKE_FILE_NAME));
+                subFolder + "_" + getString(R.string.BESPOKE_FILE_NAME));
         String bransonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.BRANSON_FILE_NAME));
+                subFolder + "_" + getString(R.string.BRANSON_FILE_NAME));
         String dianaJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.DIANA_FILE_NAME));
+                subFolder + "_" + getString(R.string.DIANA_FILE_NAME));
         String edisonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.EDISON_FILE_NAME));
+                subFolder + "_" + getString(R.string.EDISON_FILE_NAME));
         String sheldonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.SHELDON_FILE_NAME));
+                subFolder + "_" + getString(R.string.SHELDON_FILE_NAME));
 
         // Retrieve AIBT promotion configuration files
         String acePromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.ACE_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.ACE_PROMOTION_FILE_NAME));
         String bespokePromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.BESPOKE_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.BESPOKE_PROMOTION_FILE_NAME));
         String bransonPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.BRANSON_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.BRANSON_PROMOTION_FILE_NAME));
         String dianaPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.DIANA_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.DIANA_PROMOTION_FILE_NAME));
         String edisonPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.EDISON_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.EDISON_PROMOTION_FILE_NAME));
         String sheldonPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.SHELDON_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.SHELDON_PROMOTION_FILE_NAME));
 
         // Retrieve REACH basic configuration files
         String reachJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.REACH_FILE_NAME));
+                subFolder + "_" + getString(R.string.REACH_FILE_NAME));
 
         // Retrieve REACH promotion configuration files
         String reachPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.REACH_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.REACH_PROMOTION_FILE_NAME));
 
         // Retrieve brochures configuration files
         String aibtBrochureJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.AIBT_BROCHURE_FILE_NAME));
+                subFolder + "_" + getString(R.string.AIBT_BROCHURE_FILE_NAME));
         String reachBrochureJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "/" + getString(R.string.REACH_BROCHURE_FILE_NAME));
+                subFolder + "_" + getString(R.string.REACH_BROCHURE_FILE_NAME));
 
         School ace = buildSchool(aceJson, acePromotionJson, "ACE AVIATION AEROSPACE ACADEMY");
         School bespoke = buildSchool(bespokeJson, bespokePromotionJson, "BESPOKE GRAMMAR SCHOOL OF ENGLISH");

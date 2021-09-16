@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Course implements Serializable {
@@ -29,8 +30,9 @@ public class Course implements Serializable {
     private String placementFee;
     private String completeServicePeriods;
     private boolean isOnPromotion;
-    private int promotionDuration;
+    private int promotionDuration = 20;
     private String promotionDurationDetail;
+    private String promotionLocation;
     private String promotionTuition;
 
     public GroupEnum getGroup() {
@@ -178,6 +180,21 @@ public class Course implements Serializable {
 
     public void setPromotionDurationDetail(String promotionDurationDetail) {
         this.promotionDurationDetail = promotionDurationDetail;
+    }
+
+    public String getPromotionLocation() {
+        return promotionLocation;
+    }
+
+    public void setPromotionLocation(String promotionLocation) {
+        this.promotionLocation = promotionLocation;
+    }
+
+    public List<String> getPromotionLocationList() {
+        if (StringUtils.isNotEmpty(promotionLocation)) {
+            return Arrays.asList(promotionLocation.split("/"));
+        }
+        return Collections.emptyList();
     }
 
     public String getPromotionTuition() {
