@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.viskee.brochure.R;
 import com.viskee.brochure.adapter.SchoolCoursesAdapter;
-import com.viskee.brochure.model.Promotions;
+import com.viskee.brochure.model.Brochures;
 import com.viskee.brochure.model.School;
 import com.viskee.brochure.util.Utils;
 
@@ -33,14 +33,14 @@ public class SchoolCoursesActivity extends AppCompatActivity {
 
         School school = (School) getIntent().getSerializableExtra(getString(R.string.SCHOOL));
         SchoolCoursesAdapter schoolCoursesAdapter = new SchoolCoursesAdapter(this, school);
-        Promotions promotions = (Promotions) getIntent().getSerializableExtra(getString(R.string.PROMOTIONS));
-        Button showPromotions = findViewById(R.id.show_promotions);
-        if (promotions != null) {
-            showPromotions.setVisibility(View.VISIBLE);
-            showPromotions.setOnClickListener(new View.OnClickListener() {
+        Brochures brochures = (Brochures) getIntent().getSerializableExtra(getString(R.string.BROCHURES));
+        Button showBrochures = findViewById(R.id.show_brochures);
+        if (brochures != null) {
+            showBrochures.setVisibility(View.VISIBLE);
+            showBrochures.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showPromotions(school, promotions);
+                    showBrochures(school, brochures);
                 }
             });
         }
@@ -52,17 +52,17 @@ public class SchoolCoursesActivity extends AppCompatActivity {
         schoolCourseGridView.setAdapter(schoolCoursesAdapter);
     }
 
-    public void showPromotions(School school, Promotions promotions) {
-        if (promotions == null || promotions.getPromotions() == null || promotions.getPromotions().isEmpty()) {
+    public void showBrochures(School school, Brochures brochures) {
+        if (brochures == null || brochures.getBrochures() == null || brochures.getBrochures().isEmpty()) {
             new AlertDialog.Builder(this)
-                    .setTitle("No promotion found")
-                    .setMessage("Currently there is no promotion for " + school.getName())
+                    .setTitle("No brochure found")
+                    .setMessage("Currently there is no brochure for " + school.getName())
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         } else {
             Intent intent = new Intent(SchoolCoursesActivity.this, BrochureDownloadActivity.class);
             intent.putExtra(getString(R.string.GROUP_NAME), school.getName());
-            intent.putExtra(getString(R.string.PROMOTIONS), promotions);
+            intent.putExtra(getString(R.string.BROCHURES), brochures);
             startActivity(intent);
         }
     }

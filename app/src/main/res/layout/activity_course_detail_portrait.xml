@@ -137,7 +137,7 @@
                     android:fontFamily="@font/dmsans"
                     android:gravity="center"
                     android:text="Total Duration"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

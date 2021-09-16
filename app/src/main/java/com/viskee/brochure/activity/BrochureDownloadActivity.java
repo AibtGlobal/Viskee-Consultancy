@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.viskee.brochure.R;
 import com.viskee.brochure.adapter.BrochureDownloadAdapter;
-import com.viskee.brochure.model.Promotions;
+import com.viskee.brochure.model.Brochures;
 
 public class BrochureDownloadActivity extends AppCompatActivity {
 
@@ -26,14 +26,14 @@ public class BrochureDownloadActivity extends AppCompatActivity {
         }
 
         String groupName = (String) getIntent().getSerializableExtra(getString(R.string.GROUP_NAME));
-        Promotions promotions = (Promotions) getIntent().getSerializableExtra(getString(R.string.PROMOTIONS));
+        Brochures brochures = (Brochures) getIntent().getSerializableExtra(getString(R.string.BROCHURES));
 
-        TextView promotionTitle = findViewById(R.id.promotion_title);
-        promotionTitle.setText("Latest Brochures For " + groupName);
+        TextView brochureTitle = findViewById(R.id.brochure_title);
+        brochureTitle.setText("Latest Brochures For " + groupName);
 
-        BrochureDownloadAdapter brochureDownloadAdapter = new BrochureDownloadAdapter(this, promotions.getPromotions());
-        GridView promotionGridView = findViewById(R.id.promotion_grid_view);
-        promotionGridView.setAdapter(brochureDownloadAdapter);
+        BrochureDownloadAdapter brochureDownloadAdapter = new BrochureDownloadAdapter(this, brochures.getBrochures());
+        GridView brochureGridView = findViewById(R.id.brochure_grid_view);
+        brochureGridView.setAdapter(brochureDownloadAdapter);
     }
 
     public void backToPrevious(View view) {

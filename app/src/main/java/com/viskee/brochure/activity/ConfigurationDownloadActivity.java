@@ -27,23 +27,15 @@ public class ConfigurationDownloadActivity extends AppCompatActivity {
 
         if (Utils.checkInternetConnection(this)) {
             ProgressBar progressBar = findViewById(R.id.progress_bar);
-            new ConfigFileDownloader(this, progressBar, subFolder).execute(getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_LINK),
-                    getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_LINK),
-                    getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_LINK),
-                    getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_LINK),
-                    getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_LINK),
-                    getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_LINK),
-                    getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_LINK),
-                    getString(R.string.AIBT_PROMOTION_FILE_LINK),
-                    getString(R.string.REACH_PROMOTION_FILE_LINK));
+            new ConfigFileDownloader(this, progressBar, subFolder).execute();
         } else {
-            File ACE = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
-            File BESPOKE = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
-            File BRANSON = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
-            File DIANA = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
-            File EDISON = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
-            File SHELDON = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
-            File REACH = new File(getFilesDir() + "/" + subFolder + "/" + getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+            File ACE = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.ACE_FILE_NAME));
+            File BESPOKE = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.BESPOKE_FILE_NAME));
+            File BRANSON = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.BRANSON_FILE_NAME));
+            File DIANA = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.DIANA_FILE_NAME));
+            File EDISON = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.EDISON_FILE_NAME));
+            File SHELDON = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.SHELDON_FILE_NAME));
+            File REACH = new File(getFilesDir() + "/" + subFolder + "_" + getString(R.string.REACH_FILE_NAME));
             if (!ACE.exists() || !BESPOKE.exists() || !BRANSON.exists() || !DIANA.exists() || !EDISON.exists()
                     || !SHELDON.exists() || !REACH.exists()) {
                 new AlertDialog.Builder(this)

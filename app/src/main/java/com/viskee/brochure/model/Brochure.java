@@ -2,7 +2,7 @@ package com.viskee.brochure.model;
 
 import java.io.Serializable;
 
-public class Promotion implements Serializable {
+public class Brochure implements Serializable {
     private String name;
     private String link;
 

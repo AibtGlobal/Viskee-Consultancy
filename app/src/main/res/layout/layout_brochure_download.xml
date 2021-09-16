@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <Button
-        android:id="@+id/download_promotion"
+        android:id="@+id/download_brochure"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:backgroundTint="@color/gold"

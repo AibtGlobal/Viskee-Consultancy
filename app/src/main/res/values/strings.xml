@@ -8,34 +8,53 @@
     <string name="GROUP">Group</string>
     <string name="GROUP_NAME">Group_Name</string>
     <string name="SEARCH_RESULT">Search_Result</string>
-    <string name="PROMOTIONS">Promotions</string>
+    <string name="BROCHURES">Brochures</string>
+    <string name="PROMOTION">Promotion</string>
     <!-- Course Configuration File -->
     <!-- AIBT -->
-    <string name="ACE_AVIATION_AEROSPACE_ACADEMY_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/ACE_AVIATION_AEROSPACE_ACADEMY.json</string>
-    <string name="ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME">ACE_AVIATION_AEROSPACE_ACADEMY.json</string>
-    <string name="BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH.json</string>
-    <string name="BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME">BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH.json</string>
-    <string name="BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY.json</string>
-    <string name="BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME">BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY.json</string>
-    <string name="DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/DIANA_SCHOOL_OF_COMMUNITY_SERVICES.json</string>
-    <string name="DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME">DIANA_SCHOOL_OF_COMMUNITY_SERVICES.json</string>
-    <string name="EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/EDISON_SCHOOL_OF_TECH_SCIENCES.json</string>
-    <string name="EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME">EDISON_SCHOOL_OF_TECH_SCIENCES.json</string>
-    <string name="SHELDON_SCHOOL_OF_HOSPITALITY_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/SHELDON_SCHOOL_OF_HOSPITALITY.json</string>
-    <string name="SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME">SHELDON_SCHOOL_OF_HOSPITALITY.json</string>
+    <string name="ACE_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/ACE_AVIATION_AEROSPACE_ACADEMY.json</string>
+    <string name="ACE_FILE_NAME">ACE_AVIATION_AEROSPACE_ACADEMY.json</string>
+    <string name="BESPOKE_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH.json</string>
+    <string name="BESPOKE_FILE_NAME">BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH.json</string>
+    <string name="BRANSON_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY.json</string>
+    <string name="BRANSON_FILE_NAME">BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY.json</string>
+    <string name="DIANA_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/DIANA_SCHOOL_OF_COMMUNITY_SERVICES.json</string>
+    <string name="DIANA_FILE_NAME">DIANA_SCHOOL_OF_COMMUNITY_SERVICES.json</string>
+    <string name="EDISON_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/EDISON_SCHOOL_OF_TECH_SCIENCES.json</string>
+    <string name="EDISON_FILE_NAME">EDISON_SCHOOL_OF_TECH_SCIENCES.json</string>
+    <string name="SHELDON_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/SHELDON_SCHOOL_OF_HOSPITALITY.json</string>
+    <string name="SHELDON_FILE_NAME">SHELDON_SCHOOL_OF_HOSPITALITY.json</string>
     <!-- REACH -->
-    <string name="REACH_COMMUNITY_COLLEGE_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/REACH/REACH_COMMUNITY_COLLEGE.json</string>
-    <string name="REACH_COMMUNITY_COLLEGE_FILE_NAME">REACH_COMMUNITY_COLLEGE.json</string>
+    <string name="REACH_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/REACH/REACH_COMMUNITY_COLLEGE.json</string>
+    <string name="REACH_FILE_NAME">REACH_COMMUNITY_COLLEGE.json</string>
 
-    <!-- Promotion Configuration File -->
+    <!-- Promotion Course Configuration File -->
     <!-- AIBT -->
-    <string name="AIBT_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Promotion/JSON/aibt-promotions.json</string>
-    <string name="AIBT_PROMOTION_FILE_NAME">aibt-promotions.json</string>
+    <string name="ACE_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/ACE_AVIATION_AEROSPACE_ACADEMY.json</string>
+    <string name="ACE_PROMOTION_FILE_NAME">PROMOTION_ACE_AVIATION_AEROSPACE_ACADEMY.json</string>
+    <string name="BESPOKE_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH.json</string>
+    <string name="BESPOKE_PROMOTION_FILE_NAME">PROMOTION_BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH.json</string>
+    <string name="BRANSON_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY.json</string>
+    <string name="BRANSON_PROMOTION_FILE_NAME">PROMOTION_BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY.json</string>
+    <string name="DIANA_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/DIANA_SCHOOL_OF_COMMUNITY_SERVICES.json</string>
+    <string name="DIANA_PROMOTION_FILE_NAME">PROMOTION_DIANA_SCHOOL_OF_COMMUNITY_SERVICES.json</string>
+    <string name="EDISON_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/EDISON_SCHOOL_OF_TECH_SCIENCES.json</string>
+    <string name="EDISON_PROMOTION_FILE_NAME">PROMOTION_EDISON_SCHOOL_OF_TECH_SCIENCES.json</string>
+    <string name="SHELDON_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/AIBT/SHELDON_SCHOOL_OF_HOSPITALITY.json</string>
+    <string name="SHELDON_PROMOTION_FILE_NAME">PROMOTION_SHELDON_SCHOOL_OF_HOSPITALITY.json</string>
     <!-- REACH -->
-    <string name="REACH_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Promotion/JSON/reach-promotions.json</string>
-    <string name="REACH_PROMOTION_FILE_NAME">reach-promotions.json</string>
+    <string name="REACH_PROMOTION_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Course/JSON/REACH/REACH_COMMUNITY_COLLEGE.json</string>
+    <string name="REACH_PROMOTION_FILE_NAME">PROMOTION_REACH_COMMUNITY_COLLEGE.json</string>
 
-    <!-- Promotion File -->
+    <!-- Brochure Configuration File -->
+    <!-- AIBT -->
+    <string name="AIBT_BROCHURE_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Promotion/JSON/aibt-brochures.json</string>
+    <string name="AIBT_BROCHURE_FILE_NAME">aibt-brochures.json</string>
+    <!-- REACH -->
+    <string name="REACH_BROCHURE_FILE_LINK">https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/Promotion/JSON/reach-brochures.json</string>
+    <string name="REACH_BROCHURE_FILE_NAME">reach-brochures.json</string>
+
+    <!-- Brochure File -->
     <string name="BROCHURE_DIRECTORY">brochure</string>
     <!-- Accessibility -->
     <string name="BACK">Back to Previous Page</string>

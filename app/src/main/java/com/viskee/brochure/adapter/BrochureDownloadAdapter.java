@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 
 import com.viskee.brochure.R;
-import com.viskee.brochure.model.Promotion;
+import com.viskee.brochure.model.Brochure;
 import com.viskee.brochure.util.PDFFileDownloader;
 import com.viskee.brochure.util.Utils;
 
@@ -21,17 +21,17 @@ import java.util.List;
 
 public class BrochureDownloadAdapter extends BaseAdapter {
 
-    private List<Promotion> promotions;
+    private List<Brochure> brochures;
     private Context context;
 
-    public BrochureDownloadAdapter(Context context, List<Promotion> promotions) {
-        this.promotions = promotions;
+    public BrochureDownloadAdapter(Context context, List<Brochure> brochures) {
+        this.brochures = brochures;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return promotions.size();
+        return brochures.size();
     }
 
     @Override
@@ -51,26 +51,26 @@ public class BrochureDownloadAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.layout_brochure_download, null);
         }
 
-        final Promotion promotion = promotions.get(position);
-        Button downloadPromotion = convertView.findViewById(R.id.download_promotion);
-        if (promotion != null && StringUtils.isNotBlank(promotion.getName()) && StringUtils.isNotBlank(promotion.getLink())) {
-            downloadPromotion.setText(promotion.getName());
+        final Brochure brochure = brochures.get(position);
+        Button downloadBrochure = convertView.findViewById(R.id.download_brochure);
+        if (brochure != null && StringUtils.isNotBlank(brochure.getName()) && StringUtils.isNotBlank(brochure.getLink())) {
+            downloadBrochure.setText(brochure.getName());
         }
-        downloadPromotion.setOnClickListener(new View.OnClickListener() {
+        downloadBrochure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadPromotion(promotion);
+                downloadBrochure(brochure);
             }
         });
         return convertView;
     }
 
-    public void downloadPromotion(Promotion promotion) {
+    public void downloadBrochure(Brochure brochure) {
         if (Utils.checkInternetConnection(context)) {
-            new PDFFileDownloader(context).execute(promotion.getLink(), promotion.getName());
+            new PDFFileDownloader(context).execute(brochure.getLink(), brochure.getName());
         } else {
             File pdfFile =
-                    new File(context.getFilesDir() + "/" + context.getString(R.string.BROCHURE_DIRECTORY) + "/" + promotion.getName());
+                    new File(context.getFilesDir() + "/" + context.getString(R.string.BROCHURE_DIRECTORY) + "/" + brochure.getName());
             if (!pdfFile.exists()) {
                 new AlertDialog.Builder(context)
                         .setTitle("No brochure file found")
@@ -78,7 +78,7 @@ public class BrochureDownloadAdapter extends BaseAdapter {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } else {
-                Utils.openPdfFile(context, promotion.getName());
+                Utils.openPdfFile(context, brochure.getName());
             }
         }
     }

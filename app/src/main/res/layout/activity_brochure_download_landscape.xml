@@ -48,14 +48,14 @@
         app:layout_constraintWidth_percent="0.1" />
 
     <TextView
-        android:id="@+id/promotion_title"
+        android:id="@+id/brochure_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/dmsans"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Latest Promotions For AIBT"
+        android:text="Latest Brochures For AIBT"
         android:textColor="@color/gold"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.11" />
 
     <GridView
-        android:id="@+id/promotion_grid_view"
+        android:id="@+id/brochure_grid_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -81,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/promotion_title" />
+        app:layout_constraintTop_toBottomOf="@id/brochure_title" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,8 +30,7 @@ import com.viskee.brochure.adapter.SearchSuggestionAdapter;
 import com.viskee.brochure.model.Course;
 import com.viskee.brochure.model.Group;
 import com.viskee.brochure.model.GroupEnum;
-import com.viskee.brochure.model.Promotion;
-import com.viskee.brochure.model.Promotions;
+import com.viskee.brochure.model.Brochures;
 import com.viskee.brochure.model.School;
 import com.viskee.brochure.model.SearchResult;
 import com.viskee.brochure.util.Utils;
@@ -208,65 +207,107 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         if (reachGroup != null && reachGroup.getSchools() != null && reachGroup.getSchools().size() != 0) {
             Intent intent = new Intent(MainActivity.this, SchoolCoursesActivity.class);
             intent.putExtra(getString(R.string.SCHOOL), reachGroup.getSchools().get(0));
-            intent.putExtra(getString(R.string.PROMOTIONS), new Promotions(reachGroup.getPromotions()));
+            intent.putExtra(getString(R.string.BROCHURES), new Brochures(reachGroup.getBrochures()));
             startActivity(intent);
         }
     }
 
     private void prepareGroups() {
-
+        // Retrieve AIBT basic configuration files
         String aceJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
+                subFolder + "/" + getString(R.string.ACE_FILE_NAME));
         String bespokeJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
+                subFolder + "/" + getString(R.string.BESPOKE_FILE_NAME));
         String bransonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
+                subFolder + "/" + getString(R.string.BRANSON_FILE_NAME));
         String dianaJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
+                subFolder + "/" + getString(R.string.DIANA_FILE_NAME));
         String edisonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
+                subFolder + "/" + getString(R.string.EDISON_FILE_NAME));
         String sheldonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
+                subFolder + "/" + getString(R.string.SHELDON_FILE_NAME));
+
+        // Retrieve AIBT promotion configuration files
+        String acePromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.ACE_PROMOTION_FILE_NAME));
+        String bespokePromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.BESPOKE_PROMOTION_FILE_NAME));
+        String bransonPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.BRANSON_PROMOTION_FILE_NAME));
+        String dianaPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.DIANA_PROMOTION_FILE_NAME));
+        String edisonPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.EDISON_PROMOTION_FILE_NAME));
+        String sheldonPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.SHELDON_PROMOTION_FILE_NAME));
+
+        // Retrieve REACH basic configuration files
         String reachJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+                subFolder + "/" + getString(R.string.REACH_FILE_NAME));
 
-        String aibtPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.AIBT_PROMOTION_FILE_NAME));
+        // Retrieve REACH promotion configuration files
         String reachPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.REACH_PROMOTION_FILE_NAME));
+                subFolder + "/" + getString(R.string.REACH_PROMOTION_FILE_NAME));
 
-        School ace = getSchoolFromJson(aceJson);
-        ace.setName("ACE AVIATION AEROSPACE ACADEMY");
-        School bespoke = getSchoolFromJson(bespokeJson);
-        bespoke.setName("BESPOKE GRAMMAR SCHOOL OF ENGLISH");
-        School branson = getSchoolFromJson(bransonJson);
-        branson.setName("BRANSON SCHOOL OF BUSINESS AND TECHNOLOGY");
-        School diana = getSchoolFromJson(dianaJson);
-        diana.setName("DIANA SCHOOL OF COMMUNITY SERVICES");
-        School edison = getSchoolFromJson(edisonJson);
-        edison.setName("EDISON SCHOOL OF TECH SCIENCES");
-        School sheldon = getSchoolFromJson(sheldonJson);
-        sheldon.setName("SHELDON SCHOOL OF HOSPITALITY");
-        School reach = getSchoolFromJson(reachJson);
-        reach.setName("REACH COMMUNITY COLLEGE");
+        // Retrieve brochures configuration files
+        String aibtBrochureJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.AIBT_BROCHURE_FILE_NAME));
+        String reachBrochureJson = Utils.getJsonFromStorage(getApplicationContext(),
+                subFolder + "/" + getString(R.string.REACH_BROCHURE_FILE_NAME));
+
+        School ace = buildSchool(aceJson, acePromotionJson, "ACE AVIATION AEROSPACE ACADEMY");
+        School bespoke = buildSchool(bespokeJson, bespokePromotionJson, "BESPOKE GRAMMAR SCHOOL OF ENGLISH");
+        School branson = buildSchool(bransonJson, bransonPromotionJson, "BRANSON SCHOOL OF BUSINESS AND TECHNOLOGY");
+        School diana = buildSchool(dianaJson, dianaPromotionJson, "DIANA SCHOOL OF COMMUNITY SERVICES");
+        School edison = buildSchool(edisonJson, edisonPromotionJson, "EDISON SCHOOL OF TECH SCIENCES");
+        School sheldon = buildSchool(sheldonJson, sheldonPromotionJson, "SHELDON SCHOOL OF HOSPITALITY");
+        School reach = buildSchool(reachJson, reachPromotionJson, "REACH COMMUNITY COLLEGE");
 
         Group aibtGroup = new Group();
         aibtGroup.setName("AIBT");
         aibtGroup.setSchools(Arrays.asList(ace, bespoke, branson, diana, edison, sheldon));
-        if (StringUtils.isNotEmpty(aibtPromotionJson)) {
-            Promotions aibtPromotion = getPromotionsFromJson(aibtPromotionJson);
-            aibtGroup.setPromotions(aibtPromotion.getPromotions());
+        if (StringUtils.isNotEmpty(aibtBrochureJson)) {
+            Brochures aibtBrochure = getBrochuresFromJson(aibtBrochureJson);
+            aibtGroup.setBrochures(aibtBrochure.getBrochures());
         }
         groups.put(GroupEnum.AIBT, aibtGroup);
 
         Group reachGroup = new Group();
         reachGroup.setName("REACH");
         reachGroup.setSchools(Collections.singletonList(reach));
-        if (StringUtils.isNotEmpty(reachPromotionJson)) {
-            Promotions reachPromotion = getPromotionsFromJson(reachPromotionJson);
-            reachGroup.setPromotions(reachPromotion.getPromotions());
+        if (StringUtils.isNotEmpty(reachBrochureJson)) {
+            Brochures reachBrochure = getBrochuresFromJson(reachBrochureJson);
+            reachGroup.setBrochures(reachBrochure.getBrochures());
         }
         groups.put(GroupEnum.REACH, reachGroup);
+    }
+
+    private School buildSchool(String basicJson, String promotionJson, String schoolName) {
+        School school = getSchoolFromJson(basicJson);
+        school.setName(schoolName);
+        if (StringUtils.isNotEmpty(promotionJson)) {
+            School promotion = getSchoolFromJson(promotionJson);
+            school = mergePromotionToBasic(school, promotion);
+        }
+        return school;
+    }
+    private School mergePromotionToBasic(School basic, School promotion) {
+        if (promotion == null) return basic;
+        List<Course> promotionCourses = promotion.getCourses();
+        Map<String, Course> map = new HashMap<>();
+        for (Course course : promotionCourses) {
+            map.put(course.getVetCode() + "_" + course.getName().trim(), course);
+        }
+        for (Course course : basic.getCourses()) {
+            Course promotionCourse = map.get(course.getVetCode() + "_" + course.getName().trim());
+            if (promotionCourse != null) {
+                course.setOnPromotion(true);
+                course.setPromotionDuration(promotionCourse.getDuration());
+                course.setPromotionDurationDetail(promotionCourse.getDurationDetail());
+                course.setPromotionTuition(promotionCourse.getPromotionTuition());
+            }
+        }
+        return basic;
     }
 
     private List<Course> prepareCourses() {
@@ -307,10 +348,10 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         return gson.fromJson(json, schoolType);
     }
 
-    private Promotions getPromotionsFromJson(String json) {
+    private Brochures getBrochuresFromJson(String json) {
         Gson gson = new Gson();
-        Type promotionsType = new TypeToken<Promotions>() {
+        Type brochuresType = new TypeToken<Brochures>() {
         }.getType();
-        return gson.fromJson(json, promotionsType);
+        return gson.fromJson(json, brochuresType);
     }
 }

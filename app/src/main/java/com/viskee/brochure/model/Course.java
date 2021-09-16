@@ -22,12 +22,16 @@ public class Course implements Serializable {
     private int durationMin;
     private int durationMax;
     private String durationDetail;
-    private String offshoreTuition;
-    private String onshoreTuition;
+    private String tuition;
     private String location;
     private List<String> locationList = new ArrayList<>();
     private int unpaidPlacement;
+    private String placementFee;
     private String completeServicePeriods;
+    private boolean isOnPromotion;
+    private int promotionDuration;
+    private String promotionDurationDetail;
+    private String promotionTuition;
 
     public GroupEnum getGroup() {
         return group;
@@ -101,20 +105,12 @@ public class Course implements Serializable {
         this.durationDetail = durationDetail;
     }
 
-    public String getOffshoreTuition() {
-        return offshoreTuition;
+    public String getTuition() {
+        return tuition;
     }
 
-    public void setOffshoreTuition(String offshoreTuition) {
-        this.offshoreTuition = offshoreTuition;
-    }
-
-    public String getOnshoreTuition() {
-        return onshoreTuition;
-    }
-
-    public void setOnshoreTuition(String onshoreTuition) {
-        this.onshoreTuition = onshoreTuition;
+    public void setTuition(String tuition) {
+        this.tuition = tuition;
     }
 
     public String getLocation() {
@@ -144,12 +140,52 @@ public class Course implements Serializable {
         this.unpaidPlacement = unpaidPlacement;
     }
 
+    public String getPlacementFee() {
+        return placementFee;
+    }
+
+    public void setPlacementFee(String placementFee) {
+        this.placementFee = placementFee;
+    }
+
     public String getCompleteServicePeriods() {
         return completeServicePeriods;
     }
 
     public void setCompleteServicePeriods(String completeServicePeriods) {
         this.completeServicePeriods = completeServicePeriods;
+    }
+
+    public boolean isOnPromotion() {
+        return isOnPromotion;
+    }
+
+    public void setOnPromotion(boolean onPromotion) {
+        isOnPromotion = onPromotion;
+    }
+
+    public int getPromotionDuration() {
+        return promotionDuration;
+    }
+
+    public void setPromotionDuration(int promotionDuration) {
+        this.promotionDuration = promotionDuration;
+    }
+
+    public String getPromotionDurationDetail() {
+        return promotionDurationDetail;
+    }
+
+    public void setPromotionDurationDetail(String promotionDurationDetail) {
+        this.promotionDurationDetail = promotionDurationDetail;
+    }
+
+    public String getPromotionTuition() {
+        return promotionTuition;
+    }
+
+    public void setPromotionTuition(String promotionTuition) {
+        this.promotionTuition = promotionTuition;
     }
 
     public String getDurationString() {
@@ -170,8 +206,7 @@ public class Course implements Serializable {
                 ", name='" + name + '\'' +
                 ", duration=" + duration +
                 ", durationDetail='" + durationDetail + '\'' +
-                ", offshoreTuition=" + offshoreTuition +
-                ", onshoreTuition=" + onshoreTuition +
+                ", tuition=" + tuition +
                 ", location=" + locationList +
                 ", unpaidPlacement=" + unpaidPlacement +
                 ", completeServicePeriods='" + completeServicePeriods + '\'' +

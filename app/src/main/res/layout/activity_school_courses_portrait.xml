@@ -67,7 +67,7 @@
         app:layout_constraintWidth_percent="0.7" />
 
     <Button
-        android:id="@+id/show_promotions"
+        android:id="@+id/show_brochures"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -96,7 +96,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/show_promotions" />
+        app:layout_constraintTop_toBottomOf="@id/show_brochures" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

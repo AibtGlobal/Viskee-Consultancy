@@ -14,8 +14,6 @@ import com.viskee.brochure.model.Course;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.NumberFormat;
-
 public class CourseDetailActivity extends AppCompatActivity {
 
     @Override
@@ -64,13 +62,8 @@ public class CourseDetailActivity extends AppCompatActivity {
         } else {
             courseLocation.setText("");
         }
-        if (StringUtils.isNotEmpty(courseDetail.getOffshoreTuition())) {
-            offshorePricing.setText("Tuition Fee - OffShore Int Student: $" + courseDetail.getOffshoreTuition());
-        } else {
-            offshorePricing.setText("");
-        }
-        if (StringUtils.isNotEmpty(courseDetail.getOnshoreTuition())) {
-            onshorePricing.setText("Tuition Fee - OnShore Student Visa Holder: $" + courseDetail.getOnshoreTuition());
+        if (StringUtils.isNotEmpty(courseDetail.getTuition())) {
+            onshorePricing.setText("Tuition Fee: $" + courseDetail.getTuition());
         } else {
             onshorePricing.setText("");
         }
