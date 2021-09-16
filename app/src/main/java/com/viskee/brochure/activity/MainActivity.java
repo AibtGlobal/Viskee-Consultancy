@@ -55,10 +55,12 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
     private Course courseSelected;
     private SearchSuggestionAdapter searchSuggestionAdapter;
     private AutoCompleteTextView searchTextBar;
+    private String subFolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.subFolder = getIntent().getStringExtra(getString(R.string.SUB_FOLDER));
 
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -77,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             searchTextBar.refreshAutoCompleteResults();
         }
+    }
+
+    public void backToPrevious(View view) {
+        finish();
     }
 
     private void setupSearchBar() {
@@ -210,24 +216,24 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
     private void prepareGroups() {
 
         String aceJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
+                subFolder + "_" + getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
         String bespokeJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
+                subFolder + "_" + getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
         String bransonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
+                subFolder + "_" + getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
         String dianaJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
+                subFolder + "_" + getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
         String edisonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
+                subFolder + "_" + getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
         String sheldonJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
+                subFolder + "_" + getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
         String reachJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+                subFolder + "_" + getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
 
         String aibtPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.AIBT_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.AIBT_PROMOTION_FILE_NAME));
         String reachPromotionJson = Utils.getJsonFromStorage(getApplicationContext(),
-                getString(R.string.REACH_PROMOTION_FILE_NAME));
+                subFolder + "_" + getString(R.string.REACH_PROMOTION_FILE_NAME));
 
         School ace = getSchoolFromJson(aceJson);
         ace.setName("ACE AVIATION AEROSPACE ACADEMY");

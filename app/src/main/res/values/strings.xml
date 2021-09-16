@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Viskee Consultancy</string>
     <!-- Intent Parameter -->
+    <string name="ONSHORE_OFFSHORE">Onshore_Offshore</string>
+    <string name="SUB_FOLDER">Sub_Folder</string>
     <string name="COURSE_DETAIL">Course_Detail</string>
     <string name="SCHOOL">School</string>
     <string name="GROUP">Group</string>

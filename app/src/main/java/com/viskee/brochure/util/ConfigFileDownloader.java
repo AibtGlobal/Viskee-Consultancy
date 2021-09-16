@@ -1,8 +1,10 @@
 package com.viskee.brochure.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -10,6 +12,7 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AlertDialog;
 
 import com.viskee.brochure.R;
+import com.viskee.brochure.activity.ConfigurationDownloadActivity;
 import com.viskee.brochure.activity.MainActivity;
 
 import java.io.File;
@@ -22,12 +25,16 @@ import java.nio.file.StandardCopyOption;
 
 public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
 
+    private static final long SPLASH_TIME = 1500L;
+
     private final Activity context;
     private final ProgressBar progressBar;
+    private final String subFolder;
 
-    public ConfigFileDownloader(Activity context, ProgressBar progressBar) {
+    public ConfigFileDownloader(Activity context, ProgressBar progressBar, String subFolder) {
         this.context = context;
         this.progressBar = progressBar;
+        this.subFolder = subFolder;
     }
 
     @Override
@@ -68,21 +75,19 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
     protected void onPostExecute(Boolean isConfigurationDownloadSuccessfully) {
         super.onPostExecute(isConfigurationDownloadSuccessfully);
         if (isConfigurationDownloadSuccessfully) {
-            File ACE = new File(context.getFilesDir() + "/" + context.getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
-            File BESPOKE = new File(context.getFilesDir() + "/" + context.getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
-            File BRANSON = new File(context.getFilesDir() + "/" + context.getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
-            File DIANA = new File(context.getFilesDir() + "/" + context.getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
-            File EDISON = new File(context.getFilesDir() + "/" + context.getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
-            File SHELDON = new File(context.getFilesDir() + "/" + context.getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
-            File REACH = new File(context.getFilesDir() + "/" + context.getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
+            File ACE = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.ACE_AVIATION_AEROSPACE_ACADEMY_FILE_NAME));
+            File BESPOKE = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.BESPOKE_GRAMMAR_SCHOOL_OF_ENGLISH_FILE_NAME));
+            File BRANSON = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.BRANSON_SCHOOL_OF_BUSINESS_AND_TECHNOLOGY_FILE_NAME));
+            File DIANA = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.DIANA_SCHOOL_OF_COMMUNITY_SERVICES_FILE_NAME));
+            File EDISON = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.EDISON_SCHOOL_OF_TECH_SCIENCES_FILE_NAME));
+            File SHELDON = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.SHELDON_SCHOOL_OF_HOSPITALITY_FILE_NAME));
+            File REACH = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.REACH_COMMUNITY_COLLEGE_FILE_NAME));
             if (!ACE.exists() || !BESPOKE.exists() || !BRANSON.exists() || !DIANA.exists() || !EDISON.exists()
                     || !SHELDON.exists() || !REACH.exists()) {
                 displayAlert(context);
             } else {
-                progressBar.setVisibility(View.INVISIBLE);
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
-                context.finish();
+                Handler handler = new Handler();
+                handler.postDelayed(() -> goToMainActivity(context, subFolder), SPLASH_TIME);
             }
         } else {
             displayAlert(context);
@@ -94,7 +99,7 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
         try {
             URL url = new URL(sUrl);
             inputStream = url.openStream();
-            Files.copy(inputStream, Paths.get(context.getFilesDir() + "/" + fileName), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(inputStream, Paths.get(context.getFilesDir() + "/" + subFolder + "_" + fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             Log.e(ConfigFileDownloader.class.getSimpleName(), e.getMessage());
             return false;
@@ -123,5 +128,12 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
         });
     }
 
+    private void goToMainActivity(Activity context, String subFolder) {
+        progressBar.setVisibility(View.INVISIBLE);
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(context.getString(R.string.SUB_FOLDER), subFolder);
+        context.startActivity(intent);
+        context.finish();
+    }
 }
 

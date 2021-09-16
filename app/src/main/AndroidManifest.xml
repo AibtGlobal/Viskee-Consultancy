@@ -13,10 +13,23 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:windowSoftInputMode="adjustResize|adjustPan"
-        android:theme="@style/Theme.Brochure">
-        <activity android:name=".activity.BrochureDownloadActivity"/>
-        <activity android:name=".activity.SplashActivity">
+        android:theme="@style/Theme.Brochure"
+        android:windowSoftInputMode="adjustResize|adjustPan">
+        <activity android:name=".activity.CoeSelectionActivity" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/Theme.Brochure.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.RegionSelectionActivity" />
+        <activity android:name=".activity.OnshoreOffshoreActivity" />
+        <activity android:name=".activity.BrochureDownloadActivity" />
+        <activity android:name=".activity.ConfigurationDownloadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
