@@ -1,5 +1,9 @@
 package com.viskee.brochure.util;
 
+import static com.viskee.brochure.util.Constants.ACE_FILE_NAME;
+import static com.viskee.brochure.util.Constants.COURSE_BASE_URL;
+import static com.viskee.brochure.util.Constants.ONSHORE;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.viskee.brochure.R;
 import com.viskee.brochure.activity.MainActivity;
+import com.viskee.brochure.model.SubFolderEnum;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,9 +48,9 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... sUrl) {
-        // AIBT School Configurations
-        boolean basicConfigurationsResult = downloadBasicConfigurationFiles();
-        downloadPromotionsConfigurationFiles();
+        String subUrl = buildSubUrl(subFolder);
+        boolean basicConfigurationsResult = downloadBasicConfigurationFiles(subUrl);
+        downloadPromotionsConfigurationFiles(subUrl);
         return basicConfigurationsResult;
     }
 
@@ -77,42 +82,64 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
         }
     }
 
-    private boolean downloadBasicConfigurationFiles() {
-        boolean ace = downloadConfigurationFile(context.getString(R.string.ACE_FILE_LINK),
-                context.getString(R.string.ACE_FILE_NAME));
-        boolean bespoke = downloadConfigurationFile(context.getString(R.string.BESPOKE_FILE_LINK),
-                context.getString(R.string.BESPOKE_FILE_NAME));
-        boolean branson = downloadConfigurationFile(context.getString(R.string.BRANSON_FILE_LINK),
-                context.getString(R.string.BRANSON_FILE_NAME));
-        boolean diana = downloadConfigurationFile(context.getString(R.string.DIANA_FILE_LINK),
-                context.getString(R.string.DIANA_FILE_NAME));
-        boolean edison = downloadConfigurationFile(context.getString(R.string.EDISON_FILE_LINK),
-                context.getString(R.string.EDISON_FILE_NAME));
-        boolean sheldon = downloadConfigurationFile(context.getString(R.string.SHELDON_FILE_LINK),
-                context.getString(R.string.SHELDON_FILE_NAME));
+    private String buildSubUrl(String subFolder) {
+        SubFolderEnum subFolderEnum = SubFolderEnum.valueOf(subFolder);
+        switch (subFolderEnum) {
+            case COE:
+                return Constants.ONSHORE + Constants.COE;
+            case NON_COE:
+                return Constants.ONSHORE + Constants.NON_COE;
+            case SEAPAE:
+                return Constants.OFFSHORE + Constants.SEAPAE;
+            case SISMIC:
+                return Constants.OFFSHORE + Constants.SISMIC;
+            default:
+                return "";
+        }
+    }
+
+    private boolean downloadBasicConfigurationFiles(String subUrl) {
+
+        String aibtSubUrl = subUrl + Constants.AIBT;
+        // AIBT School Configurations
+        boolean ace = downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.ACE_FILE_NAME,
+                Constants.ACE_FILE_NAME);
+        boolean bespoke = downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.BESPOKE_FILE_NAME,
+                Constants.BESPOKE_FILE_NAME);
+        boolean branson = downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.BRANSON_FILE_NAME,
+                Constants.BRANSON_FILE_NAME);
+        boolean diana = downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.DIANA_FILE_NAME,
+                Constants.DIANA_FILE_NAME);
+        boolean edison = downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.EDISON_FILE_NAME,
+                Constants.EDISON_FILE_NAME);
+        boolean sheldon = downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.SHELDON_FILE_NAME,
+                Constants.SHELDON_FILE_NAME);
         // REACH School Configurations
-        boolean reach = downloadConfigurationFile(context.getString(R.string.REACH_FILE_LINK),
-                context.getString(R.string.REACH_FILE_NAME));
+        String reachSubUrl = subUrl + Constants.REACH;
+        boolean reach = downloadConfigurationFile(COURSE_BASE_URL + reachSubUrl + Constants.REACH_FILE_NAME,
+                Constants.REACH_FILE_NAME);
         return ace && bespoke && branson && diana && edison && sheldon && reach;
     }
 
-    private void downloadPromotionsConfigurationFiles() {
+    private void downloadPromotionsConfigurationFiles(String subUrl) {
+        String aibtSubUrl = subUrl + Constants.AIBT + Constants.PROMOTIONS;
         // AIBT School Configurations
-        downloadConfigurationFile(context.getString(R.string.ACE_FILE_LINK),
-                context.getString(R.string.ACE_PROMOTION_FILE_NAME));
-        downloadConfigurationFile(context.getString(R.string.BESPOKE_FILE_LINK),
-                context.getString(R.string.BESPOKE_PROMOTION_FILE_NAME));
-        downloadConfigurationFile(context.getString(R.string.BRANSON_FILE_LINK),
-                context.getString(R.string.BRANSON_PROMOTION_FILE_NAME));
-        downloadConfigurationFile(context.getString(R.string.DIANA_FILE_LINK),
-                context.getString(R.string.DIANA_PROMOTION_FILE_NAME));
-        downloadConfigurationFile(context.getString(R.string.EDISON_FILE_LINK),
-                context.getString(R.string.EDISON_PROMOTION_FILE_NAME));
-        downloadConfigurationFile(context.getString(R.string.SHELDON_FILE_LINK),
-                context.getString(R.string.SHELDON_PROMOTION_FILE_NAME));
+        downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.ACE_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.ACE_FILE_NAME);
+        downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.BESPOKE_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.BESPOKE_FILE_NAME);
+        downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.BRANSON_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.BRANSON_FILE_NAME);
+        downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.DIANA_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.DIANA_FILE_NAME);
+        downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.EDISON_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.EDISON_FILE_NAME);
+        downloadConfigurationFile(COURSE_BASE_URL + aibtSubUrl + Constants.SHELDON_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.SHELDON_FILE_NAME);
         // REACH School Configurations
-        downloadConfigurationFile(context.getString(R.string.REACH_FILE_LINK),
-                context.getString(R.string.REACH_PROMOTION_FILE_NAME));
+        String reachSubUrl = subUrl + Constants.REACH + Constants.PROMOTIONS;
+        downloadConfigurationFile(COURSE_BASE_URL + reachSubUrl + Constants.REACH_FILE_NAME,
+                Constants.PROMOTION + "_" + Constants.REACH_FILE_NAME);
     }
 
     private void downloadBrochureConfigurationFiles() {
