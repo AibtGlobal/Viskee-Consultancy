@@ -40,6 +40,13 @@ public class Constants {
     public static final String PROMOTIONS = "promotions/";
 
     /**
+     * Brochure Configuration BASE URL
+     */
+    public static final String BROCHURE_BASE_URL = "https://raw.githubusercontent.com/AibtGlobal/Viskee-Consultancy-Configuration/master/new-brochure/Json/";
+    public static final String AIBT_BROCHURE_FILE_NAME = "aibt-brochures.json";
+    public static final String REACH_BROCHURE_FILE_NAME = "reach-brochures.json";
+
+    /**
      * Course Configuration File URL - ONSHORE COE
      */
     public static final String ONSHORE_COE_ACE = COURSE_BASE_URL + ONSHORE + COE + AIBT + ACE_FILE_NAME;

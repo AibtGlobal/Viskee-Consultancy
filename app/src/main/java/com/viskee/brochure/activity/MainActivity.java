@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -252,9 +253,9 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
 
         // Retrieve brochures configuration files
         String aibtBrochureJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.AIBT_BROCHURE_FILE_NAME));
+                subFolder + "_" + Constants.AIBT_BROCHURE_FILE_NAME);
         String reachBrochureJson = Utils.getJsonFromStorage(getApplicationContext(),
-                subFolder + "_" + getString(R.string.REACH_BROCHURE_FILE_NAME));
+                subFolder + "_" + Constants.REACH_BROCHURE_FILE_NAME);
 
         School ace = buildSchool(aceJson, acePromotionJson, "ACE AVIATION AEROSPACE ACADEMY");
         School bespoke = buildSchool(bespokeJson, bespokePromotionJson, "BESPOKE GRAMMAR SCHOOL OF ENGLISH");
@@ -266,7 +267,8 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
 
         Group aibtGroup = new Group();
         aibtGroup.setName("AIBT");
-        aibtGroup.setSchools(Arrays.asList(ace, bespoke, branson, diana, edison, sheldon));
+        List<School> schoolList = Arrays.asList(ace, bespoke, branson, diana, edison, sheldon);
+        aibtGroup.setSchools(schoolList.stream().filter(Objects::nonNull).collect(Collectors.toList()));
         if (StringUtils.isNotEmpty(aibtBrochureJson)) {
             Brochures aibtBrochure = getBrochuresFromJson(aibtBrochureJson);
             aibtGroup.setBrochures(aibtBrochure.getBrochures());
@@ -284,6 +286,9 @@ public class MainActivity extends AppCompatActivity implements OnKeyboardVisibil
     }
 
     private School buildSchool(String basicJson, String promotionJson, String schoolName) {
+        if (basicJson == null) {
+            return null;
+        }
         School school = getSchoolFromJson(basicJson);
         school.setName(schoolName);
         if (StringUtils.isNotEmpty(promotionJson)) {

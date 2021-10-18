@@ -1,6 +1,7 @@
 package com.viskee.brochure.util;
 
 import static com.viskee.brochure.util.Constants.ACE_FILE_NAME;
+import static com.viskee.brochure.util.Constants.BROCHURE_BASE_URL;
 import static com.viskee.brochure.util.Constants.COURSE_BASE_URL;
 import static com.viskee.brochure.util.Constants.ONSHORE;
 
@@ -51,6 +52,7 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
         String subUrl = buildSubUrl(subFolder);
         boolean basicConfigurationsResult = downloadBasicConfigurationFiles(subUrl);
         downloadPromotionsConfigurationFiles(subUrl);
+        downloadBrochureConfigurationFiles(subUrl);
         return basicConfigurationsResult;
     }
 
@@ -63,15 +65,15 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
     protected void onPostExecute(Boolean isConfigurationDownloadSuccessfully) {
         super.onPostExecute(isConfigurationDownloadSuccessfully);
         if (isConfigurationDownloadSuccessfully) {
-            File ACE = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.ACE_FILE_NAME));
-            File BESPOKE = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.BESPOKE_FILE_NAME));
-            File BRANSON = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.BRANSON_FILE_NAME));
-            File DIANA = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.DIANA_FILE_NAME));
-            File EDISON = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.EDISON_FILE_NAME));
-            File SHELDON = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.SHELDON_FILE_NAME));
-            File REACH = new File(context.getFilesDir() + "/" + subFolder + "_" + context.getString(R.string.REACH_FILE_NAME));
-            if (!ACE.exists() || !BESPOKE.exists() || !BRANSON.exists() || !DIANA.exists() || !EDISON.exists()
-                    || !SHELDON.exists() || !REACH.exists()) {
+            File ACE = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.ACE_FILE_NAME);
+            File BESPOKE = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.BESPOKE_FILE_NAME);
+            File BRANSON = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.BRANSON_FILE_NAME);
+            File DIANA = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.DIANA_FILE_NAME);
+            File EDISON = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.EDISON_FILE_NAME);
+            File SHELDON = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.SHELDON_FILE_NAME);
+            File REACH = new File(context.getFilesDir() + "/" + subFolder + "_" + Constants.REACH_FILE_NAME);
+            if (!ACE.exists() && !BESPOKE.exists() && !BRANSON.exists() && !DIANA.exists() && !EDISON.exists()
+                    && !SHELDON.exists() && !REACH.exists()) {
                 displayAlert(context);
             } else {
                 Handler handler = new Handler();
@@ -118,7 +120,7 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
         String reachSubUrl = subUrl + Constants.REACH;
         boolean reach = downloadConfigurationFile(COURSE_BASE_URL + reachSubUrl + Constants.REACH_FILE_NAME,
                 Constants.REACH_FILE_NAME);
-        return ace && bespoke && branson && diana && edison && sheldon && reach;
+        return true;
     }
 
     private void downloadPromotionsConfigurationFiles(String subUrl) {
@@ -142,14 +144,14 @@ public class ConfigFileDownloader extends AsyncTask<String, Integer, Boolean> {
                 Constants.PROMOTION + "_" + Constants.REACH_FILE_NAME);
     }
 
-    private void downloadBrochureConfigurationFiles() {
+    private void downloadBrochureConfigurationFiles(String subUrl) {
         // AIBT Brochure Configuration
-        downloadConfigurationFile(context.getString(R.string.AIBT_BROCHURE_FILE_LINK),
-                context.getString(R.string.AIBT_BROCHURE_FILE_NAME));
+        downloadConfigurationFile(BROCHURE_BASE_URL + subUrl + Constants.AIBT_BROCHURE_FILE_NAME,
+                Constants.AIBT_BROCHURE_FILE_NAME);
 
         // REACH Brochure Configuration
-        downloadConfigurationFile(context.getString(R.string.REACH_BROCHURE_FILE_LINK),
-                context.getString(R.string.REACH_BROCHURE_FILE_NAME));
+        downloadConfigurationFile(BROCHURE_BASE_URL + subUrl + Constants.REACH_BROCHURE_FILE_NAME,
+                Constants.REACH_BROCHURE_FILE_NAME);
     }
 
     private boolean downloadConfigurationFile(String sUrl, String fileName) {

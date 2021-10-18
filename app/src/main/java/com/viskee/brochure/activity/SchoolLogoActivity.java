@@ -40,7 +40,7 @@ public class SchoolLogoActivity extends AppCompatActivity {
         gridView.setAdapter(booksAdapter);
     }
 
-    public void showPromotions(View view) {
+    public void showBrochures(View view) {
         List<Brochure> brochures = group.getBrochures();
         if (brochures == null || brochures.isEmpty()) {
             new AlertDialog.Builder(this)
@@ -48,11 +48,12 @@ public class SchoolLogoActivity extends AppCompatActivity {
                     .setMessage("Currently there is no brochure for " + group.getName())
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
+        } else {
+            Intent intent = new Intent(SchoolLogoActivity.this, BrochureDownloadActivity.class);
+            intent.putExtra(getString(R.string.GROUP_NAME), group.getName());
+            intent.putExtra(getString(R.string.BROCHURES), new Brochures(brochures));
+            startActivity(intent);
         }
-        Intent intent = new Intent(SchoolLogoActivity.this, BrochureDownloadActivity.class);
-        intent.putExtra(getString(R.string.GROUP_NAME), group.getName());
-        intent.putExtra(getString(R.string.BROCHURES), new Brochures(brochures));
-        startActivity(intent);
     }
 
     public void backToPrevious(View view) {
